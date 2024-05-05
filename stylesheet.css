@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    margin: 0 566px;
+    /* margin: 0 566px; */
     background-color: #1A1A1A;
     color: #FAFAFA;
     font-family: "Montserrat", sans-serif;
@@ -36,3 +36,69 @@ body {
     background-color: #FF737D;
 }
 
+#about-info h1 {
+    font-size: 64px;
+    margin-bottom: 0;
+}
+
+#about-info h3 {
+    margin-top: 0;
+}
+
+#about-description p {
+    font-size: 20px;
+}
+
+#about-links-container {
+    display: flex;
+}
+
+.about-link svg {
+    width: 30px;
+    height: 30px;
+    fill: #FAFAFA;
+}
+
+.subtitle {
+    position: relative;
+    font-size: 42px;
+    z-index: 1;
+}
+
+#projects-title::before {
+    content: '';
+    position: absolute;
+    left: 10%;
+    bottom: -1px;
+    width: 125px;
+    height: 15px;
+    background-color: #3216BB;
+    z-index: -1;
+}
+
+#projects-cards-container {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.project-card {
+    width: 377px;
+    height: 240px;
+    border-radius: 25px;
+    overflow: hidden;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.project-card-image-top-container {
+    width: 100%;
+    height: 40%;
+    overflow: hidden;
+}
+
+.project-card-image-top-container img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
