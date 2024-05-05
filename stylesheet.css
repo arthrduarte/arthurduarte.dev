@@ -1,0 +1,38 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0 566px;
+    background-color: #1A1A1A;
+    color: #FAFAFA;
+    font-family: "Montserrat", sans-serif;
+}
+
+#nav-container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #FF4D5A;
+    border-radius: 25px;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.nav-item p {
+    padding: 5px 20px;
+    border-radius: 50px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    font-weight: 600;
+}
+
+.nav-item p:hover {
+    background-color: #FF737D;
+}
+
