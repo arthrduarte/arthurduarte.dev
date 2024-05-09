@@ -307,7 +307,6 @@ svg:hover:not(.special-hover) {
 }
 
 #submit-button {
-    width: 15%;
     height: 3rem;
     background-color: #FF4D5A;
     color: #FAFAFA;
@@ -345,15 +344,10 @@ footer {
     html {
         margin: 0;
         padding: 0;
-        overflow: hidden;
-    }
-
-    body {
-        overflow: hidden;
     }
 
     main {
-        width: 100%;
+        width: 80%;
     }
 
     .hide-on-mobile {
@@ -364,6 +358,10 @@ footer {
         display: flex;
     }
 
+    .subtitle {
+        text-align: center;
+    }
+
     .nav-container {
         width: 100%;
         margin: 0;
@@ -372,5 +370,79 @@ footer {
 
     nav {
         width: 100%;
+    }
+
+    section {
+        margin-bottom: 2rem;
+    }
+
+    #about-info h1 {
+        margin-top: 2rem;
+    }
+
+    #about {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .project-card {
+        width: 100%;
+    }
+
+    #contact-container {
+        width: 100%;
+    }
+
+    #projects-title::before {
+        content: '';
+        position: absolute;
+        left: 10rem;
+        bottom: -1px;
+        width: 170px;
+        height: 20px;
+        background-color: #3216BB;
+        z-index: -1;
+    }
+
+    #contact-title::before {
+        content: '';
+        position: absolute;
+        left: 10rem;
+        bottom: -1px;
+        width: 170px;
+        height: 20px;
+        background-color: #3216BB;
+        z-index: -1;
+    }
+
+    .skills-item {
+        width: 48%;
+        margin-bottom: 2rem;
+    }
+
+    .skills-item:nth-child(7),
+    .skills-item:nth-child(8) {
+        margin-bottom: 0;
+    }
+
+    .skills-item hr {
+        width: 80%;
+    }
+
+    .skills-name {
+        font-size: 1.1rem;
+    }
+
+    #skills-title::before {
+        content: '';
+        position: absolute;
+        left: 8rem;
+        bottom: -1px;
+        width: 150px;
+        height: 20px;
+        background-color: #3216BB;
+        z-index: -1;
     }
 }
