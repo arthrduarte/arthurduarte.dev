@@ -437,11 +437,6 @@ footer {
         margin-bottom: 2rem;
     }
 
-    .skills-item:nth-child(7),
-    .skills-item:nth-child(8) {
-        margin-bottom: 0;
-    }
-
     .skills-item hr {
         width: 80%;
     }
