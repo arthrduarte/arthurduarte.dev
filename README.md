@@ -12,8 +12,6 @@ This is the source code for my personal portfolio website. This site showcases s
 
 - HTML5
 - CSS3
-- JavaScript
-- SVG for icons
 
 ## How to Use
 
