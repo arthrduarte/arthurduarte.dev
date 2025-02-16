@@ -1,0 +1,46 @@
+body {
+    background-color: #333333;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+}
+.social-icons a {
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.social-icons a:hover {
+    color: #666;
+}
+
+
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+div {
+    text-align: center;
+}
+
+h1 {
+    margin: 20px 0;
+}
