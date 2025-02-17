@@ -5,9 +5,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 0;
     font-family: system-ui, -apple-system, sans-serif;
+    padding-top: 20px;
 }
 
 .social-icons {
@@ -16,17 +17,22 @@ body {
     justify-content: center;
     margin: 20px 0;
 }
-.social-icons a {
+a .icon {
     color: white;
     font-size: 16px;
     text-decoration: none;
     transition: color 0.3s ease;
 }
-.social-icons a:hover {
+a .icon:hover {
     color: #666;
 }
 
-
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
 
 a {
     color: white;
