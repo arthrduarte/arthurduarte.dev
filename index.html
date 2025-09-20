@@ -7,28 +7,47 @@
     <title>Arthur Duarte</title>
     <link rel="shortcut icon" href="images/favicon-16x16.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
+<body class="bg-[#ffffff] text-white min-h-screen flex flex-col items-center justify-start m-0 font-['Inter'] pt-5">
+    <nav class="w-full max-w-6xl flex justify-between items-center px-6 py-4 mb-8">
+        <div class="text-2xl font-bold text-black">
+            Arthur Duarte
+        </div>
+        <div class="hidden md:flex space-x-8">
+            <a href="#" class="text-black hover:text-gray-600 transition-colors">Home</a>
+            <a href="#" class="text-black hover:text-gray-600 transition-colors">About</a>
+            <a href="#" class="text-black hover:text-gray-600 transition-colors">Projects</a>
+            <a href="#" class="text-black hover:text-gray-600 transition-colors">Contact</a>
+        </div>
+        <div class="md:hidden">
+            <button class="text-black">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
 
-<body>
-    <div class="w-1/2">
-        <div>
-            <div>
-            <div class="social-icons">
-                <a href="https://github.com/arthrduarte" target="_blank" aria-label="GitHub"><i class="icon fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/arthurleiteduarte" target="_blank" aria-label="LinkedIn"><i class="icon fab fa-linkedin"></i></a>
-                <a href="https://twitter.com/arthrduarte" target="_blank" aria-label="Twitter"><i class="icon fab fa-twitter"></i></a>
+    <section class="w-full max-w-6xl px-6 text-center">
+        <div class="mb-8">
+            <h1 class="text-5xl md:text-7xl font-bold text-black mb-6">
+                Hello, I'm Arthur
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                A passionate developer creating innovative solutions and building amazing digital experiences
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-black text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors">
+                    View My Work
+                </button>
+                <button class="border-2 border-black text-black px-8 py-3 rounded-lg hover:bg-black hover:text-white transition-colors">
+                    Get In Touch
+                </button>
             </div>
         </div>
-        <h1 class="text-2xl font-bold">Hi, I'm Arthur.</h1>
-    </div>
-    <div>
-        <a href="/writings">writings</a>
-        <a href="projects"><p>projects</p></a>
-        <a href="about"><p>about</p></a>
-    </div>
-</div>
-</body>
+    </section>
 
+</body>
 </html>
