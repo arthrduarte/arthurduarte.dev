@@ -12,8 +12,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
-<body class="bg-[#ffffff] text-white min-h-screen flex flex-col items-center justify-start m-0 font-['Inter'] pt-5">
-    <nav class="w-full max-w-6xl flex justify-between items-center px-6 py-4 mb-8">
+<body class="bg-[#ffffff] text-white min-h-screen flex flex-col items-center justify-start m-0 font-serif pt-5">
+    <nav class="w-full max-w-6xl flex justify-between items-center px-6 py-4 mb-24">
         <div>
             <img src="images/logos/rectangular_golden.png" alt="Arthurian Lab" class="h-12">
         </div>
@@ -36,38 +36,45 @@
     </nav>
 
     <section class="w-full max-w-6xl px-6 relative">
-        <div class="flex flex-col md:flex-row items-center justify-between mb-8">
-            <div class="md:w-1/2 text-left mb-8 md:mb-0">
-                <h1 class="text-3xl md:text-5xl font-bold text-black mb-6">
-                    Arthur Duarte
-                </h1>
-                <p class="text-lg md:text-xl text-gray-600 mb-8">
+        <div class="relative flex flex-col items-center justify-center min-h-[500px]">
+            <!-- Centered Sword -->
+            <div class="absolute hidden md:flex md:inset-0 items-center justify-center z-1">
+                <img src="images/logos/long_sword.svg" alt="Sword" class="md:h-[700px] w-auto">
+            </div>
+
+            <!-- Split Text Over Sword -->
+            <div class="relative z-10 text-center ">
+                <div class="md:flex gap-8 md:gap-16 text-6xl md:text-7xl font-serif font-bold text-black mb-6">
+                    <h1>Arthur</h1>
+                    <h1>Duarte</h1>
+                </div>
+            </div>
+
+            <!-- Description below -->
+            <div class="relative z-10 text-center max-w-2xl">
+                <p class="text-lg md:text-xl text-gray-600">
                     Software developer crafting real solutions at the intersection of technology and human potential.
                 </p>
-            </div>
-            <div class="md:w-1/2 flex justify-center md:justify-end relative z-10">
-                <img src="images/logos/long_sword.png" alt="Sword" class="max-w-xs md:max-w-sm h-auto">
             </div>
         </div>
     </section>
 
-    <div class="w-full px-6 bg-[#f7c873] relative -mt-16">
-        <div class="flex flex-col md:flex-row items-center justify-between mb-8"></div>
+    <div class="w-full bg-[#262422] mt-9 z-0">
+        <div class="h-16"></div>
     </div>
 
-    <section class="w-full max-w-6xl px-6 py-24">
-        <div class="flex flex-col lg:flex-row items-center gap-16">
+    <section class="w-full px-6 py-40 bg-[#f7c873]">
+        <div class="flex flex-col lg:flex-row items-center gap-16 max-w-6xl mx-auto">
             <div class="lg:w-1/2">
-                <h2 class="text-6xl md:text-7xl font-serif font-bold text-black mb-6">
+                <h2 class="text-6xl md:text-7xl font-serif font-bold text-[#262422] mb-6">
                     What is the Arthurian Lab?
                 </h2>
-                <p class="text-xl text-gray-600 mb-8">
-                    After years of working in tech, a digital forge that actually works is <span class="underline decoration-[#f7c873] decoration-4">finally</span> here.
-                    When you need software that scales, performs, and delights users, you need a partner that understands both the craft and business of technology.
+                <p class="text-xl text-[#262422] font-medium mb-8">
+                    Arthurian Lab is a one-man digital workshop where innovative software comes to life. As a <span class="underline decoration-[#262422] decoration-4">solo operation</span>, I design and build voice agents, mobile applications, and web platforms that solve real problems with elegant solutions.
                 </p>
             </div>
             <div class="lg:w-1/2">
-                <img src="images/round table.png" alt="Round Table" class="w-full rounded-2xl shadow-2xl">
+                <img src="images/round table.png" alt="Round Table" class="w-full h-1/2 rounded-2xl shadow-2xl">
             </div>
         </div>
     </section>
