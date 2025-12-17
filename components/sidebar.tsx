@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, FileText, List, Clock, Twitter, Linkedin, Youtube, Mail, PanelsTopLeft } from "lucide-react";
+import { Home, FileText, List, Clock, Twitter, Linkedin, Youtube, Mail, PanelsTopLeft, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navigation = [
+  { name: "about", href: "/about", icon: User },
   { name: "list of lists", href: "/list-of-lists", icon: List },
   { name: "timeline", href: "/timeline", icon: Clock },
   { name: "projects", href: "/projects", icon: PanelsTopLeft },
