@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, FileText, List, Twitter, Linkedin, Youtube, Mail } from "lucide-react";
+import { Home, FileText, List, Clock, Twitter, Linkedin, Youtube, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navigation = [
-  { name: "home", href: "/", icon: Home },
-  { name: "writings", href: "/writings", icon: FileText },
   { name: "list of lists", href: "/list-of-lists", icon: List },
+  { name: "timeline", href: "/timeline", icon: Clock },
 ];
 
 const socials = [
