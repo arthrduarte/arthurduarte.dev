@@ -1,6 +1,6 @@
 export interface Link {
   title: string;
-  url: string;
+  url?: string;
   reason?: string;
   hover?: string;
 }
@@ -56,6 +56,14 @@ const categories: Category[] = [
       { title: "Tack Room Bible Talk", url: "https://www.youtube.com/@TackRoomBibleTalk" },
       { title: "galleries to pull sacred art from", url: "https://x.com/luxangelae/status/1995947323030208612" },
       { title: "Coptic Tattoo Designs", url: "https://archive.org/details/coptictattoodesi0000cars/mode/2up" },
+    ]
+  },
+  {
+    name: "I want to",
+    links: [
+      { title: "learn advanced math" },
+      { title: "be a wine conoisseur" },
+      { title: "learn wood work / carpentry" },
     ]
   },
   {
@@ -117,6 +125,7 @@ const categories: Category[] = [
       { title: "Self-improvement September 4", url: "https://www.youtube.com/watch?v=Xr3E0GRFVpE" },
       { title: "How to bend reality", url: "https://youtu.be/gTpXXrOQFNI?si=xhGuN5KDufenEq7L" },
       { title: "Greg Isenberg on \"how to win in your 20s\"", url: "https://x.com/gregisenberg/status/1977805435874029585" },
+      { title: "focus on gut health for social dominance", url: "https://scholar.google.ca/scholar?hl=en&as_sdt=0%2C5&q=social+dominance%2C+gut+microbiome&btnG=" },
     ]
   },
   {
