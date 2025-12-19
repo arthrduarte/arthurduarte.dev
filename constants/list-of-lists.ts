@@ -30,30 +30,30 @@ const categories: Category[] = [
   {
     name: "Business",
     links: [
-      { title: "Social Growth Engineers", url: "https://www.socialgrowthengineers.com/" },
+      { 
+        title: "Social Growth Engineers", 
+        url: "https://www.socialgrowthengineers.com/", 
+        reason: "These guys were such a great resource when I was first launching my mobile app Farelo. The team is actually pretty active on X and are always posting stuff - def worth checking them out." 
+      }, 
       { title: "Karlton Dennis on government's legal playbook on how to pay the least amount of taxes possible", url: "https://www.tiktok.com/@theschoolofhardknocks/video/7371871423247224106?lang=en" },
       {
         title: "The Golden Path to the R$20k/month (for devs)",
         url: "https://igor.marcossi.com/caminho-dourado",
-        reason: "This guide completely changed my perspective on building a sustainable dev career. Igor breaks down the exact steps to reach R$20k/month as a developer in a practical, no-nonsense way."
+        reason: "Great guide. Igor used to be super active in a brazilian indie hackers community on Discord and a random day I remember seeing this link. It really reasoned with me and I quite often think about it."
       },
       { title: "GymShark CEO on Modern Wisdom podcast", url: "https://youtu.be/QfKwidYQW6M?si=6_jUyUjnmcgqP749" },
-      { title: "Great Reads", url: "https://drive.google.com/drive/folders/1eZreo356E7qq5RAgc1ynMsRSlPfmQ58X" },
+      { title: "Great Reads", url: "https://drive.google.com/drive/folders/1eZreo356E7qq5RAgc1ynMsRSlPfmQ58X", hover: "got this from a random guy on X" },
       { title: "How-To-Succeed-At-MrBeast-Production", url: "https://drive.google.com/file/d/1YaG9xpu-WQKBPUi8yQ4HaDYQLUSa7Y3J/view" },
-      { title: "Stupid simple resume format", url: "https://gist.github.com/LukeberryPi/b52d2a5715fa3ae2ee0b69c729dcc896" },
+      { title: "Stupid simple resume format", url: "https://gist.github.com/LukeberryPi/b52d2a5715fa3ae2ee0b69c729dcc896", hover: "because sometimes your resume doesnt have to be fancy looking" },
       { title: "The Cold Email Handbook", url: "https://za-zu.com/docs/handbook/cold-email/intro" },
-      {
-        title: "Naval's \"How to Get Rich (without getting lucky)\" thread",
-        url: "https://x.com/naval/status/1002103360646823936",
-        reason: "One of the most impactful Twitter threads ever written. I revisit this quarterly—it's distilled wisdom on building wealth through leverage, specific knowledge, and accountability."
-      },
+      { title: "Naval's \"How to Get Rich (without getting lucky)\" thread", url: "https://x.com/naval/status/1002103360646823936" },
       { title: "How to do marketing (If you are a Solopreneur who sucks at marketing)", url: "https://docs.google.com/document/d/e/2PACX-1vTFgkhHVLh2MVU05EIdV1feAFZXljeFbRZEvz24Sl3oSUR-m1VwMQlmlAV_n8B2WZQReGcKEwoFjput/pub" },
     ]
   },
   {
     name: "Faith",
     links: [
-      { title: "Tack Room Bible Talk", url: "https://www.youtube.com/@TackRoomBibleTalk" },
+      { title: "Tack Room Bible Talk", url: "https://www.youtube.com/@TackRoomBibleTalk", reason: "Freaking love this guy, I originally discovered him through his other channel Dry Creek Wrangler School and eventually found out about this secondary channel where he discusses Christianism and the Bible itself. Great role model." },
       { title: "galleries to pull sacred art from", url: "https://x.com/luxangelae/status/1995947323030208612" },
       { title: "Coptic Tattoo Designs", url: "https://archive.org/details/coptictattoodesi0000cars/mode/2up" },
     ]
@@ -64,6 +64,7 @@ const categories: Category[] = [
       { title: "learn advanced math" },
       { title: "be a wine conoisseur" },
       { title: "learn wood work / carpentry" },
+      { title: "host events like I used to do in Brazil" },
     ]
   },
   {
@@ -72,16 +73,12 @@ const categories: Category[] = [
       {
         title: "How do you craft animations that feel right?",
         url: "https://animations.dev/",
-        reason: "Emil Kowalski's work on animation timing and easing is phenomenal. This resource helped me understand the subtle differences that make animations feel natural vs mechanical."
+        reason: "Emil Kowalski is the guy who made my favorite shadcn component: sonner."
       },
       { title: "Devouring Details", url: "https://devouringdetails.com/" },
       { title: "Interactive SVG Animations", url: "https://www.svg.guide/" },
       { title: "UI Engineering 101 for Designers", url: "https://maven.com/pixeljanitor/uiengineering-101-for-designers" },
-      {
-        title: "Refactoring UI",
-        url: "https://www.refactoringui.com/",
-        reason: "Adam Wathan and Steve Schoger's book that taught me design isn't about following strict rules—it's about making systematic decisions. Game-changer for developer-designers."
-      },
+      { title: "Refactoring UI", url: "https://www.refactoringui.com/" },
       { title: "Vercel Design Guidelines", url: "https://vercel.com/design/guidelines" },
       { title: "Floguo", url: "https://www.floguo.com/notes/design-engineering" },
     ]
