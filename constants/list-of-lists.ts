@@ -55,6 +55,7 @@ const categories: Category[] = [
     links: [
       { title: "Tack Room Bible Talk", url: "https://www.youtube.com/@TackRoomBibleTalk", reason: "Freaking love this guy, I originally discovered him through his other channel Dry Creek Wrangler School and eventually found out about this secondary channel where he discusses Christianism and the Bible itself. Great role model." },
       { title: "galleries to pull sacred art from", url: "https://x.com/luxangelae/status/1995947323030208612" },
+      { title: "When You Don't Want to Serve God (But You Want to Want to)", url: "https://youtu.be/tJA-HgEgyL0?si=w-qVAdqBtPQAhcA6" },
       { title: "Coptic Tattoo Designs", url: "https://archive.org/details/coptictattoodesi0000cars/mode/2up" },
     ]
   },
