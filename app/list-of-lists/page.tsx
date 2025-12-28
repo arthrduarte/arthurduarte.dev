@@ -71,7 +71,7 @@ export default function ListOfListsPage() {
                     <li key={index}>
                       {link.hover ? (
                         <HoverCard>
-                          <HoverCardTrigger asChild>
+                          <HoverCardTrigger>
                             {linkButton}
                           </HoverCardTrigger>
                           <HoverCardContent side="right" className="w-80">
