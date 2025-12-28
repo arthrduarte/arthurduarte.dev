@@ -1,4 +1,4 @@
-export interface Link {
+export interface Resource {
   title: string;
   url?: string;
   reason?: string;
@@ -7,7 +7,7 @@ export interface Link {
 
 export interface Category {
   name: string;
-  links: Link[];
+  links: Resource[];
 }
 
 const categories: Category[] = [
