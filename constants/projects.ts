@@ -25,20 +25,6 @@ const projects: Project[] = [
     }
   },
   {
-    name: "Stealth",
-    emoji: "👻",
-    description: "Working in colaboration with an influencer.",
-    year: "2025",
-    status: "active",
-  },
-  {
-    name: "Arthurian Lab",
-    emoji: "💼",
-    description: "My sole proprietorship company for freelance work and building my own software products.",
-    year: "2025",
-    status: "active",
-  },
-  {
     name: "Vaza AI",
     emoji: "🌍",
     description: "Vaza uses AI to figure out exactly which visa you need and builds a step-by-step plan for your move. It basically handles all the confusing legal paperwork so you can just focus on starting your new life in a different country.",
