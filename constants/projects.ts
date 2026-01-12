@@ -25,14 +25,14 @@ const projects: Project[] = [
     }
   },
   {
-    name: "Vaza AI",
-    emoji: "🌍",
-    description: "Vaza uses AI to figure out exactly which visa you need and builds a step-by-step plan for your move. It basically handles all the confusing legal paperwork so you can just focus on starting your new life in a different country.",
-    year: "2025",
-    status: "hackathon",
+    name: "Finish Line",
+    emoji: "🏁",
+    description: "Finish Line is a mobile app that helps you focus in ONE task instead of trying multiple things at once.",
+    year: "2026",
+    status: "active",
     links: {
-      website: "https://hb-02-2025-vaza.vercel.app/",
-      github: "https://github.com/arthrduarte/vaza",
+      website: "https://finish-line.app",
+      github: "https://github.com/arthrduarte/finish-line",
     }
   },
   {

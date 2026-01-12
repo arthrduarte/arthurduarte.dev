@@ -60,15 +60,6 @@ const categories: Category[] = [
     ]
   },
   {
-    name: "I want to",
-    links: [
-      { title: "learn advanced math" },
-      { title: "be a wine conoisseur" },
-      { title: "learn wood work / carpentry" },
-      { title: "host events like I used to do in Brazil" },
-    ]
-  },
-  {
     name: "Design Engineering",
     links: [
       {
