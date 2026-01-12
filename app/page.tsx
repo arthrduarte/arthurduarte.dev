@@ -125,6 +125,21 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      {/* 12x12 Section */}
+      <section>
+        <h2 className="text-sm font-semibold mb-3">
+          12 Projects in 12 Months
+        </h2>
+        <div className="space-y-1">
+          <Link 
+            href="/12x12/report-1" 
+            className="flex font-medium text-sm text-stone-400 hover:text-stone-100 hover:bg-stone-800/80 rounded-sm transition-colors -mx-2 px-2 py-1"
+          >
+            Report 1
+          </Link>
+        </div>
+      </section>
     </div>
   )
 }
