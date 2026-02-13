@@ -59,7 +59,7 @@ export default function Home() {
                     {social.icon === "mail" && <Mail className="h-4 w-4" />}
                     {social.icon === "x" && <XIcon />}
                     {social.icon === "linkedin" && <LinkedInIcon />}
-                    {social.icon === "youtube" && <YouTubeIcon />}
+                    {/* {social.icon === "youtube" && <YouTubeIcon />} */}
                     {social.icon === "github" && <GitHubIcon />}
                   </Link>
                 ))}
@@ -127,7 +127,7 @@ export default function Home() {
       </section>
 
       {/* 12x12 Section */}
-      <section>
+      {/* <section>
         <h2 className="text-sm font-semibold mb-3">
           12 Projects in 12 Months
         </h2>
@@ -139,7 +139,7 @@ export default function Home() {
             Report 1
           </Link>
         </div>
-      </section>
+      </section> */}
     </div>
   )
 }
