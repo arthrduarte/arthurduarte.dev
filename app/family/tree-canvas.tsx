@@ -44,6 +44,8 @@ const SIDE_X_OFFSET = 265;
 const SIDE_Y_STEP = 250;
 const MIN_SCALE = 0.45;
 const MAX_SCALE = 1.8;
+const ANCESTOR_SLOT_GAP = 240;
+const DRAG_THRESHOLD_PX = 6;
 
 export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
   const [expandedBranches, setExpandedBranches] = useState<Record<string, boolean>>({});
@@ -52,6 +54,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef(false);
   const dragOriginRef = useRef({ pointerX: 0, pointerY: 0, viewportX: 0, viewportY: 0 });
+  const dragPendingRef = useRef(false);
 
   const peopleById = useMemo(
     () => new Map<string, Person>(data.people.map((person) => [person.id, person])),
@@ -79,7 +82,12 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
 
     addMainNode(rootId, 0, 0);
 
-    const placeAncestors = (personId: string, depth: number, x: number, spread: number) => {
+    const getAncestorX = (depth: number, slotIndex: number) => {
+      const slotCount = 2 ** depth;
+      return (slotIndex - (slotCount - 1) / 2) * ANCESTOR_SLOT_GAP;
+    };
+
+    const placeAncestors = (personId: string, depth: number, slotIndex: number) => {
       if (depth >= 3) {
         return;
       }
@@ -94,12 +102,14 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
           return;
         }
 
-        const parentX = x + (index === 0 ? -spread : spread);
+        const nextDepth = depth + 1;
+        const parentSlotIndex = slotIndex * 2 + index;
+        const parentX = getAncestorX(nextDepth, parentSlotIndex);
         const parentY = -(depth + 1) * MAIN_Y_GAP;
         addMainNode(parentId, parentX, parentY);
 
         edges.push({ fromKey: parentId, toKey: personId });
-        placeAncestors(parentId, depth + 1, parentX, Math.max(spread * 0.58, 90));
+        placeAncestors(parentId, nextDepth, parentSlotIndex);
       });
     };
 
@@ -130,7 +140,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       });
     };
 
-    placeAncestors(rootId, 0, 0, MAIN_X_SPREAD);
+    placeAncestors(rootId, 0, 0);
     placeDescendants(rootId, 0, 0, MAIN_X_SPREAD);
 
     mainNodes.forEach((mainNode) => {
@@ -273,7 +283,13 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
             return;
           }
 
-          isDraggingRef.current = true;
+          const target = event.target as HTMLElement | null;
+          if (target?.closest("[data-interactive='true']")) {
+            return;
+          }
+
+          dragPendingRef.current = true;
+          isDraggingRef.current = false;
           dragOriginRef.current = {
             pointerX: event.clientX,
             pointerY: event.clientY,
@@ -283,12 +299,21 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
           event.currentTarget.setPointerCapture(event.pointerId);
         }}
         onPointerMove={(event) => {
-          if (!isDraggingRef.current) {
+          if (!dragPendingRef.current && !isDraggingRef.current) {
             return;
           }
 
           const deltaX = event.clientX - dragOriginRef.current.pointerX;
           const deltaY = event.clientY - dragOriginRef.current.pointerY;
+          const travel = Math.hypot(deltaX, deltaY);
+
+          if (!isDraggingRef.current && travel >= DRAG_THRESHOLD_PX) {
+            isDraggingRef.current = true;
+          }
+
+          if (!isDraggingRef.current) {
+            return;
+          }
 
           setViewport((current) => ({
             ...current,
@@ -298,10 +323,12 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
         }}
         onPointerUp={(event) => {
           isDraggingRef.current = false;
+          dragPendingRef.current = false;
           event.currentTarget.releasePointerCapture(event.pointerId);
         }}
         onPointerCancel={(event) => {
           isDraggingRef.current = false;
+          dragPendingRef.current = false;
           event.currentTarget.releasePointerCapture(event.pointerId);
         }}
         onWheel={(event) => {
@@ -447,6 +474,7 @@ function PersonCard({
       {showBranchToggle ? (
         <button
           type="button"
+          data-interactive="true"
           className="absolute -right-3 top-1/2 h-8 w-8 -translate-y-1/2 rounded-full border border-[#CE955E]/70 bg-[#FAF6ED] text-lg leading-none shadow-sm hover:bg-[#F0EBD6]"
           onClick={onToggleBranch}
           aria-label={isBranchOpen ? "Hide relatives" : "Show relatives"}
@@ -455,7 +483,7 @@ function PersonCard({
         </button>
       ) : null}
 
-      <Link href={`/family/person/${person.id}`} className="block">
+      <Link href={`/family/person/${person.id}`} className="block" data-interactive="true">
         <Image
           src={person.portrait}
           alt={person.name}
