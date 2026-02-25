@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { FamilyData, Person } from "@/lib/family-data";
-import { getSideRelativeIds, formatLifeRange } from "@/lib/family-data";
+import { formatLifeRange } from "@/lib/family-data";
 
 type FamilyTreeCanvasProps = {
   data: FamilyData;
@@ -40,12 +40,7 @@ const NODE_WIDTH = 170;
 const NODE_HEIGHT = 222;
 const MAIN_Y_GAP = 310;
 const MAIN_X_SPREAD = 380;
-const SIDE_BRANCH_X_OFFSET = 300;
-const SIDE_BRANCH_LANE_GAP = 820;
-const SIDE_SPOUSE_X_GAP = 210;
-const SIDE_DESC_Y_GAP = 250;
-const SIDE_CHILD_X_GAP = 220;
-const SIDE_DESC_MAX_DEPTH = 2;
+const SIDE_SIBLING_X_GAP = 250;
 const MIN_SCALE = 0.45;
 const MAX_SCALE = 1.8;
 const ANCESTOR_SLOT_GAP = 240;
@@ -159,63 +154,14 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
         return;
       }
 
-      const sideRelatives = getSideRelativeIds(person).filter((relativeId) => peopleById.has(relativeId));
+      const siblingIds = getSiblingIds(person, peopleById);
 
-      const addFamilyBranch = (
-        personId: string,
-        nodeKey: string,
-        anchorId: string,
-        x: number,
-        y: number,
-        depth: number,
-      ) => {
-        addSideNode(nodeKey, personId, anchorId, x, y);
+      siblingIds.forEach((siblingId, index) => {
+        const sideNodeId = `${mainNode.id}::sibling:${siblingId}`;
+        const sideX = mainNode.x - (siblingIds.length - index) * SIDE_SIBLING_X_GAP;
+        const sideY = mainNode.y;
 
-        const branchPerson = peopleById.get(personId);
-        if (!branchPerson || depth >= SIDE_DESC_MAX_DEPTH) {
-          return;
-        }
-
-        const spouseIds = branchPerson.spouse.filter((spouseId) => peopleById.has(spouseId));
-        const spouseKeys: string[] = [];
-
-        spouseIds.forEach((spouseId, spouseIndex) => {
-          const spouseKey = `${nodeKey}::spouse:${spouseId}:${spouseIndex}`;
-          const spouseX = x + SIDE_SPOUSE_X_GAP * (spouseIndex + 1);
-
-          addSideNode(spouseKey, spouseId, anchorId, spouseX, y);
-          spouseKeys.push(spouseKey);
-          edges.push({ fromKey: nodeKey, toKey: spouseKey, dashed: true });
-        });
-
-        const children = branchPerson.children.filter((childId) => peopleById.has(childId));
-        if (children.length === 0) {
-          return;
-        }
-
-        const parentCenterX = spouseKeys.length > 0 ? x + SIDE_SPOUSE_X_GAP / 2 : x;
-        const childGap = Math.max(SIDE_CHILD_X_GAP - depth * 40, 120);
-
-        children.forEach((childId, childIndex) => {
-          const childX = parentCenterX + (childIndex - (children.length - 1) / 2) * childGap;
-          const childY = y + SIDE_DESC_Y_GAP;
-          const childNodeKey = `${nodeKey}::child:${childId}:${depth}:${childIndex}`;
-
-          addFamilyBranch(childId, childNodeKey, anchorId, childX, childY, depth + 1);
-          edges.push({ fromKey: nodeKey, toKey: childNodeKey });
-
-          spouseKeys.forEach((spouseKey) => {
-            edges.push({ fromKey: spouseKey, toKey: childNodeKey });
-          });
-        });
-      };
-
-      sideRelatives.forEach((relativeId, index) => {
-        const sideNodeId = `${mainNode.id}::relative:${relativeId}`;
-        const sideX = mainNode.x + SIDE_BRANCH_X_OFFSET;
-        const sideY = mainNode.y + (index - (sideRelatives.length - 1) / 2) * SIDE_BRANCH_LANE_GAP;
-
-        addFamilyBranch(relativeId, sideNodeId, mainNode.id, sideX, sideY, 0);
+        addSideNode(sideNodeId, siblingId, mainNode.id, sideX, sideY);
         edges.push({ fromKey: mainNode.id, toKey: sideNodeId, dashed: true });
       });
     });
@@ -448,7 +394,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
               return null;
             }
 
-            const sideCount = getSideRelativeIds(person).filter((relativeId) => peopleById.has(relativeId)).length;
+            const sideCount = getSiblingIds(person, peopleById).length;
 
             return (
               <PersonCard
@@ -491,6 +437,17 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       </div>
     </div>
   );
+}
+
+function getSiblingIds(person: Person, peopleById: Map<string, Person>): string[] {
+  const siblingIdsFromParents = person.parents.flatMap((parentId) => {
+    const parent = peopleById.get(parentId);
+    return parent?.children ?? [];
+  });
+
+  const preferred = siblingIdsFromParents.length > 0 ? siblingIdsFromParents : person.siblings ?? [];
+  const unique = Array.from(new Set(preferred));
+  return unique.filter((id) => id !== person.id && peopleById.has(id));
 }
 
 type PersonCardProps = {
