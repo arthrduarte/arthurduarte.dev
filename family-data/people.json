@@ -1,398 +1,421 @@
 {
-  "rootPersonId": "arthur-duarte",
+  "rootPersonId": "arthur-leite-duarte",
   "people": [
     {
-      "id": "arthur-duarte",
-      "slug": "arthur-duarte",
-      "name": "Arthur Duarte",
-      "birth": "1999",
-      "death": null,
-      "parents": ["marco-duarte", "helena-leite"],
-      "spouse": ["beatriz-moretti"],
-      "children": ["clara-duarte"],
-      "siblings": ["matteo-duarte"],
-      "cousins": ["sofia-duarte-cousin", "enzo-leite-cousin"],
-      "unclesAunts": ["renata-duarte", "paulo-leite"],
-      "bio": "Arthur grew up listening to long table stories about migrations, harvest seasons, and the people who crossed oceans with little more than faith and family names. He became the keeper of those stories, writing them down before they faded.\n\nToday he sees this archive as a quiet promise to future generations: memory should not disappear just because life gets busy.",
-      "portrait": "/family-photos/arthur.jpg",
-      "gallery": [
-        "/family-photos/memory-1.jpg",
-        "/family-photos/memory-2.jpg",
-        "/family-photos/memory-3.jpg"
-      ],
-      "videos": []
-    },
-    {
-      "id": "marco-duarte",
-      "slug": "marco-duarte",
-      "name": "Marco Duarte",
-      "birth": "1972",
-      "death": null,
-      "parents": ["giuseppe-rocco-ii", "maria-lucia-rocco"],
-      "spouse": ["helena-leite"],
-      "children": ["arthur-duarte", "matteo-duarte"],
-      "siblings": ["renata-duarte"],
-      "cousins": [],
-      "unclesAunts": [],
-      "bio": "Marco is the patient builder of the family. He measured success in consistency, not noise, and taught everyone that dignity comes from keeping your word.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": ["/family-photos/memory-2.jpg"],
-      "videos": []
-    },
-    {
-      "id": "helena-leite",
-      "slug": "helena-leite",
-      "name": "Helena Leite",
-      "birth": "1975",
-      "death": null,
-      "parents": ["antonio-leite", "isabel-ferrara"],
-      "spouse": ["marco-duarte"],
-      "children": ["arthur-duarte", "matteo-duarte"],
-      "siblings": ["paulo-leite"],
-      "cousins": [],
-      "unclesAunts": [],
-      "bio": "Helena carried the oral history of both sides of the family and made sure every birthday became a reunion. Her memory for names and places became the backbone of this tree.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": ["/family-photos/memory-3.jpg"],
-      "videos": []
-    },
-    {
-      "id": "matteo-duarte",
-      "slug": "matteo-duarte",
-      "name": "Matteo Duarte",
-      "birth": "2002",
-      "death": null,
-      "parents": ["marco-duarte", "helena-leite"],
-      "spouse": [],
-      "children": [],
-      "siblings": ["arthur-duarte"],
-      "cousins": ["sofia-duarte-cousin"],
-      "unclesAunts": ["renata-duarte", "paulo-leite"],
-      "bio": "Matteo brought music to every family gathering and has become known as the one who can bridge generations with humor and heart.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": [],
-      "videos": []
-    },
-    {
-      "id": "beatriz-moretti",
-      "slug": "beatriz-moretti",
-      "name": "Beatriz Moretti",
-      "birth": "2000",
-      "death": null,
-      "parents": [],
-      "spouse": ["arthur-duarte"],
-      "children": ["clara-duarte"],
-      "siblings": [],
-      "cousins": [],
-      "unclesAunts": [],
-      "bio": "Beatriz is remembered in this archive as a gentle presence who made every house feel like home.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": [],
-      "videos": []
-    },
-    {
-      "id": "clara-duarte",
-      "slug": "clara-duarte",
-      "name": "Clara Duarte",
-      "birth": "2028",
-      "death": null,
-      "parents": ["arthur-duarte", "beatriz-moretti"],
-      "spouse": [],
-      "children": [],
-      "siblings": [],
-      "cousins": [],
-      "unclesAunts": ["matteo-duarte"],
-      "bio": "Clara represents the branch of the family still being written. Her page is intentionally short, leaving room for future memories.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": [],
-      "videos": []
-    },
-    {
-      "id": "giuseppe-rocco-ii",
-      "slug": "giuseppe-rocco-ii",
-      "name": "Giuseppe Rocco",
-      "birth": "1944",
-      "death": "2011",
-      "parents": ["giuseppe-rocco-i", "caterina-bianchi"],
-      "spouse": ["maria-lucia-rocco"],
-      "children": ["marco-duarte", "renata-duarte"],
-      "siblings": ["alessandro-rocco"],
-      "cousins": [],
-      "unclesAunts": [],
-      "bio": "Giuseppe worked the same land his father did and kept family customs alive with quiet discipline. He insisted that names carry duty, not vanity.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": ["/family-photos/memory-1.jpg"],
-      "videos": []
-    },
-    {
-      "id": "maria-lucia-rocco",
-      "slug": "maria-lucia-rocco",
-      "name": "Maria Lucia Rocco",
-      "birth": "1948",
-      "death": null,
-      "parents": ["carlo-venturi", "rosa-casini"],
-      "spouse": ["giuseppe-rocco-ii"],
-      "children": ["marco-duarte", "renata-duarte"],
-      "siblings": [],
-      "cousins": [],
-      "unclesAunts": [],
-      "bio": "Maria Lucia documented recipes, letters, and names in small notebooks. Much of the family memory survived because she wrote it down.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": [],
-      "videos": []
-    },
-    {
-      "id": "antonio-leite",
-      "slug": "antonio-leite",
-      "name": "Antonio Leite",
-      "birth": "1946",
-      "death": "2019",
-      "parents": ["francisco-leite", "elena-sarti"],
-      "spouse": ["isabel-ferrara"],
-      "children": ["helena-leite", "paulo-leite"],
-      "siblings": [],
-      "cousins": [],
-      "unclesAunts": [],
-      "bio": "Antonio crossed regions for work and sent handwritten letters back home every month, building a paper bridge between generations.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": [],
-      "videos": []
-    },
-    {
-      "id": "isabel-ferrara",
-      "slug": "isabel-ferrara",
-      "name": "Isabel Ferrara",
-      "birth": "1950",
-      "death": null,
-      "parents": ["lorenzo-ferrara", "bianca-romano"],
-      "spouse": ["antonio-leite"],
-      "children": ["helena-leite", "paulo-leite"],
-      "siblings": [],
-      "cousins": [],
-      "unclesAunts": [],
-      "bio": "Isabel kept the family together through celebrations and grief alike. Her home was always the place everyone returned to.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": [],
-      "videos": []
-    },
-    {
-      "id": "renata-duarte",
-      "slug": "renata-duarte",
-      "name": "Renata Duarte",
-      "birth": "1978",
-      "death": null,
-      "parents": ["giuseppe-rocco-ii", "maria-lucia-rocco"],
-      "spouse": [],
-      "children": ["sofia-duarte-cousin"],
-      "siblings": ["marco-duarte"],
-      "cousins": [],
-      "unclesAunts": [],
-      "bio": "Renata is the aunt who preserved family letters and baptism records, helping reconstruct missing links in the lineage.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": [],
-      "videos": []
-    },
-    {
-      "id": "paulo-leite",
-      "slug": "paulo-leite",
-      "name": "Paulo Leite",
-      "birth": "1980",
-      "death": null,
-      "parents": ["antonio-leite", "isabel-ferrara"],
-      "spouse": [],
-      "children": ["enzo-leite-cousin"],
-      "siblings": ["helena-leite"],
-      "cousins": [],
-      "unclesAunts": [],
-      "bio": "Paulo carried the Leite storytelling spirit and became known for retelling ancestral journeys to younger cousins.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": [],
-      "videos": []
-    },
-    {
-      "id": "sofia-duarte-cousin",
-      "slug": "sofia-duarte-cousin",
-      "name": "Sofia Duarte",
-      "birth": "2001",
-      "death": null,
-      "parents": ["renata-duarte"],
-      "spouse": [],
-      "children": [],
-      "siblings": [],
-      "cousins": ["arthur-duarte", "matteo-duarte"],
-      "unclesAunts": ["marco-duarte"],
-      "bio": "Sofia keeps the family photo albums organized and digitized, making old moments easy to revisit.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": [],
-      "videos": []
-    },
-    {
-      "id": "enzo-leite-cousin",
-      "slug": "enzo-leite-cousin",
-      "name": "Enzo Leite",
+      "id": "arthur-leite-duarte",
+      "slug": "arthur-leite-duarte",
+      "name": "Arthur Leite Duarte",
       "birth": "2004",
       "death": null,
-      "parents": ["paulo-leite"],
+      "parents": [
+        "francisco-de-almeida-duarte",
+        "cristiane-alano-leite"
+      ],
       "spouse": [],
       "children": [],
       "siblings": [],
-      "cousins": ["arthur-duarte", "matteo-duarte"],
-      "unclesAunts": ["helena-leite"],
-      "bio": "Enzo represents the newer generation that bridges old family traditions with modern life.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "cousins": [],
+      "unclesAunts": [
+        "fabio-de-almeida-duarte",
+        "felipe-de-almeida-duarte",
+        "fernando-de-almeida-duarte"
+      ],
+      "bio": "Arthur Leite Duarte was born in 2004 and carries forward both the Duarte and Leite family legacies.",
+      "portrait": "/family-photos/arthur-leite-duarte.jpg",
       "gallery": [],
       "videos": []
     },
     {
-      "id": "giuseppe-rocco-i",
-      "slug": "giuseppe-rocco-i",
-      "name": "Giuseppe Rocco",
-      "birth": "1915",
+      "id": "francisco-de-almeida-duarte",
+      "slug": "francisco-de-almeida-duarte",
+      "name": "Francisco de Almeida Duarte",
+      "birth": "1972",
+      "death": null,
+      "parents": [
+        "airan-valdemar-duarte",
+        "ione-beatriz-scola-de-almeida"
+      ],
+      "spouse": [
+        "cristiane-alano-leite"
+      ],
+      "children": [
+        "arthur-leite-duarte"
+      ],
+      "siblings": [
+        "fabio-de-almeida-duarte",
+        "felipe-de-almeida-duarte",
+        "fernando-de-almeida-duarte"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Francisco de Almeida Duarte, born in 1972, is the son of Airan Valdemar Duarte and Ione Beatriz Scola de Almeida.",
+      "portrait": "/family-photos/francisco-de-almeida-duarte.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "cristiane-alano-leite",
+      "slug": "cristiane-alano-leite",
+      "name": "Cristiane Alano Leite",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "luiz-fernando-costa-leite",
+        "marlene-alano-leite"
+      ],
+      "spouse": [
+        "francisco-de-almeida-duarte"
+      ],
+      "children": [
+        "arthur-leite-duarte"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Cristiane Alano Leite is the daughter of Luiz Fernando Costa Leite and Marlene Alano Leite.",
+      "portrait": "/family-photos/cristiane-alano-leite.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "airan-valdemar-duarte",
+      "slug": "airan-valdemar-duarte",
+      "name": "Airan Valdemar Duarte",
+      "birth": "1939",
+      "death": "1985",
+      "parents": [
+        "manoel-dos-santos-duarte",
+        "martha-barbosa-duarte"
+      ],
+      "spouse": [
+        "ione-beatriz-scola-de-almeida"
+      ],
+      "children": [
+        "francisco-de-almeida-duarte",
+        "fabio-de-almeida-duarte",
+        "felipe-de-almeida-duarte",
+        "fernando-de-almeida-duarte"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Airan Valdemar Duarte (1939–1985) was the son of Manoel dos Santos Duarte and Martha Barbosa Duarte.",
+      "portrait": "/family-photos/airan-valdemar-duarte.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "ione-beatriz-scola-de-almeida",
+      "slug": "ione-beatriz-scola-de-almeida",
+      "name": "Ione Beatriz Scola de Almeida",
+      "birth": "1942",
+      "death": "2011",
+      "parents": [
+        "hermes-baptista-de-almeida",
+        "thomazina-scola"
+      ],
+      "spouse": [
+        "airan-valdemar-duarte"
+      ],
+      "children": [
+        "francisco-de-almeida-duarte",
+        "fabio-de-almeida-duarte",
+        "felipe-de-almeida-duarte",
+        "fernando-de-almeida-duarte"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Ione Beatriz Scola de Almeida (1942–2011) was the daughter of Hermes Baptista de Almeida and Thomazina Scola.",
+      "portrait": "/family-photos/ione-beatriz-scola-de-almeida.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "manoel-dos-santos-duarte",
+      "slug": "manoel-dos-santos-duarte",
+      "name": "Manoel dos Santos Duarte",
+      "birth": "1908",
       "death": "1988",
       "parents": [],
-      "spouse": ["caterina-bianchi"],
-      "children": ["giuseppe-rocco-ii", "alessandro-rocco"],
+      "spouse": [
+        "martha-barbosa-duarte"
+      ],
+      "children": [
+        "airan-valdemar-duarte"
+      ],
       "siblings": [],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "The first Giuseppe in this preserved branch, remembered for rebuilding after war years and safeguarding family records.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "bio": "Manoel dos Santos Duarte (1908–1988) represents an earlier Duarte generation.",
+      "portrait": "/family-photos/manoel-dos-santos-duarte.jpg",
       "gallery": [],
       "videos": []
     },
     {
-      "id": "caterina-bianchi",
-      "slug": "caterina-bianchi",
-      "name": "Caterina Bianchi",
-      "birth": "1919",
-      "death": "1996",
+      "id": "martha-barbosa-duarte",
+      "slug": "martha-barbosa-duarte",
+      "name": "Martha Barbosa Duarte",
+      "birth": "1910",
+      "death": "1986",
       "parents": [],
-      "spouse": ["giuseppe-rocco-i"],
-      "children": ["giuseppe-rocco-ii", "alessandro-rocco"],
+      "spouse": [
+        "manoel-dos-santos-duarte"
+      ],
+      "children": [
+        "airan-valdemar-duarte"
+      ],
       "siblings": [],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Caterina passed down songs and prayers that still appear in family gatherings.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "bio": "Martha Barbosa Duarte (1910–1986) was part of the Barbosa lineage and mother of Airan.",
+      "portrait": "/family-photos/martha-barbosa-duarte.jpg",
       "gallery": [],
       "videos": []
     },
     {
-      "id": "carlo-venturi",
-      "slug": "carlo-venturi",
-      "name": "Carlo Venturi",
-      "birth": "1920",
-      "death": "1989",
+      "id": "hermes-baptista-de-almeida",
+      "slug": "hermes-baptista-de-almeida",
+      "name": "Hermes Baptista de Almeida",
+      "birth": "1909",
+      "death": "1957",
       "parents": [],
-      "spouse": ["rosa-casini"],
-      "children": ["maria-lucia-rocco"],
+      "spouse": [
+        "thomazina-scola"
+      ],
+      "children": [
+        "ione-beatriz-scola-de-almeida"
+      ],
       "siblings": [],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Carlo was known for keeping meticulous notes on births and marriages in the family.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "bio": "Hermes Baptista de Almeida (1909–1957) is part of the Almeida ancestry line.",
+      "portrait": "/family-photos/hermes-baptista-de-almeida.jpg",
       "gallery": [],
       "videos": []
     },
     {
-      "id": "rosa-casini",
-      "slug": "rosa-casini",
-      "name": "Rosa Casini",
-      "birth": "1922",
-      "death": "1994",
+      "id": "thomazina-scola",
+      "slug": "thomazina-scola",
+      "name": "Thomazina Scola",
+      "birth": "1910",
+      "death": "1980",
       "parents": [],
-      "spouse": ["carlo-venturi"],
-      "children": ["maria-lucia-rocco"],
+      "spouse": [
+        "hermes-baptista-de-almeida"
+      ],
+      "children": [
+        "ione-beatriz-scola-de-almeida"
+      ],
       "siblings": [],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Rosa's diaries helped preserve stories that would otherwise have been lost.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "bio": "Thomazina Scola (1910–1980) carried the Scola family name into the Almeida branch.",
+      "portrait": "/family-photos/thomazina-scola.jpg",
       "gallery": [],
       "videos": []
     },
     {
-      "id": "francisco-leite",
-      "slug": "francisco-leite",
-      "name": "Francisco Leite",
-      "birth": "1921",
-      "death": "1990",
-      "parents": [],
-      "spouse": ["elena-sarti"],
-      "children": ["antonio-leite"],
+      "id": "luiz-fernando-costa-leite",
+      "slug": "luiz-fernando-costa-leite",
+      "name": "Luiz Fernando Costa Leite",
+      "birth": "1946",
+      "death": "2020",
+      "parents": [
+        "raphael-paiva-leite",
+        "nair-garcia-costa"
+      ],
+      "spouse": [
+        "marlene-alano-leite"
+      ],
+      "children": [
+        "cristiane-alano-leite"
+      ],
       "siblings": [],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Francisco kept family land records and legal papers in careful order.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "bio": "Luiz Fernando Costa Leite (1946–2020) was the son of Raphael Paiva Leite and Nair Garcia Costa, continuing the Leite lineage into the next generation.",
+      "portrait": "/family-photos/luiz-fernando-costa-leite.jpg",
       "gallery": [],
       "videos": []
     },
     {
-      "id": "elena-sarti",
-      "slug": "elena-sarti",
-      "name": "Elena Sarti",
-      "birth": "1926",
-      "death": "2002",
-      "parents": [],
-      "spouse": ["francisco-leite"],
-      "children": ["antonio-leite"],
-      "siblings": [],
-      "cousins": [],
-      "unclesAunts": [],
-      "bio": "Elena taught the younger generation the value of family rituals and oral memory.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": [],
-      "videos": []
-    },
-    {
-      "id": "lorenzo-ferrara",
-      "slug": "lorenzo-ferrara",
-      "name": "Lorenzo Ferrara",
-      "birth": "1923",
-      "death": "1993",
-      "parents": [],
-      "spouse": ["bianca-romano"],
-      "children": ["isabel-ferrara"],
-      "siblings": [],
-      "cousins": [],
-      "unclesAunts": [],
-      "bio": "Lorenzo was remembered for his craftsmanship and unwavering dedication to family unity.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": [],
-      "videos": []
-    },
-    {
-      "id": "bianca-romano",
-      "slug": "bianca-romano",
-      "name": "Bianca Romano",
-      "birth": "1928",
-      "death": "2008",
-      "parents": [],
-      "spouse": ["lorenzo-ferrara"],
-      "children": ["isabel-ferrara"],
-      "siblings": [],
-      "cousins": [],
-      "unclesAunts": [],
-      "bio": "Bianca was a family historian in spirit, known for preserving letters, recipes, and stories.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
-      "gallery": [],
-      "videos": []
-    },
-    {
-      "id": "alessandro-rocco",
-      "slug": "alessandro-rocco",
-      "name": "Alessandro Rocco",
-      "birth": "1949",
+      "id": "marlene-alano-leite",
+      "slug": "marlene-alano-leite",
+      "name": "Marlene Alano Leite",
+      "birth": null,
       "death": null,
-      "parents": ["giuseppe-rocco-i", "caterina-bianchi"],
+      "parents": [
+        "antonio-alano",
+        "maria-guilhermina-alano"
+      ],
+      "spouse": [
+        "luiz-fernando-costa-leite"
+      ],
+      "children": [
+        "cristiane-alano-leite"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Marlene Alano Leite is the daughter of Antonio Alano and Maria Guilhermina Alano, representing the Alano family branch.",
+      "portrait": "/family-photos/marlene-alano-leite.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "raphael-paiva-leite",
+      "slug": "raphael-paiva-leite",
+      "name": "Raphael Paiva Leite",
+      "birth": "1911",
+      "death": "1998",
+      "parents": [],
+      "spouse": [
+        "nair-garcia-costa"
+      ],
+      "children": [
+        "luiz-fernando-costa-leite"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Raphael Paiva Leite (1911–1998) was part of the Leite ancestry and father of Luiz Fernando.",
+      "portrait": "/family-photos/raphael-paiva-leite.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "nair-garcia-costa",
+      "slug": "nair-garcia-costa",
+      "name": "Nair Garcia Costa",
+      "birth": "1912",
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "raphael-paiva-leite"
+      ],
+      "children": [
+        "luiz-fernando-costa-leite"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Nair Garcia Costa (1912–Deceased) was part of the Costa family and mother of Luiz Fernando.",
+      "portrait": "/family-photos/nair-garcia-costa.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "antonio-alano",
+      "slug": "antonio-alano",
+      "name": "Antonio Alano",
+      "birth": "1908",
+      "death": "2004",
+      "parents": [],
+      "spouse": [
+        "maria-guilhermina-alano"
+      ],
+      "children": [
+        "marlene-alano-leite"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Antonio Alano (1908–2004) represents an earlier generation of the Alano family.",
+      "portrait": "/family-photos/antonio-alano.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "maria-guilhermina-alano",
+      "slug": "maria-guilhermina-alano",
+      "name": "Maria Guilhermina Alano",
+      "birth": "1913",
+      "death": "1986",
+      "parents": [],
+      "spouse": [
+        "antonio-alano"
+      ],
+      "children": [
+        "marlene-alano-leite"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Maria Guilhermina Alano (1913–1986) carried the Alano name into the next generation as the mother of Marlene.",
+      "portrait": "/family-photos/maria-guilhermina-alano.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "fabio-de-almeida-duarte",
+      "slug": "fabio-de-almeida-duarte",
+      "name": "Fabio de Almeida Duarte",
+      "birth": "1966",
+      "death": "2021",
+      "parents": [
+        "airan-valdemar-duarte",
+        "ione-beatriz-scola-de-almeida"
+      ],
       "spouse": [],
       "children": [],
-      "siblings": ["giuseppe-rocco-ii"],
+      "siblings": [
+        "francisco-de-almeida-duarte",
+        "felipe-de-almeida-duarte",
+        "fernando-de-almeida-duarte"
+      ],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Alessandro stayed close to home and helped protect the family estate archives.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "bio": "Fabio de Almeida Duarte (1966-2021) is part of the Duarte sibling branch descending from Airan and Ione.",
+      "portrait": "/family-photos/fabio-de-almeida-duarte.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "felipe-de-almeida-duarte",
+      "slug": "felipe-de-almeida-duarte",
+      "name": "Felipe de Almeida Duarte",
+      "birth": "1971",
+      "death": null,
+      "parents": [
+        "airan-valdemar-duarte",
+        "ione-beatriz-scola-de-almeida"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "francisco-de-almeida-duarte",
+        "fabio-de-almeida-duarte",
+        "fernando-de-almeida-duarte"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Felipe de Almeida Duarte (1971-Present) belongs to the same Duarte generation as Francisco and his brothers.",
+      "portrait": "/family-photos/felipe-de-almeida-duarte.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "fernando-de-almeida-duarte",
+      "slug": "fernando-de-almeida-duarte",
+      "name": "Fernando de Almeida Duarte",
+      "birth": "1972",
+      "death": null,
+      "parents": [
+        "airan-valdemar-duarte",
+        "ione-beatriz-scola-de-almeida"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "francisco-de-almeida-duarte",
+        "fabio-de-almeida-duarte",
+        "felipe-de-almeida-duarte"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Fernando de Almeida Duarte (1972-Present) is included in the Duarte sibling line rooted in Airan and Ione.",
+      "portrait": "/family-photos/fernando-de-almeida-duarte.jpg",
       "gallery": [],
       "videos": []
     }
