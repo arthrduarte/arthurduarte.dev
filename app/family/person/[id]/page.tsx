@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FamilyPortrait } from "@/components/family-portrait";
 import { familyData, getPersonById, formatLifeRange } from "@/lib/family-data";
 
 export const dynamic = "force-static";
@@ -38,8 +39,8 @@ export default async function PersonPage({ params }: { params: Promise<{ id: str
 
         <section className="rounded-[36px] border border-[#CE955E]/50 bg-[#FAF6ED] p-8 md:p-12">
           <div className="mx-auto mb-8 w-fit rounded-full border-4 border-[#CE955E]/55 p-1">
-            <Image
-              src={person.portrait}
+            <FamilyPortrait
+              person={person}
               alt={person.name}
               width={220}
               height={220}

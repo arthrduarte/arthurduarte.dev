@@ -1,5 +1,7 @@
 import peopleData from "@/family-data/people.json";
 
+export const FAMILY_PORTRAIT_PLACEHOLDER = "/family-photos/portrait-placeholder.jpg";
+
 export type Person = {
   id: string;
   slug: string;
@@ -39,4 +41,22 @@ export function formatLifeRange(person: Person): string {
 
 export function getSideRelativeIds(person: Person): string[] {
   return [...(person.siblings ?? []), ...(person.cousins ?? []), ...(person.unclesAunts ?? [])];
+}
+
+export function getPortraitCandidates(person: Pick<Person, "id" | "slug" | "portrait">): string[] {
+  const candidates = new Set<string>();
+  const baseNames = Array.from(new Set([person.id, person.slug].filter(Boolean)));
+  const extensions = [".jpg", ".JPG", ".jpeg", ".JPEG", ".png", ".PNG", ".webp", ".WEBP"];
+
+  if (person.portrait && person.portrait !== FAMILY_PORTRAIT_PLACEHOLDER) {
+    candidates.add(person.portrait);
+  }
+
+  for (const baseName of baseNames) {
+    for (const extension of extensions) {
+      candidates.add(`/family-photos/${baseName}${extension}`);
+    }
+  }
+
+  return Array.from(candidates);
 }

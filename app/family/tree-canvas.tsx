@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { FamilyPortrait } from "@/components/family-portrait";
 import type { FamilyData, Person } from "@/lib/family-data";
 import { formatLifeRange } from "@/lib/family-data";
 
@@ -55,6 +55,8 @@ const NODE_WIDTH = 170;
 const NODE_HEIGHT = 222;
 const MAIN_Y_GAP = 310;
 const MAIN_X_SPREAD = 380;
+const ROOT_SIBLING_X_GAP = 300;
+const ROOT_PARTNER_X_GAP = 430;
 const SIDE_BRANCH_START_OFFSET = 250;
 const SIDE_CARD_X_STEP = NODE_WIDTH + 36;
 const SIDE_CLUSTER_GAP = 84;
@@ -111,14 +113,47 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       sideNodes.set(id, { id, personId, anchorId, x, y, kind, parentKeys });
     };
 
-    addMainNode(rootId, 0, 0);
+    const naturalBranchNodes = new Set<string>();
+    const rootPartnerPositions = new Map<string, number>();
 
-    const getAncestorX = (depth: number, slotIndex: number) => {
+    addMainNode(rootId, 0, 0);
+    naturalBranchNodes.add(rootId);
+
+    const rootPartnerIds = rootPerson.spouse.filter((personId) => peopleById.has(personId));
+    rootPartnerIds.forEach((partnerId, partnerIndex) => {
+      const partnerX = (partnerIndex + 1) * ROOT_PARTNER_X_GAP;
+
+      addMainNode(partnerId, partnerX, 0);
+      partnerLinks.push({ fromKey: rootId, toKey: partnerId });
+      naturalBranchNodes.add(partnerId);
+      rootPartnerPositions.set(partnerId, partnerX);
+    });
+
+    getSiblingIds(rootPerson, peopleById).forEach((siblingId, siblingIndex) => {
+      addMainNode(siblingId, -(siblingIndex + 1) * ROOT_SIBLING_X_GAP, 0);
+      naturalBranchNodes.add(siblingId);
+    });
+
+    rootPartnerIds.forEach((partnerId) => {
+      const partner = peopleById.get(partnerId);
+      const partnerX = rootPartnerPositions.get(partnerId);
+
+      if (!partner || partnerX === undefined) {
+        return;
+      }
+
+      getSiblingIds(partner, peopleById).forEach((siblingId, siblingIndex) => {
+        addMainNode(siblingId, partnerX + (siblingIndex + 1) * ROOT_SIBLING_X_GAP, 0);
+        naturalBranchNodes.add(siblingId);
+      });
+    });
+
+    const getAncestorX = (depth: number, slotIndex: number, baseX: number) => {
       const slotCount = 2 ** depth;
-      return (slotIndex - (slotCount - 1) / 2) * ANCESTOR_SLOT_GAP;
+      return baseX + (slotIndex - (slotCount - 1) / 2) * ANCESTOR_SLOT_GAP;
     };
 
-    const placeAncestors = (personId: string, depth: number, slotIndex: number) => {
+    const placeAncestors = (personId: string, depth: number, slotIndex: number, baseX: number) => {
       if (depth >= 3) {
         return;
       }
@@ -135,10 +170,10 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
 
         const nextDepth = depth + 1;
         const parentSlotIndex = slotIndex * 2 + index;
-        const parentX = getAncestorX(nextDepth, parentSlotIndex);
+        const parentX = getAncestorX(nextDepth, parentSlotIndex, baseX);
         const parentY = -(depth + 1) * MAIN_Y_GAP;
         addMainNode(parentId, parentX, parentY);
-        placeAncestors(parentId, nextDepth, parentSlotIndex);
+        placeAncestors(parentId, nextDepth, parentSlotIndex, baseX);
       });
     };
 
@@ -167,7 +202,16 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       });
     };
 
-    placeAncestors(rootId, 0, 0);
+    placeAncestors(rootId, 0, 0, 0);
+    rootPartnerIds.forEach((partnerId) => {
+      const partnerX = rootPartnerPositions.get(partnerId);
+
+      if (partnerX === undefined) {
+        return;
+      }
+
+      placeAncestors(partnerId, 0, 0, partnerX);
+    });
     placeDescendants(rootId, 0, 0, MAIN_X_SPREAD);
 
     mainNodes.forEach((mainNode) => {
@@ -289,7 +333,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
 
     mainNodes.forEach((node) => {
       const person = peopleById.get(node.id);
-      if (!person || getSiblingIds(person, peopleById).length === 0) {
+      if (!person || naturalBranchNodes.has(node.id) || getSiblingIds(person, peopleById).length === 0) {
         return;
       }
 
@@ -306,6 +350,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       familyGroups: Array.from(familyGroupMap.values()),
       partnerLinks,
       branchDirections,
+      naturalBranchNodes,
     };
   }, [data.rootPersonId, expandedBranches, peopleById]);
 
@@ -522,6 +567,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
             }
 
             const sideCount = getSiblingIds(person, peopleById).length;
+            const showBranchToggle = sideCount > 0 && !layout.naturalBranchNodes.has(node.id);
 
             return (
               <PersonCard
@@ -529,7 +575,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
                 person={person}
                 x={absolute.x}
                 y={absolute.y}
-                showBranchToggle={sideCount > 0}
+                showBranchToggle={showBranchToggle}
                 branchDirection={layout.branchDirections.get(node.id) ?? "left"}
                 isBranchOpen={!!expandedBranches[node.id]}
                 onToggleBranch={() =>
@@ -569,6 +615,10 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
 }
 
 function getSiblingIds(person: Person, peopleById: Map<string, Person>): string[] {
+  return getSiblingSequence(person, peopleById).filter((id) => id !== person.id);
+}
+
+function getSiblingSequence(person: Person, peopleById: Map<string, Person>): string[] {
   const siblingIdsFromParents = person.parents.flatMap((parentId) => {
     const parent = peopleById.get(parentId);
     return parent?.children ?? [];
@@ -576,7 +626,7 @@ function getSiblingIds(person: Person, peopleById: Map<string, Person>): string[
 
   const preferred = siblingIdsFromParents.length > 0 ? siblingIdsFromParents : person.siblings ?? [];
   const unique = Array.from(new Set(preferred));
-  return unique.filter((id) => id !== person.id && peopleById.has(id));
+  return unique.filter((id) => peopleById.has(id));
 }
 
 function getFamilyConnectorPaths(
@@ -684,13 +734,12 @@ function PersonCard({
       ) : null}
 
       <Link href={`/family/person/${person.id}`} className="block" data-interactive="true">
-        <Image
-          src={person.portrait}
+        <FamilyPortrait
+          person={person}
           alt={person.name}
           width={96}
           height={96}
           className="mx-auto h-24 w-24 rounded-full border-2 border-[#CE955E]/50 object-cover transition duration-200 hover:scale-105"
-          draggable={false}
         />
       </Link>
 

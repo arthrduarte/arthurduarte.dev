@@ -11,7 +11,9 @@
         "francisco-de-almeida-duarte",
         "cristiane-alano-leite"
       ],
-      "spouse": [],
+      "spouse": [
+        "tania-wiebenga"
+      ],
       "children": [],
       "siblings": [
         "augusto-leite-duarte"
@@ -24,6 +26,96 @@
       ],
       "bio": "Arthur Leite Duarte was born in 2004 and carries forward both the Duarte and Leite family legacies.",
       "portrait": "/family-photos/arthur-leite-duarte.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "tania-wiebenga",
+      "slug": "tania-wiebenga",
+      "name": "Tania Wiebenga",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "trevor-wiebenga",
+        "annie-wiebenga"
+      ],
+      "spouse": [
+        "arthur-leite-duarte"
+      ],
+      "children": [],
+      "siblings": [
+        "amy-lee-wiebenga"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Tania Wiebenga is the daughter of Trevor Wiebenga and Annie Wiebenga.",
+      "portrait": "/family-photos/tania-wiebenga.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "trevor-wiebenga",
+      "slug": "trevor-wiebenga",
+      "name": "Trevor Wiebenga",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "annie-wiebenga"
+      ],
+      "children": [
+        "tania-wiebenga",
+        "amy-lee-wiebenga"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Trevor Wiebenga is the father of Tania Wiebenga and Amy-Lee Wiebenga.",
+      "portrait": "/family-photos/trevor-wiebenga.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "annie-wiebenga",
+      "slug": "annie-wiebenga",
+      "name": "Annie Wiebenga",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "trevor-wiebenga"
+      ],
+      "children": [
+        "tania-wiebenga",
+        "amy-lee-wiebenga"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Annie Wiebenga is the mother of Tania Wiebenga and Amy-Lee Wiebenga.",
+      "portrait": "/family-photos/annie-wiebenga.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "amy-lee-wiebenga",
+      "slug": "amy-lee-wiebenga",
+      "name": "Amy-Lee Wiebenga",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "trevor-wiebenga",
+        "annie-wiebenga"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "tania-wiebenga"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Amy-Lee Wiebenga is the sister of Tania Wiebenga.",
+      "portrait": "/family-photos/amy-lee-wiebenga.jpg",
       "gallery": [],
       "videos": []
     },
@@ -73,7 +165,10 @@
         "arthur-leite-duarte",
         "augusto-leite-duarte"
       ],
-      "siblings": [],
+      "siblings": [
+        "daniele-alano-leite",
+        "fernanda-alano-leite"
+      ],
       "cousins": [],
       "unclesAunts": [],
       "bio": "Cristiane Alano Leite is the daughter of Luiz Fernando Costa Leite and Marlene Alano Leite.",
@@ -146,7 +241,10 @@
         "martha-barbosa-duarte"
       ],
       "children": [
-        "airan-valdemar-duarte"
+        "airan-valdemar-duarte",
+        "odilon-antonio-duarte",
+        "yara-duarte",
+        "yone-duarte"
       ],
       "siblings": [],
       "cousins": [],
@@ -167,7 +265,10 @@
         "manoel-dos-santos-duarte"
       ],
       "children": [
-        "airan-valdemar-duarte"
+        "airan-valdemar-duarte",
+        "odilon-antonio-duarte",
+        "yara-duarte",
+        "yone-duarte"
       ],
       "siblings": [],
       "cousins": [],
@@ -188,7 +289,8 @@
         "thomazina-scola"
       ],
       "children": [
-        "ione-beatriz-scola-de-almeida"
+        "ione-beatriz-scola-de-almeida",
+        "iara-scola-de-almeida"
       ],
       "siblings": [],
       "cousins": [],
@@ -209,7 +311,8 @@
         "hermes-baptista-de-almeida"
       ],
       "children": [
-        "ione-beatriz-scola-de-almeida"
+        "ione-beatriz-scola-de-almeida",
+        "iara-scola-de-almeida"
       ],
       "siblings": [],
       "cousins": [],
@@ -233,7 +336,9 @@
         "marlene-alano-leite"
       ],
       "children": [
-        "cristiane-alano-leite"
+        "cristiane-alano-leite",
+        "daniele-alano-leite",
+        "fernanda-alano-leite"
       ],
       "siblings": [],
       "cousins": [],
@@ -257,7 +362,9 @@
         "luiz-fernando-costa-leite"
       ],
       "children": [
-        "cristiane-alano-leite"
+        "cristiane-alano-leite",
+        "daniele-alano-leite",
+        "fernanda-alano-leite"
       ],
       "siblings": [],
       "cousins": [],
@@ -473,7 +580,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Liane Batista is linked here as Felipe de Almeida Duarte's spouse.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "portrait": "/family-photos/liane-batista.jpg",
       "gallery": [],
       "videos": []
     },
@@ -494,7 +601,239 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Angelica Fanfa Freitas is linked here as Fernando de Almeida Duarte's spouse.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "portrait": "/family-photos/angelica-fanfa-freitas.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "odilon-antonio-duarte",
+      "slug": "odilon-antonio-duarte",
+      "name": "Odilon Antonio Duarte",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "manoel-dos-santos-duarte",
+        "martha-barbosa-duarte"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "airan-valdemar-duarte",
+        "yara-duarte",
+        "yone-duarte"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Odilon Antonio Duarte is one of the children of Manoel dos Santos Duarte and Martha Barbosa Duarte.",
+      "portrait": "/family-photos/odilon-valdemar-duarte/WhatsApp Image 2026-03-03 at 20.51.47.jpeg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "daniele-alano-leite",
+      "slug": "daniele-alano-leite",
+      "name": "Daniele Alano Leite",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "luiz-fernando-costa-leite",
+        "marlene-alano-leite"
+      ],
+      "spouse": [
+        "diego-fernando-de-oliveira"
+      ],
+      "children": [],
+      "siblings": [
+        "cristiane-alano-leite",
+        "fernanda-alano-leite"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Daniele Alano Leite is one of the children of Luiz Fernando Costa Leite and Marlene Alano Leite.",
+      "portrait": "/family-photos/daniele-alano-leite.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "fernanda-alano-leite",
+      "slug": "fernanda-alano-leite",
+      "name": "Fernanda Alano Leite",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "luiz-fernando-costa-leite",
+        "marlene-alano-leite"
+      ],
+      "spouse": [
+        "andre-romero"
+      ],
+      "children": [
+        "gabriele-leite-romero",
+        "mariana-leite-romero"
+      ],
+      "siblings": [
+        "cristiane-alano-leite",
+        "daniele-alano-leite"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Fernanda Alano Leite is one of the children of Luiz Fernando Costa Leite and Marlene Alano Leite.",
+      "portrait": "/family-photos/fernanda-alano-leite.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "andre-romero",
+      "slug": "andre-romero",
+      "name": "Andre Romero",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "fernanda-alano-leite"
+      ],
+      "children": [
+        "gabriele-leite-romero",
+        "mariana-leite-romero"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Andre Romero is linked here as Fernanda Alano Leite's spouse.",
+      "portrait": "/family-photos/andre-romero.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "diego-fernando-de-oliveira",
+      "slug": "diego-fernando-de-oliveira",
+      "name": "Diego Fernando de Oliveira",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "daniele-alano-leite"
+      ],
+      "children": [],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Diego Fernando de Oliveira is linked here as Daniele Alano Leite's spouse.",
+      "portrait": "/family-photos/diego-fernando-de-oliveira.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "gabriele-leite-romero",
+      "slug": "gabriele-leite-romero",
+      "name": "Gabriele Leite Romero",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "fernanda-alano-leite",
+        "andre-romero"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "mariana-leite-romero"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Gabriele Leite Romero is the child of Fernanda Alano Leite and Andre Romero.",
+      "portrait": "/family-photos/gabriele-leite-romero.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "mariana-leite-romero",
+      "slug": "mariana-leite-romero",
+      "name": "Mariana Leite Romero",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "fernanda-alano-leite",
+        "andre-romero"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "gabriele-leite-romero"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Mariana Leite Romero is the child of Fernanda Alano Leite and Andre Romero.",
+      "portrait": "/family-photos/mariana-leite-romero.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "yara-duarte",
+      "slug": "yara-duarte",
+      "name": "Yara Duarte",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "manoel-dos-santos-duarte",
+        "martha-barbosa-duarte"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "airan-valdemar-duarte",
+        "odilon-antonio-duarte",
+        "yone-duarte"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Yara Duarte is one of the children of Manoel dos Santos Duarte and Martha Barbosa Duarte.",
+      "portrait": "/family-photos/yara-duarte.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "yone-duarte",
+      "slug": "yone-duarte",
+      "name": "Yone Duarte",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "manoel-dos-santos-duarte",
+        "martha-barbosa-duarte"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "airan-valdemar-duarte",
+        "odilon-antonio-duarte",
+        "yara-duarte"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Yone Duarte is one of the children of Manoel dos Santos Duarte and Martha Barbosa Duarte.",
+      "portrait": "/family-photos/yone-duarte.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "iara-scola-de-almeida",
+      "slug": "iara-scola-de-almeida",
+      "name": "Iara Scola de Almeida",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "hermes-baptista-de-almeida",
+        "thomazina-scola"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "ione-beatriz-scola-de-almeida"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Iara Scola de Almeida is one of the children of Hermes Baptista de Almeida and Thomazina Scola.",
+      "portrait": "/family-photos/iara-beatriz-scola-de-almeida/WhatsApp Image 2026-03-03 at 20.59.25.jpeg",
       "gallery": [],
       "videos": []
     },
@@ -514,7 +853,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Henrique Fortuna Duarte is the child of Fabio de Almeida Duarte and Marta Fortuna.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "portrait": "/family-photos/henrique-fortuna-duarte.jpg",
       "gallery": [],
       "videos": []
     },
@@ -534,7 +873,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Matheus Batista Duarte is the child of Felipe de Almeida Duarte and Liane Batista.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "portrait": "/family-photos/matheus-batista-duarte.jpg",
       "gallery": [],
       "videos": []
     },
@@ -554,7 +893,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Rafael Freitas Duarte is the child of Fernando de Almeida Duarte and Angelica Fanfa Freitas.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "portrait": "/family-photos/rafael-freitas-duarte.jpg",
       "gallery": [],
       "videos": []
     },
@@ -580,7 +919,7 @@
         "fernando-de-almeida-duarte"
       ],
       "bio": "Augusto Leite Duarte is the child of Francisco de Almeida Duarte and Cristiane Alano Leite.",
-      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "portrait": "/family-photos/augusto-leite-duarte.jpg",
       "gallery": [],
       "videos": []
     }
