@@ -30,6 +30,583 @@
       "videos": []
     },
     {
+      "id": "wietze-wiebenga",
+      "slug": "wietze-wiebenga",
+      "name": "Wietze Wiebenga",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "janke-vis"
+      ],
+      "children": [
+        "harry-wiebenga"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Wietze Wiebenga is the father of Harry Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "janke-vis",
+      "slug": "janke-vis",
+      "name": "Janke Vis",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "wietze-wiebenga"
+      ],
+      "children": [
+        "harry-wiebenga"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Janke Vis is the mother of Harry Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "jan-kuiper",
+      "slug": "jan-kuiper",
+      "name": "Jan Kuiper",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "tijpke-dejong"
+      ],
+      "children": [
+        "roberta-kuiper-wiebenga"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Jan Kuiper is the father of Roberta Kuiper Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "tijpke-dejong",
+      "slug": "tijpke-dejong",
+      "name": "Tijpke DeJong",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "jan-kuiper"
+      ],
+      "children": [
+        "roberta-kuiper-wiebenga"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Tijpke DeJong is the mother of Roberta Kuiper Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "harry-wiebenga",
+      "slug": "harry-wiebenga",
+      "name": "Harry Wiebenga",
+      "birth": "1908",
+      "death": "1976",
+      "parents": [
+        "wietze-wiebenga",
+        "janke-vis"
+      ],
+      "spouse": [
+        "roberta-kuiper-wiebenga"
+      ],
+      "children": [
+        "sandra-wiebenga-denharder",
+        "bill-wiebenga",
+        "sam-wiebenga",
+        "john-wiebenga"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Harry Wiebenga, originally Harm Wiebenga, was born in 1908 in Benedenknijpe. He married Roberta Kuiper Wiebenga in 1934 in Schoterland, moved to Canada with her in 1947, and died in 1976 in Aylmer, Canada.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "roberta-kuiper-wiebenga",
+      "slug": "roberta-kuiper-wiebenga",
+      "name": "Roberta Kuiper Wiebenga",
+      "birth": "1910",
+      "death": "1999",
+      "parents": [
+        "jan-kuiper",
+        "tijpke-dejong"
+      ],
+      "spouse": [
+        "harry-wiebenga"
+      ],
+      "children": [
+        "sandra-wiebenga-denharder",
+        "bill-wiebenga",
+        "sam-wiebenga",
+        "john-wiebenga"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Roberta Kuiper Wiebenga, originally Rinske Kuiper Wiebenga, was born in 1910 in Mildam. She married Harry Wiebenga in 1934 in Schoterland, moved to Canada with him in 1947, and died in 1999 in Aylmer.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "sandra-wiebenga-denharder",
+      "slug": "sandra-wiebenga-denharder",
+      "name": "Sandra Wiebenga DenHarder",
+      "birth": "1940",
+      "death": null,
+      "parents": [
+        "harry-wiebenga",
+        "roberta-kuiper-wiebenga"
+      ],
+      "spouse": [
+        "john-denharder"
+      ],
+      "children": [
+        "kevin-denharder",
+        "sharlene-denharder",
+        "robbie-denharder"
+      ],
+      "siblings": [
+        "bill-wiebenga",
+        "sam-wiebenga",
+        "john-wiebenga"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Sandra Wiebenga DenHarder, born in 1940, is the daughter of Harry Wiebenga and Roberta Kuiper Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "john-denharder",
+      "slug": "john-denharder",
+      "name": "John DenHarder",
+      "birth": "1942",
+      "death": "2020",
+      "parents": [],
+      "spouse": [
+        "sandra-wiebenga-denharder"
+      ],
+      "children": [
+        "kevin-denharder",
+        "sharlene-denharder",
+        "robbie-denharder"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "John DenHarder was born in 1942 in The Hague, married Sandra Wiebenga DenHarder, and died in 2020 in Aylmer.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "bill-wiebenga",
+      "slug": "bill-wiebenga",
+      "name": "Bill Wiebenga",
+      "birth": "1938",
+      "death": "2017",
+      "parents": [
+        "harry-wiebenga",
+        "roberta-kuiper-wiebenga"
+      ],
+      "spouse": [
+        "trudy-mantel"
+      ],
+      "children": [
+        "dawn-lelane"
+      ],
+      "siblings": [
+        "sandra-wiebenga-denharder",
+        "sam-wiebenga",
+        "john-wiebenga"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Bill Wiebenga, originally William Wiebenga, was born in 1938 in Tjalleberd. He is the son of Harry Wiebenga and Roberta Kuiper Wiebenga and died in 2017 in St. Thomas.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "trudy-mantel",
+      "slug": "trudy-mantel",
+      "name": "Trudy Mantel",
+      "birth": "1943",
+      "death": "2018",
+      "parents": [],
+      "spouse": [
+        "bill-wiebenga"
+      ],
+      "children": [
+        "dawn-lelane"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Trudy Mantel, originally Truus Mantel, was born in 1943 in Andijk, married Bill Wiebenga, and died in 2018 in Aylmer.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "dawn-lelane",
+      "slug": "dawn-lelane",
+      "name": "Dawn Lelane",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "bill-wiebenga",
+        "trudy-mantel"
+      ],
+      "spouse": [],
+      "children": [
+        "jeff-wiebenga"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Dawn Lelane is the daughter of Bill Wiebenga and Trudy Mantel and the mother of Jeff Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "jeff-wiebenga",
+      "slug": "jeff-wiebenga",
+      "name": "Jeff Wiebenga",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "dawn-lelane"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Jeff Wiebenga was born in Aylmer and is the child of Dawn Lelane.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "kevin-denharder",
+      "slug": "kevin-denharder",
+      "name": "Kevin DenHarder",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "sandra-wiebenga-denharder",
+        "john-denharder"
+      ],
+      "spouse": [
+        "jena"
+      ],
+      "children": [],
+      "siblings": [
+        "sharlene-denharder",
+        "robbie-denharder"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Kevin DenHarder is the child of Sandra Wiebenga DenHarder and John DenHarder. He is married to Jena and has a son and a daughter.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "jena",
+      "slug": "jena",
+      "name": "Jena",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "kevin-denharder"
+      ],
+      "children": [],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Jena is linked here as Kevin DenHarder's spouse.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "sharlene-denharder",
+      "slug": "sharlene-denharder",
+      "name": "Sharlene DenHarder",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "sandra-wiebenga-denharder",
+        "john-denharder"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "kevin-denharder",
+        "robbie-denharder"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Sharlene DenHarder is the child of Sandra Wiebenga DenHarder and John DenHarder. She has two sons.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "robbie-denharder",
+      "slug": "robbie-denharder",
+      "name": "Robbie DenHarder",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "sandra-wiebenga-denharder",
+        "john-denharder"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "kevin-denharder",
+        "sharlene-denharder"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Robbie DenHarder is the child of Sandra Wiebenga DenHarder and John DenHarder. He has a son and a daughter.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "john-wiebenga",
+      "slug": "john-wiebenga",
+      "name": "John Wiebenga",
+      "birth": "1942",
+      "death": null,
+      "parents": [
+        "harry-wiebenga",
+        "roberta-kuiper-wiebenga"
+      ],
+      "spouse": [
+        "pam-mcdermid"
+      ],
+      "children": [],
+      "siblings": [
+        "sandra-wiebenga-denharder",
+        "bill-wiebenga",
+        "sam-wiebenga"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "John Wiebenga, born in 1942, is the son of Harry Wiebenga and Roberta Kuiper Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "pam-mcdermid",
+      "slug": "pam-mcdermid",
+      "name": "Pam McDermid",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "john-wiebenga"
+      ],
+      "children": [],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Pam McDermid is linked here as John Wiebenga's spouse.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "sam-wiebenga",
+      "slug": "sam-wiebenga",
+      "name": "Sam Wiebenga",
+      "birth": "1944",
+      "death": "2007",
+      "parents": [
+        "harry-wiebenga",
+        "roberta-kuiper-wiebenga"
+      ],
+      "spouse": [
+        "eva-catharina-dekraker-wiebenga"
+      ],
+      "children": [
+        "sherry-wiebenga-berkelmans",
+        "willy-wiebenga",
+        "trevor-wiebenga"
+      ],
+      "siblings": [
+        "sandra-wiebenga-denharder",
+        "bill-wiebenga",
+        "john-wiebenga"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Sam Wiebenga, originally Sietze Wiebenga, was born in 1944 in De Knijpe, Netherlands. He is the son of Harry Wiebenga and Roberta Kuiper Wiebenga, married Eva Catharina DeKraker Wiebenga in 1966 in Aylmer, and died in 2007 in Aylmer, Canada.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "eva-catharina-dekraker-wiebenga",
+      "slug": "eva-catharina-dekraker-wiebenga",
+      "name": "Eva Catharina DeKraker Wiebenga",
+      "birth": "1944",
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "sam-wiebenga"
+      ],
+      "children": [
+        "sherry-wiebenga-berkelmans",
+        "willy-wiebenga",
+        "trevor-wiebenga"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Eva Catharina DeKraker Wiebenga, born in 1944, married Sam Wiebenga in 1966 in Aylmer and is the mother of Sherry Wiebenga Berkelmans, Willy Wiebenga, and Trevor Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "sherry-wiebenga-berkelmans",
+      "slug": "sherry-wiebenga-berkelmans",
+      "name": "Sherry Wiebenga Berkelmans",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "sam-wiebenga",
+        "eva-catharina-dekraker-wiebenga"
+      ],
+      "spouse": [
+        "frank-berkelmans"
+      ],
+      "children": [
+        "samantha-berkelmans",
+        "kelsey-berkelmans",
+        "blake-berkelmans",
+        "danae-berkelmans",
+        "troy-berkelmans"
+      ],
+      "siblings": [
+        "willy-wiebenga",
+        "trevor-wiebenga"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Sherry Wiebenga Berkelmans is the daughter of Sam Wiebenga and Eva Catharina DeKraker Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "frank-berkelmans",
+      "slug": "frank-berkelmans",
+      "name": "Frank Berkelmans",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "sherry-wiebenga-berkelmans"
+      ],
+      "children": [
+        "samantha-berkelmans",
+        "kelsey-berkelmans",
+        "blake-berkelmans",
+        "danae-berkelmans",
+        "troy-berkelmans"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Frank Berkelmans is linked here as Sherry Wiebenga Berkelmans's spouse.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "willy-wiebenga",
+      "slug": "willy-wiebenga",
+      "name": "Willy Wiebenga",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "sam-wiebenga",
+        "eva-catharina-dekraker-wiebenga"
+      ],
+      "spouse": [
+        "crystal-wiebenga"
+      ],
+      "children": [
+        "morgan-wiebenga",
+        "hunter-wiebenga",
+        "alisson-wiebenga"
+      ],
+      "siblings": [
+        "sherry-wiebenga-berkelmans",
+        "trevor-wiebenga"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Willy Wiebenga is the son of Sam Wiebenga and Eva Catharina DeKraker Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "crystal-wiebenga",
+      "slug": "crystal-wiebenga",
+      "name": "Crystal Wiebenga",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "willy-wiebenga"
+      ],
+      "children": [
+        "morgan-wiebenga",
+        "hunter-wiebenga",
+        "alisson-wiebenga"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Crystal Wiebenga is linked here as Willy Wiebenga's spouse.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
       "id": "tania-wiebenga",
       "slug": "tania-wiebenga",
       "name": "Tania Wiebenga",
@@ -47,7 +624,10 @@
         "amy-lee-wiebenga"
       ],
       "cousins": [],
-      "unclesAunts": [],
+      "unclesAunts": [
+        "sherry-wiebenga-berkelmans",
+        "willy-wiebenga"
+      ],
       "bio": "Tania Wiebenga is the daughter of Trevor Wiebenga and Annie Wiebenga.",
       "portrait": "/family-photos/tania-wiebenga/index.webp",
       "gallery": [],
@@ -59,7 +639,10 @@
       "name": "Trevor Wiebenga",
       "birth": null,
       "death": null,
-      "parents": [],
+      "parents": [
+        "sam-wiebenga",
+        "eva-catharina-dekraker-wiebenga"
+      ],
       "spouse": [
         "annie-wiebenga"
       ],
@@ -67,10 +650,13 @@
         "tania-wiebenga",
         "amy-lee-wiebenga"
       ],
-      "siblings": [],
+      "siblings": [
+        "sherry-wiebenga-berkelmans",
+        "willy-wiebenga"
+      ],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Trevor Wiebenga is the father of Tania Wiebenga and Amy-Lee Wiebenga.",
+      "bio": "Trevor Wiebenga is the son of Sam Wiebenga and Eva Catharina DeKraker Wiebenga, and the father of Tania Wiebenga and Amy-Lee Wiebenga.",
       "portrait": "/family-photos/trevor-wiebenga/index.webp",
       "gallery": [],
       "videos": []
@@ -113,9 +699,206 @@
         "tania-wiebenga"
       ],
       "cousins": [],
-      "unclesAunts": [],
+      "unclesAunts": [
+        "sherry-wiebenga-berkelmans",
+        "willy-wiebenga"
+      ],
       "bio": "Amy-Lee Wiebenga is the sister of Tania Wiebenga.",
       "portrait": "/family-photos/amy-lee-wiebenga/index.webp",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "samantha-berkelmans",
+      "slug": "samantha-berkelmans",
+      "name": "Samantha Berkelmans",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "sherry-wiebenga-berkelmans",
+        "frank-berkelmans"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "kelsey-berkelmans",
+        "blake-berkelmans",
+        "danae-berkelmans",
+        "troy-berkelmans"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Samantha Berkelmans is the child of Sherry Wiebenga Berkelmans and Frank Berkelmans.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "kelsey-berkelmans",
+      "slug": "kelsey-berkelmans",
+      "name": "Kelsey Berkelmans",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "sherry-wiebenga-berkelmans",
+        "frank-berkelmans"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "samantha-berkelmans",
+        "blake-berkelmans",
+        "danae-berkelmans",
+        "troy-berkelmans"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Kelsey Berkelmans is the child of Sherry Wiebenga Berkelmans and Frank Berkelmans.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "blake-berkelmans",
+      "slug": "blake-berkelmans",
+      "name": "Blake Berkelmans",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "sherry-wiebenga-berkelmans",
+        "frank-berkelmans"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "samantha-berkelmans",
+        "kelsey-berkelmans",
+        "danae-berkelmans",
+        "troy-berkelmans"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Blake Berkelmans is the child of Sherry Wiebenga Berkelmans and Frank Berkelmans.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "danae-berkelmans",
+      "slug": "danae-berkelmans",
+      "name": "Danae Berkelmans",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "sherry-wiebenga-berkelmans",
+        "frank-berkelmans"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "samantha-berkelmans",
+        "kelsey-berkelmans",
+        "blake-berkelmans",
+        "troy-berkelmans"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Danae Berkelmans is the child of Sherry Wiebenga Berkelmans and Frank Berkelmans.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "troy-berkelmans",
+      "slug": "troy-berkelmans",
+      "name": "Troy Berkelmans",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "sherry-wiebenga-berkelmans",
+        "frank-berkelmans"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "samantha-berkelmans",
+        "kelsey-berkelmans",
+        "blake-berkelmans",
+        "danae-berkelmans"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Troy Berkelmans is the child of Sherry Wiebenga Berkelmans and Frank Berkelmans.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "morgan-wiebenga",
+      "slug": "morgan-wiebenga",
+      "name": "Morgan Wiebenga",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "willy-wiebenga",
+        "crystal-wiebenga"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "hunter-wiebenga",
+        "alisson-wiebenga"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Morgan Wiebenga is the child of Willy Wiebenga and Crystal Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "hunter-wiebenga",
+      "slug": "hunter-wiebenga",
+      "name": "Hunter Wiebenga",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "willy-wiebenga",
+        "crystal-wiebenga"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "morgan-wiebenga",
+        "alisson-wiebenga"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Hunter Wiebenga is the child of Willy Wiebenga and Crystal Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "alisson-wiebenga",
+      "slug": "alisson-wiebenga",
+      "name": "Alisson Wiebenga",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "willy-wiebenga",
+        "crystal-wiebenga"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "morgan-wiebenga",
+        "hunter-wiebenga"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Alisson Wiebenga is the child of Willy Wiebenga and Crystal Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
       "gallery": [],
       "videos": []
     },
@@ -190,15 +973,20 @@
         "ione-beatriz-scola-de-almeida"
       ],
       "children": [
+        "flavio-de-almeida-duarte",
         "francisco-de-almeida-duarte",
         "fabio-de-almeida-duarte",
         "felipe-de-almeida-duarte",
         "fernando-de-almeida-duarte"
       ],
-      "siblings": [],
+      "siblings": [
+        "odilon-antonio-duarte",
+        "yara-duarte",
+        "yone-duarte"
+      ],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Airan Valdemar Duarte (1939–1985) was the son of Manoel dos Santos Duarte and Martha Barbosa Duarte.",
+      "bio": "Airan Valdemar Duarte was born on 5 de janeiro de 1939 in Porto Alegre, Rio Grande do Sul, Brasil, and died on 21 de abril de 1985 in Porto Alegre, Rio Grande do Sul, Brasil. He was the son of Manoel dos Santos Duarte and Martha Barbosa Duarte.",
       "portrait": "/family-photos/airan-valdemar-duarte/index.webp",
       "gallery": [
         "/family-photos/airan-valdemar-duarte/whatsapp-image-2026-03-03-at-20-50-22.webp",
@@ -222,15 +1010,18 @@
         "airan-valdemar-duarte"
       ],
       "children": [
+        "flavio-de-almeida-duarte",
         "francisco-de-almeida-duarte",
         "fabio-de-almeida-duarte",
         "felipe-de-almeida-duarte",
         "fernando-de-almeida-duarte"
       ],
-      "siblings": [],
+      "siblings": [
+        "iara-scola-de-almeida"
+      ],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Ione Beatriz Scola de Almeida (1942–2011) was the daughter of Hermes Baptista de Almeida and Thomazina Scola.",
+      "bio": "Ione Beatriz Scola de Almeida was born on 12 de janeiro de 1942 in Porto Alegre, Rio Grande do Sul, Brasil, and died on 03/01/2011 in Porto Alegre, Rio Grande do Sul, Brasil. She was the daughter of Hermes Baptista de Almeida and Thomazina Scola.",
       "portrait": "/family-photos/ione-beatriz-scola-de-almeida/index.webp",
       "gallery": [
         "/family-photos/ione-beatriz-scola-de-almeida/whatsapp-image-2026-03-03-at-20-46-40.webp",
@@ -239,6 +1030,26 @@
         "/family-photos/ione-beatriz-scola-de-almeida/whatsapp-image-2026-03-03-at-21-04-08.webp",
         "/family-photos/ione-beatriz-scola-de-almeida/whatsapp-image-2026-03-03-at-21-07-37.webp"
       ],
+      "videos": []
+    },
+    {
+      "id": "flavio-de-almeida-duarte",
+      "slug": "flavio-de-almeida-duarte",
+      "name": "Flavio de Almeida Duarte",
+      "birth": "1964",
+      "death": "1964",
+      "parents": [
+        "airan-valdemar-duarte",
+        "ione-beatriz-scola-de-almeida"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Flavio de Almeida Duarte was born in 1964 and died in 1964. He was the child of Airan Valdemar Duarte and Ione Beatriz Scola de Almeida.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
       "videos": []
     },
     {
@@ -260,7 +1071,7 @@
       "siblings": [],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Manoel dos Santos Duarte (1908–1988) represents an earlier Duarte generation.",
+      "bio": "Manoel dos Santos Duarte was born on 5 de janeiro de 1908 and died on 25 de julho de 1988 in Porto Alegre, Rio Grande do Sul, Brasil.",
       "portrait": "/family-photos/manoel-dos-santos-duarte/index.webp",
       "gallery": [
         "/family-photos/manoel-dos-santos-duarte/whatsapp-image-2026-03-03-at-20-48-06.webp",
@@ -288,12 +1099,255 @@
       "siblings": [],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Martha Barbosa Duarte (1910–1986) was part of the Barbosa lineage and mother of Airan.",
+      "bio": "Martha Barbosa Duarte was born on 16 November 1910 and died on 23 de agosto de 1986 in Porto Alegre, Rio Grande do Sul, Brasil.",
       "portrait": "/family-photos/martha-barbosa-duarte/index.webp",
       "gallery": [
         "/family-photos/martha-barbosa-duarte/whatsapp-image-2026-03-03-at-20-50-22.webp",
         "/family-photos/martha-barbosa-duarte/whatsapp-image-2026-03-03-at-20-51-47.webp"
       ],
+      "videos": []
+    },
+    {
+      "id": "fortunato-scola",
+      "slug": "fortunato-scola",
+      "name": "Fortunato Scola",
+      "birth": null,
+      "death": "1809",
+      "parents": [],
+      "spouse": [
+        "anna-amendola"
+      ],
+      "children": [
+        "rosa-scola",
+        "giuseppe-scola"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Fortunato Scola is recorded here as deceased on 16 March 1809 in Agropoli, Salerno, Campania, Italy.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "anna-amendola",
+      "slug": "anna-amendola",
+      "name": "Anna Amendola",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "fortunato-scola"
+      ],
+      "children": [
+        "rosa-scola",
+        "giuseppe-scola"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Anna Amendola is recorded here as the spouse of Fortunato Scola and mother of Rosa Scola and Giuseppe Scola.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "rosa-scola",
+      "slug": "rosa-scola",
+      "name": "Rosa Scola",
+      "birth": "1800",
+      "death": null,
+      "parents": [
+        "fortunato-scola",
+        "anna-amendola"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "giuseppe-scola"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Rosa Scola was born in 1800 and is recorded here as deceased. She was the child of Fortunato Scola and Anna Amendola.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "giuseppe-scola",
+      "slug": "giuseppe-scola",
+      "name": "Giuseppe Scola",
+      "birth": "1807",
+      "death": null,
+      "parents": [
+        "fortunato-scola",
+        "anna-amendola"
+      ],
+      "spouse": [
+        "angela-rosa-spinelli"
+      ],
+      "children": [
+        "antonio-di-scola"
+      ],
+      "siblings": [
+        "rosa-scola"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Giuseppe Scola was born on 8 de maio de 1807 in Laureana Cilento, Salerno, Campania, Italia. He was the child of Fortunato Scola and Anna Amendola and is recorded here as deceased in Castellabate, Salerno, Campania, Italia.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "angela-rosa-spinelli",
+      "slug": "angela-rosa-spinelli",
+      "name": "Angela Rosa Spinelli",
+      "birth": "1809",
+      "death": "1886",
+      "parents": [],
+      "spouse": [
+        "giuseppe-scola"
+      ],
+      "children": [
+        "antonio-di-scola"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Angela Rosa Spinelli was born on 3 de marco de 1809 in Camella, Perdifumo, Salerno, Campania, Italia, and died on 28 de maio de 1886 in Castellabate, Salerno, Campania, Italia.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "antonio-di-scola",
+      "slug": "antonio-di-scola",
+      "name": "Antonio Di Scola",
+      "birth": "1839",
+      "death": null,
+      "parents": [
+        "giuseppe-scola",
+        "angela-rosa-spinelli"
+      ],
+      "spouse": [
+        "raffaella-guzzo"
+      ],
+      "children": [
+        "francesco-paolo-di-scola",
+        "carmela-di-scola"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Antonio Di Scola, also known as Antonio Scola, was born on 10 de outubro de 1839 in Perdifumo, Salerno, Italia. He was the child of Giuseppe Scola and Angela Rosa Spinelli, married Raffaella Guzzo on 5 de outubro de 1874 in Italia, and is recorded here as deceased.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "raffaella-guzzo",
+      "slug": "raffaella-guzzo",
+      "name": "Raffaella Guzzo",
+      "birth": "1859",
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "antonio-di-scola"
+      ],
+      "children": [
+        "francesco-paolo-di-scola",
+        "carmela-di-scola"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Raffaella Guzzo was born on 1 de agosto de 1859 in Castellabate, Salerno, Campania, Italia and is recorded here as deceased.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "francesco-paolo-di-scola",
+      "slug": "francesco-paolo-di-scola",
+      "name": "Francesco Paolo di Scola",
+      "birth": "1885",
+      "death": "1935",
+      "parents": [
+        "antonio-di-scola",
+        "raffaella-guzzo"
+      ],
+      "spouse": [
+        "angelina-rocco"
+      ],
+      "children": [
+        "antonio-scola",
+        "thomazina-scola",
+        "jose-paulo-rocco-scola",
+        "rafaela-scola-dias",
+        "vicente-scola",
+        "holanda-scola-palmeiro"
+      ],
+      "siblings": [
+        "carmela-di-scola"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Francesco Paolo di Scola, also known as Francisco Paula Scola, was born on 13 de setembro de 1885 in Castellabate, Salerno, Campania, Italia. He was the son of Antonio Di Scola and Raffaella Guzzo, married Angelina Rocco on 4 de abril de 1908 at Igreja do Rosario in Porto Alegre, and died on 7 de janeiro de 1935 in Porto Alegre, Rio Grande do Sul, Brasil.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "angelina-rocco",
+      "slug": "angelina-rocco",
+      "name": "Angelina Rocco",
+      "birth": "1887",
+      "death": "1918",
+      "parents": [],
+      "spouse": [
+        "francesco-paolo-di-scola"
+      ],
+      "children": [
+        "antonio-scola",
+        "thomazina-scola",
+        "jose-paulo-rocco-scola",
+        "rafaela-scola-dias",
+        "vicente-scola",
+        "holanda-scola-palmeiro"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Angelina Rocco, also known as Angelina Roque Scola, was born on 28 de outubro de 1887 in Porto Alegre, Rio Grande do Sul, Brasil, was christened on 11 de junho de 1888 in Porto Alegre, Rio Grande do Sul, Brasil, married Francesco Paolo di Scola on 4 de abril de 1908 at Igreja do Rosario in Porto Alegre, and died on 16 de novembro de 1918 in Porto Alegre, Rio Grande do Sul, Brasil.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "antonio-scola",
+      "slug": "antonio-scola",
+      "name": "Antonio Scola",
+      "birth": "1909",
+      "death": "1972",
+      "parents": [
+        "francesco-paolo-di-scola",
+        "angelina-rocco"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "thomazina-scola",
+        "jose-paulo-rocco-scola",
+        "rafaela-scola-dias",
+        "vicente-scola",
+        "holanda-scola-palmeiro"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Antonio Scola was born in 1909 and died in 1972. He was the child of Francesco Paolo di Scola and Angelina Rocco.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
       "videos": []
     },
     {
@@ -313,7 +1367,7 @@
       "siblings": [],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Hermes Baptista de Almeida (1909–1957) is part of the Almeida ancestry line.",
+      "bio": "Hermes Baptista de Almeida was born on 22 de outubro de 1909 in Porto Alegre, Rio Grande do Sul, Brasil, was christened on 5 de marco de 1911 in Porto Alegre, Rio Grande do Sul, Brasil, and died on 7 de agosto de 1957 in Porto Alegre, Rio Grande do Sul, Brasil.",
       "portrait": "/family-photos/hermes-baptista-de-almeida/index.webp",
       "gallery": [
         "/family-photos/hermes-baptista-de-almeida/whatsapp-image-2026-03-03-at-20-59-25.webp"
@@ -326,7 +1380,10 @@
       "name": "Thomazina Scola",
       "birth": "1910",
       "death": "1980",
-      "parents": [],
+      "parents": [
+        "francesco-paolo-di-scola",
+        "angelina-rocco"
+      ],
       "spouse": [
         "hermes-baptista-de-almeida"
       ],
@@ -334,15 +1391,274 @@
         "ione-beatriz-scola-de-almeida",
         "iara-scola-de-almeida"
       ],
-      "siblings": [],
+      "siblings": [
+        "antonio-scola",
+        "jose-paulo-rocco-scola",
+        "rafaela-scola-dias",
+        "vicente-scola",
+        "holanda-scola-palmeiro"
+      ],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Thomazina Scola (1910–1980) carried the Scola family name into the Almeida branch.",
+      "bio": "Thomazina Scola was born on 30 de dezembro de 1910 in Porto Alegre, Rio Grande do Sul, Brasil, and died on 15 de outubro de 1980 in Porto Alegre, Rio Grande do Sul, Brasil. She was the daughter of Francesco Paolo di Scola and Angelina Rocco.",
       "portrait": "/family-photos/thomazina-scola/index.webp",
       "gallery": [
         "/family-photos/thomazina-scola/whatsapp-image-2026-03-03-at-20-42-45.webp",
         "/family-photos/thomazina-scola/whatsapp-image-2026-03-03-at-20-59-25.webp"
       ],
+      "videos": []
+    },
+    {
+      "id": "jose-paulo-rocco-scola",
+      "slug": "jose-paulo-rocco-scola",
+      "name": "Jose Paulo Rocco Scola",
+      "birth": "1911",
+      "death": "1958",
+      "parents": [
+        "francesco-paolo-di-scola",
+        "angelina-rocco"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "antonio-scola",
+        "thomazina-scola",
+        "rafaela-scola-dias",
+        "vicente-scola",
+        "holanda-scola-palmeiro"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Jose Paulo Rocco Scola was born in 1911 and died in 1958. He was the child of Francesco Paolo di Scola and Angelina Rocco.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "rafaela-scola-dias",
+      "slug": "rafaela-scola-dias",
+      "name": "Rafaela Scola Dias",
+      "birth": "1912",
+      "death": "1952",
+      "parents": [
+        "francesco-paolo-di-scola",
+        "angelina-rocco"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "antonio-scola",
+        "thomazina-scola",
+        "jose-paulo-rocco-scola",
+        "vicente-scola",
+        "holanda-scola-palmeiro"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Rafaela Scola Dias was born in 1912 and died in 1952. She was the child of Francesco Paolo di Scola and Angelina Rocco.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "vicente-scola",
+      "slug": "vicente-scola",
+      "name": "Vicente Scola",
+      "birth": "1915",
+      "death": null,
+      "parents": [
+        "francesco-paolo-di-scola",
+        "angelina-rocco"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "antonio-scola",
+        "thomazina-scola",
+        "jose-paulo-rocco-scola",
+        "rafaela-scola-dias",
+        "holanda-scola-palmeiro"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Vicente Scola was born in 1915 and is recorded here as deceased. He was the child of Francesco Paolo di Scola and Angelina Rocco.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "holanda-scola-palmeiro",
+      "slug": "holanda-scola-palmeiro",
+      "name": "Holanda Scola Palmeiro",
+      "birth": "1916",
+      "death": "1975",
+      "parents": [
+        "francesco-paolo-di-scola",
+        "angelina-rocco"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "antonio-scola",
+        "thomazina-scola",
+        "jose-paulo-rocco-scola",
+        "rafaela-scola-dias",
+        "vicente-scola"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Holanda Scola Palmeiro was born in 1916 and died in 1975. She was the child of Francesco Paolo di Scola and Angelina Rocco.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "carmela-di-scola",
+      "slug": "carmela-di-scola",
+      "name": "Carmela Di Scola",
+      "birth": "1883",
+      "death": "1961",
+      "parents": [
+        "antonio-di-scola",
+        "raffaella-guzzo"
+      ],
+      "spouse": [
+        "andrea-ippolito"
+      ],
+      "children": [
+        "giovannina-ippolito",
+        "rafaela-hippolyto",
+        "costabile-hipolito-sobrinho",
+        "octavio-hippolito"
+      ],
+      "siblings": [
+        "francesco-paolo-di-scola"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Carmela Di Scola was born on 11 de janeiro de 1883 in Castellabate, Salerno, Italia. She married Andrea Ippolito on 21 de abril de 1903 in Porto Alegre, Rio Grande do Sul, Brasil, and died on 17 de setembro de 1961 in Porto Alegre, Rio Grande do Sul, Brasil.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "andrea-ippolito",
+      "slug": "andrea-ippolito",
+      "name": "Andrea Ippolito",
+      "birth": "1876",
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "carmela-di-scola"
+      ],
+      "children": [
+        "giovannina-ippolito",
+        "rafaela-hippolyto",
+        "costabile-hipolito-sobrinho",
+        "octavio-hippolito"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Andrea Ippolito, also known as Andre Hippolyto, was born on 6 de fevereiro de 1876 in Castellabate, Salerno, Campania, Italia. He married Carmela Di Scola on 21 de abril de 1903 in Porto Alegre, Rio Grande do Sul, Brasil, and is recorded here as deceased in Rio Grande do Sul, Brasil.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "giovannina-ippolito",
+      "slug": "giovannina-ippolito",
+      "name": "Giovannina Ippolito",
+      "birth": "1904",
+      "death": null,
+      "parents": [
+        "carmela-di-scola",
+        "andrea-ippolito"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "rafaela-hippolyto",
+        "costabile-hipolito-sobrinho",
+        "octavio-hippolito"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Giovannina Ippolito was born in 1904 and is recorded here as deceased. She was the child of Carmela Di Scola and Andrea Ippolito.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "rafaela-hippolyto",
+      "slug": "rafaela-hippolyto",
+      "name": "Rafaela Hippolyto",
+      "birth": "1905",
+      "death": "1973",
+      "parents": [
+        "carmela-di-scola",
+        "andrea-ippolito"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "giovannina-ippolito",
+        "costabile-hipolito-sobrinho",
+        "octavio-hippolito"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Rafaela Hippolyto was born in 1905 and died in 1973. She was the child of Carmela Di Scola and Andrea Ippolito.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "costabile-hipolito-sobrinho",
+      "slug": "costabile-hipolito-sobrinho",
+      "name": "Costabile Hipolito Sobrinho",
+      "birth": "1908",
+      "death": "1969",
+      "parents": [
+        "carmela-di-scola",
+        "andrea-ippolito"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "giovannina-ippolito",
+        "rafaela-hippolyto",
+        "octavio-hippolito"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Costabile Hipolito Sobrinho was born in 1908 and died in 1969. He was the child of Carmela Di Scola and Andrea Ippolito.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "octavio-hippolito",
+      "slug": "octavio-hippolito",
+      "name": "Octavio Hippolito",
+      "birth": "1912",
+      "death": "1969",
+      "parents": [
+        "carmela-di-scola",
+        "andrea-ippolito"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "giovannina-ippolito",
+        "rafaela-hippolyto",
+        "costabile-hipolito-sobrinho"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Octavio Hippolito was born in 1912 and died in 1969. He was the child of Carmela Di Scola and Andrea Ippolito.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
       "videos": []
     },
     {
