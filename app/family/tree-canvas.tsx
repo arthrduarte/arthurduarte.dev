@@ -17,6 +17,7 @@ import {
   getPersonFamilyUnits,
   getPersonParents,
   getPersonPartners,
+  getPersonSiblings,
   validateFamilyData,
   type FamilyData,
   type FamilyGraph,
@@ -33,7 +34,7 @@ type CanvasNode = {
   personId: string;
   x: number;
   y: number;
-  role: "focus" | "ancestor" | "descendant" | "partner";
+  role: "focus" | "ancestor" | "descendant" | "partner" | "sibling";
 };
 
 type FamilyConnectorGroup = {
@@ -42,6 +43,11 @@ type FamilyConnectorGroup = {
 };
 
 type PartnerLink = {
+  fromKey: string;
+  toKey: string;
+};
+
+type SiblingLink = {
   fromKey: string;
   toKey: string;
 };
@@ -56,12 +62,15 @@ const MAIN_CARD_WIDTH = 210;
 const MAIN_CARD_HEIGHT = 244;
 const PARTNER_CARD_WIDTH = 178;
 const PARTNER_CARD_HEIGHT = 210;
+const SIBLING_CARD_WIDTH = 184;
+const SIBLING_CARD_HEIGHT = 214;
 const GRID_X_STEP = 250;
 const ANCESTOR_Y_STEP = 320;
 const DESCENDANT_Y_STEP = 340;
 const PARTNER_X_GAP = 220;
 const UNIT_GAP = 0.9;
 const SIBLING_GAP = 0.65;
+const SIBLING_CARD_STEP = 0.92;
 const BOARD_PADDING = 180;
 const MIN_SCALE = 0.42;
 const MAX_SCALE = 1.4;
@@ -107,8 +116,10 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
 
     const mainNodes = new Map<string, CanvasNode>();
     const partnerNodes = new Map<string, CanvasNode>();
+    const siblingNodes = new Map<string, CanvasNode>();
     const familyGroups: FamilyConnectorGroup[] = [];
     const partnerLinks: PartnerLink[] = [];
+    const siblingLinks: SiblingLink[] = [];
 
     const descendantWidthCache = new Map<string, number>();
     const familyUnitWidthCache = new Map<string, number>();
@@ -141,6 +152,52 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       return key;
     };
 
+    const addSiblingNode = (
+      anchorKey: string,
+      siblingId: string,
+      x: number,
+      y: number,
+    ) => {
+      if (!graph.peopleById.has(siblingId)) {
+        return null;
+      }
+
+      const key = `sibling:${anchorKey}:${siblingId}`;
+      if (!siblingNodes.has(key)) {
+        siblingNodes.set(key, { key, personId: siblingId, x, y, role: "sibling" });
+      }
+
+      siblingLinks.push({ fromKey: anchorKey, toKey: key });
+      return key;
+    };
+
+    const getSiblingSpan = (personId: string) => {
+      const visibleSiblingCount = getVisibleSiblingIds(personId, graph).length;
+
+      if (visibleSiblingCount === 0) {
+        return 1;
+      }
+
+      return 1 + visibleSiblingCount * SIBLING_CARD_STEP;
+    };
+
+    const placeSiblingCluster = (
+      anchorKey: string,
+      personId: string,
+      centerX: number,
+      y: number,
+      direction: -1 | 1,
+    ) => {
+      const siblingIds = getVisibleSiblingIds(personId, graph);
+
+      siblingIds.forEach((siblingId, index) => {
+        const siblingCenter =
+          centerX + direction * (1 + (index + 1) * SIBLING_CARD_STEP);
+
+        addSiblingNode(anchorKey, siblingId, siblingCenter * GRID_X_STEP, y);
+      });
+    };
+
     const measureAncestorWidth = (personId: string, lineagePath: string[]): number => {
       const cacheKey = `${personId}:${lineagePath.join(">")}`;
       const cachedWidth = ancestorWidthCache.get(cacheKey);
@@ -157,17 +214,19 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       const parents = getPersonParents(personId, graph);
 
       if (parents.length === 0) {
-        ancestorWidthCache.set(cacheKey, 1);
-        return 1;
+        const width = getSiblingSpan(personId);
+        ancestorWidthCache.set(cacheKey, width);
+        return width;
       }
 
-      const width =
+      const subtreeWidth =
         parents.reduce(
           (sum, parentId, index) =>
             sum + measureAncestorWidth(parentId, [...lineagePath, personId]) + (index > 0 ? SIBLING_GAP : 0),
           0,
         ) || 1;
 
+      const width = Math.max(subtreeWidth, getSiblingSpan(personId));
       ancestorWidthCache.set(cacheKey, width);
       return width;
     };
@@ -194,6 +253,13 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
         const parentCenter = cursorX + parentWidth / 2;
 
         addMainNode(parentId, parentCenter * GRID_X_STEP, -depth * ANCESTOR_Y_STEP, "ancestor");
+        placeSiblingCluster(
+          parentId,
+          parentId,
+          parentCenter,
+          -depth * ANCESTOR_Y_STEP,
+          parentCenter <= 0 ? -1 : 1,
+        );
         parentKeys.push(parentId);
 
         placeAncestors(parentId, parentCenter, depth + 1, [...lineagePath, personId]);
@@ -322,10 +388,11 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
 
     addMainNode(focusedPerson.id, 0, 0, "focus");
     placePartnerNodes(focusedPerson.id, 0, 0);
+    placeSiblingCluster(focusedPerson.id, focusedPerson.id, 0, 0, -1);
     placeAncestors(focusedPerson.id, 0, 1, []);
     placeDescendants(focusedPerson.id, 0, 0, []);
 
-    const allNodes = [...mainNodes.values(), ...partnerNodes.values()];
+    const allNodes = [...mainNodes.values(), ...partnerNodes.values(), ...siblingNodes.values()];
     const minX = Math.min(...allNodes.map((node) => node.x)) - BOARD_PADDING;
     const maxX = Math.max(...allNodes.map((node) => node.x + getNodeWidth(node.role))) + BOARD_PADDING;
     const minY = Math.min(...allNodes.map((node) => node.y)) - BOARD_PADDING;
@@ -354,8 +421,10 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       rootKey: focusedPerson.id,
       mainNodes: [...mainNodes.values()],
       partnerNodes: [...partnerNodes.values()],
+      siblingNodes: [...siblingNodes.values()],
       familyGroups,
       partnerLinks,
+      siblingLinks,
       absolutePositions,
     };
   }, [focusedPerson, graph]);
@@ -407,12 +476,12 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
   };
 
   return (
-    <div className="relative h-full overflow-hidden bg-[#1c160f] text-[#f5ecde]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(237,206,163,0.2),_transparent_34%),linear-gradient(180deg,_rgba(44,33,21,0.92),_rgba(22,17,11,1))]" />
-      <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.7)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.7)_1px,transparent_1px)] [background-size:56px_56px]" />
+    <div className="relative h-full overflow-hidden bg-[#f6efe4] text-[#3b2c1d]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,250,241,0.96),_rgba(245,235,220,0.94)_46%,_rgba(238,224,204,0.92)_100%)]" />
+      <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(131,96,63,0.42)_1px,transparent_1px),linear-gradient(90deg,rgba(131,96,63,0.42)_1px,transparent_1px)] [background-size:56px_56px]" />
 
-      <div className="absolute left-5 top-5 z-20 flex max-w-[520px] flex-col gap-3 rounded-[28px] border border-[#d8b389]/20 bg-[#21180f]/85 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.35)] backdrop-blur-md">
-        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-[#cda679]">
+      <div className="absolute left-5 top-5 z-20 flex max-w-[520px] flex-col gap-3 rounded-[28px] border border-[#ce955e]/25 bg-[#faf6ed]/88 p-4 shadow-[0_24px_70px_rgba(90,63,34,0.16)] backdrop-blur-md">
+        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-[#b07b49]">
           <Link className="rounded-full px-2 py-1 hover:bg-white/5" href="/">
             Home
           </Link>
@@ -421,39 +490,39 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
         </div>
 
         <div>
-          <h1 className="font-serif text-3xl tracking-tight text-[#fff3e0]">Family Canvas</h1>
-          <p className="mt-1 max-w-md text-sm text-[#dcc6ae]">
+          <h1 className="font-serif text-3xl tracking-tight text-[#352619]">Family Canvas</h1>
+          <p className="mt-1 max-w-md text-sm text-[#75573a]">
             One person in focus. Direct ascendants above. Direct descendants below. Drag the canvas and zoom to
             inspect the lineage.
           </p>
         </div>
 
-        <div className="rounded-[22px] border border-[#d8b389]/16 bg-black/15 p-3">
-          <p className="text-[11px] uppercase tracking-[0.24em] text-[#cda679]">Focused lineage</p>
-          <p className="mt-2 text-lg font-semibold text-[#fff3e0]">{focusedPerson.name}</p>
-          <p className="mt-1 text-sm text-[#ccb59d]">{formatLifeRange(focusedPerson)}</p>
+        <div className="rounded-[22px] border border-[#ce955e]/20 bg-white/55 p-3">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-[#b07b49]">Focused lineage</p>
+          <p className="mt-2 text-lg font-semibold text-[#352619]">{focusedPerson.name}</p>
+          <p className="mt-1 text-sm text-[#75573a]">{formatLifeRange(focusedPerson)}</p>
         </div>
 
         {validationIssues.length > 0 ? (
-          <p className="text-xs text-[#c9a47b]">
+          <p className="text-xs text-[#9f6c3c]">
             Data warnings: {validationIssues.length}. The canvas still renders, but some relationships should be
             cleaned up.
           </p>
         ) : null}
       </div>
 
-      <div className="absolute right-5 top-5 z-20 flex w-[360px] flex-col gap-3 rounded-[28px] border border-[#d8b389]/20 bg-[#21180f]/85 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.35)] backdrop-blur-md">
-        <div className="flex items-center gap-2 rounded-[20px] border border-[#d8b389]/14 bg-black/15 px-3 py-2">
-          <SearchIcon className="h-4 w-4 text-[#cda679]" />
+      <div className="absolute right-5 top-5 z-20 flex w-[360px] flex-col gap-3 rounded-[28px] border border-[#ce955e]/25 bg-[#faf6ed]/88 p-4 shadow-[0_24px_70px_rgba(90,63,34,0.16)] backdrop-blur-md">
+        <div className="flex items-center gap-2 rounded-[20px] border border-[#ce955e]/20 bg-white/55 px-3 py-2">
+          <SearchIcon className="h-4 w-4 text-[#b07b49]" />
           <input
             value={searchValue}
             onChange={(event) => setSearchValue(event.target.value)}
             placeholder="Search people"
-            className="w-full bg-transparent text-sm text-[#fff3e0] outline-none placeholder:text-[#9e8468]"
+            className="w-full bg-transparent text-sm text-[#352619] outline-none placeholder:text-[#9f8161]"
           />
         </div>
 
-        <div className="max-h-[220px] overflow-y-auto rounded-[22px] border border-[#d8b389]/14 bg-black/15 p-2">
+        <div className="max-h-[220px] overflow-y-auto rounded-[22px] border border-[#ce955e]/20 bg-white/55 p-2">
           <div className="grid gap-2">
             {filteredPeople.map((person) => (
               <button
@@ -462,8 +531,8 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
                 onClick={() => router.push(`/family?person=${person.id}`)}
                 className={`rounded-[18px] px-3 py-2 text-left text-sm transition ${
                   person.id === focusedPerson.id
-                    ? "bg-[#d1a06a] text-[#23180f]"
-                    : "bg-white/[0.04] text-[#f0deca] hover:bg-white/[0.08]"
+                    ? "bg-[#ce955e] text-[#2b1d10]"
+                    : "bg-[#fffaf2] text-[#4f3a26] hover:bg-[#f3ebdb]"
                 }`}
               >
                 <div className="font-medium">{person.name}</div>
@@ -473,8 +542,8 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between rounded-[22px] border border-[#d8b389]/14 bg-black/15 px-3 py-3">
-          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-[#cda679]">
+        <div className="flex items-center justify-between rounded-[22px] border border-[#ce955e]/20 bg-white/55 px-3 py-3">
+          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-[#b07b49]">
             <MoveIcon className="h-4 w-4" />
             Drag canvas
           </div>
@@ -482,7 +551,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
             <button
               type="button"
               onClick={() => setScale(viewport.scale / 1.1)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#d8b389]/18 bg-white/[0.04] text-[#fff3e0] transition hover:bg-white/[0.08]"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#ce955e]/20 bg-[#fffaf2] text-[#4f3a26] transition hover:bg-[#f3ebdb]"
               aria-label="Zoom out"
             >
               <ZoomOutIcon className="h-4 w-4" />
@@ -490,7 +559,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
             <button
               type="button"
               onClick={() => setScale(viewport.scale * 1.1)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#d8b389]/18 bg-white/[0.04] text-[#fff3e0] transition hover:bg-white/[0.08]"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#ce955e]/20 bg-[#fffaf2] text-[#4f3a26] transition hover:bg-[#f3ebdb]"
               aria-label="Zoom in"
             >
               <ZoomInIcon className="h-4 w-4" />
@@ -592,7 +661,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
                   key={`${group.parentKeys.join("|")}-${groupIndex}-${pathIndex}`}
                   d={path}
                   fill="none"
-                  stroke="#d7b185"
+                  stroke="#be8a57"
                   strokeOpacity={0.86}
                   strokeWidth={1.8}
                   strokeLinecap="round"
@@ -620,9 +689,35 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
                   key={`${link.fromKey}-${link.toKey}-${index}`}
                   d={`M ${startX} ${fromCenterY} C ${bendX} ${fromCenterY}, ${bendX} ${toCenterY}, ${endX} ${toCenterY}`}
                   fill="none"
-                  stroke="#f1d1ad"
+                  stroke="#be8a57"
                   strokeOpacity={0.52}
                   strokeWidth={1.5}
+                  strokeLinecap="round"
+                />
+              );
+            })}
+
+            {layout.siblingLinks.map((link, index) => {
+              const from = layout.absolutePositions.get(link.fromKey);
+              const to = layout.absolutePositions.get(link.toKey);
+
+              if (!from || !to) {
+                return null;
+              }
+
+              const siblingOnRight = to.x > from.x;
+              const startX = siblingOnRight ? from.x + from.width : from.x;
+              const endX = siblingOnRight ? to.x : to.x + to.width;
+              const y = from.y + from.height / 2;
+
+              return (
+                <path
+                  key={`${link.fromKey}-${link.toKey}-${index}`}
+                  d={`M ${startX} ${y} L ${endX} ${y}`}
+                  fill="none"
+                  stroke="#be8a57"
+                  strokeOpacity={0.5}
+                  strokeWidth={1.4}
                   strokeLinecap="round"
                 />
               );
@@ -666,6 +761,25 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
               />
             );
           })}
+
+          {layout.siblingNodes.map((node) => {
+            const person = graph.peopleById.get(node.personId);
+            const position = layout.absolutePositions.get(node.key);
+
+            if (!person || !position) {
+              return null;
+            }
+
+            return (
+              <CanvasCard
+                key={node.key}
+                person={person}
+                position={position}
+                role="sibling"
+                interactive
+              />
+            );
+          })}
         </div>
       </div>
     </div>
@@ -684,17 +798,27 @@ function CanvasCard({
   interactive?: boolean;
 }) {
   const compact = role === "partner";
-  const portraitSize = compact ? 72 : role === "focus" ? 104 : 90;
+  const portraitSize = compact || role === "sibling" ? 72 : role === "focus" ? 104 : 90;
 
   const skin =
     role === "focus"
-      ? "border-[#f1c18b]/60 bg-[linear-gradient(180deg,rgba(255,248,237,0.98),rgba(249,233,211,0.94))] text-[#26180d] shadow-[0_34px_90px_rgba(0,0,0,0.28)]"
+      ? "border-[#ce955e]/55 bg-[linear-gradient(180deg,rgba(255,251,244,0.98),rgba(250,240,225,0.96))] text-[#26180d] shadow-[0_30px_70px_rgba(90,63,34,0.16)]"
+      : role === "sibling"
+        ? "border-[#ce955e]/24 bg-[linear-gradient(180deg,rgba(255,251,245,0.96),rgba(247,238,226,0.96))] text-[#3b2c1d] shadow-[0_18px_40px_rgba(90,63,34,0.1)]"
       : role === "partner"
-        ? "border-[#c9a57b]/28 bg-[linear-gradient(180deg,rgba(47,35,24,0.96),rgba(31,23,15,0.98))] text-[#f5ebde] shadow-[0_20px_60px_rgba(0,0,0,0.24)]"
-        : "border-[#d0af86]/32 bg-[linear-gradient(180deg,rgba(40,30,21,0.94),rgba(23,17,11,0.98))] text-[#f5ebde] shadow-[0_24px_72px_rgba(0,0,0,0.25)]";
+        ? "border-[#ce955e]/26 bg-[linear-gradient(180deg,rgba(252,247,239,0.96),rgba(245,234,219,0.96))] text-[#3b2c1d] shadow-[0_20px_48px_rgba(90,63,34,0.12)]"
+        : "border-[#ce955e]/30 bg-[linear-gradient(180deg,rgba(250,246,237,0.96),rgba(244,235,220,0.98))] text-[#3b2c1d] shadow-[0_24px_54px_rgba(90,63,34,0.12)]";
 
   const tag =
-    role === "focus" ? "Focused person" : role === "ancestor" ? "Ascendant" : role === "descendant" ? "Descendant" : "Partner";
+    role === "focus"
+      ? "Focused person"
+      : role === "ancestor"
+        ? "Ascendant"
+        : role === "descendant"
+          ? "Descendant"
+          : role === "sibling"
+            ? "Sibling"
+            : "Partner";
 
   return (
     <article
@@ -740,11 +864,27 @@ function CanvasCard({
 }
 
 function getNodeWidth(role: CanvasNode["role"]) {
-  return role === "partner" ? PARTNER_CARD_WIDTH : MAIN_CARD_WIDTH;
+  if (role === "partner") {
+    return PARTNER_CARD_WIDTH;
+  }
+
+  if (role === "sibling") {
+    return SIBLING_CARD_WIDTH;
+  }
+
+  return MAIN_CARD_WIDTH;
 }
 
 function getNodeHeight(role: CanvasNode["role"]) {
-  return role === "partner" ? PARTNER_CARD_HEIGHT : MAIN_CARD_HEIGHT;
+  if (role === "partner") {
+    return PARTNER_CARD_HEIGHT;
+  }
+
+  if (role === "sibling") {
+    return SIBLING_CARD_HEIGHT;
+  }
+
+  return MAIN_CARD_HEIGHT;
 }
 
 function getFamilyConnectorPaths(
@@ -799,4 +939,10 @@ function getFamilyConnectorPaths(
   });
 
   return paths;
+}
+
+function getVisibleSiblingIds(personId: string, graph: FamilyGraph): string[] {
+  return getPersonParents(personId, graph).length === 0
+    ? []
+    : Array.from(new Set(graph.peopleById.has(personId) ? getPersonSiblings(personId, graph) : []));
 }
