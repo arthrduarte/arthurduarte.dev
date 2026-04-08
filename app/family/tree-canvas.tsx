@@ -23,11 +23,24 @@ type SideNodePosition = {
   anchorId: string;
   x: number;
   y: number;
+  kind: "relative" | "spouse" | "child";
+  parentKeys?: string[];
 };
 
 type FamilyGroup = {
   parentKeys: string[];
   childKeys: string[];
+};
+
+type VisibleNode = {
+  key: string;
+  personId: string;
+  parentKeys?: string[];
+};
+
+type PartnerLink = {
+  fromKey: string;
+  toKey: string;
 };
 
 type BranchDirection = "left" | "right";
@@ -42,7 +55,11 @@ const NODE_WIDTH = 170;
 const NODE_HEIGHT = 222;
 const MAIN_Y_GAP = 310;
 const MAIN_X_SPREAD = 380;
-const SIDE_SIBLING_X_GAP = 250;
+const SIDE_BRANCH_START_OFFSET = 250;
+const SIDE_CARD_X_STEP = NODE_WIDTH + 36;
+const SIDE_CLUSTER_GAP = 84;
+const SIDE_CHILD_Y_GAP = 290;
+const SIDE_CHILD_X_STEP = 190;
 const MIN_SCALE = 0.45;
 const MAX_SCALE = 1.8;
 const ANCESTOR_SLOT_GAP = 240;
@@ -72,17 +89,26 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
 
     const mainNodes = new Map<string, MainNodePosition>();
     const sideNodes = new Map<string, SideNodePosition>();
+    const partnerLinks: PartnerLink[] = [];
     const addMainNode = (id: string, x: number, y: number) => {
       if (!peopleById.has(id) || mainNodes.has(id)) {
         return;
       }
       mainNodes.set(id, { id, x, y });
     };
-    const addSideNode = (id: string, personId: string, anchorId: string, x: number, y: number) => {
+    const addSideNode = (
+      id: string,
+      personId: string,
+      anchorId: string,
+      x: number,
+      y: number,
+      kind: SideNodePosition["kind"],
+      parentKeys?: string[],
+    ) => {
       if (!peopleById.has(personId) || sideNodes.has(id)) {
         return;
       }
-      sideNodes.set(id, { id, personId, anchorId, x, y });
+      sideNodes.set(id, { id, personId, anchorId, x, y, kind, parentKeys });
     };
 
     addMainNode(rootId, 0, 0);
@@ -151,13 +177,55 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       }
 
       const siblingIds = getSiblingIds(person, peopleById);
+      const branchDirection = mainNode.x >= 0 ? "right" : "left";
+      const directionMultiplier = branchDirection === "right" ? 1 : -1;
+      let branchOffset = SIDE_BRANCH_START_OFFSET;
 
-      siblingIds.forEach((siblingId, index) => {
+      siblingIds.forEach((siblingId) => {
         const sideNodeId = `${mainNode.id}::sibling:${siblingId}`;
-        const sideX = mainNode.x - (siblingIds.length - index) * SIDE_SIBLING_X_GAP;
+        const sideX = mainNode.x + directionMultiplier * branchOffset;
         const sideY = mainNode.y;
 
-        addSideNode(sideNodeId, siblingId, mainNode.id, sideX, sideY);
+        addSideNode(sideNodeId, siblingId, mainNode.id, sideX, sideY, "relative");
+
+        const sibling = peopleById.get(siblingId);
+        const spouseCount = sibling?.spouse.length ?? 0;
+        const partnerKeys = [sideNodeId];
+
+        sibling?.spouse.forEach((spouseId, spouseIndex) => {
+          const spouseNodeId = `${sideNodeId}::spouse:${spouseId}`;
+          const spouseX = sideX + directionMultiplier * SIDE_CARD_X_STEP * (spouseIndex + 1);
+
+          addSideNode(spouseNodeId, spouseId, sideNodeId, spouseX, sideY, "spouse");
+          partnerLinks.push({ fromKey: sideNodeId, toKey: spouseNodeId });
+          partnerKeys.push(spouseNodeId);
+        });
+
+        const childIds = sibling?.children ?? [];
+        const clusterStartX = Math.min(
+          sideX,
+          ...partnerKeys
+            .map((key) => sideNodes.get(key)?.x)
+            .filter((value): value is number => value !== undefined),
+        );
+        const clusterEndX = Math.max(
+          sideX,
+          ...partnerKeys
+            .map((key) => sideNodes.get(key)?.x)
+            .filter((value): value is number => value !== undefined),
+        );
+        const clusterCenterX = (clusterStartX + clusterEndX) / 2;
+
+        childIds.forEach((childId, childIndex) => {
+          const childNodeId = `${sideNodeId}::child:${childId}`;
+          const childOffset = (childIndex - (childIds.length - 1) / 2) * SIDE_CHILD_X_STEP;
+          const childX = clusterCenterX + childOffset;
+          const childY = sideY + SIDE_CHILD_Y_GAP;
+
+          addSideNode(childNodeId, childId, sideNodeId, childX, childY, "child", partnerKeys);
+        });
+
+        branchOffset += (spouseCount + 1) * SIDE_CARD_X_STEP + SIDE_CLUSTER_GAP;
       });
     });
 
@@ -181,9 +249,11 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       allPositions.map((node) => [node.key, { x: node.x + offsetX, y: node.y + offsetY }]),
     );
 
-    const visibleNodes = [
+    const visibleNodes: VisibleNode[] = [
       ...Array.from(mainNodes.values()).map((node) => ({ key: node.id, personId: node.id })),
-      ...Array.from(sideNodes.values()).map((node) => ({ key: node.id, personId: node.personId })),
+      ...Array.from(sideNodes.values())
+        .filter((node) => node.kind !== "spouse")
+        .map((node) => ({ key: node.id, personId: node.personId, parentKeys: node.parentKeys })),
     ];
 
     const familyGroupMap = new Map<string, FamilyGroup>();
@@ -195,7 +265,8 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
         return;
       }
 
-      const parentKeys = person.parents.filter((parentId) => mainNodes.has(parentId)).sort();
+      const parentKeys =
+        node.parentKeys?.slice().sort() ?? person.parents.filter((parentId) => mainNodes.has(parentId)).sort();
       if (parentKeys.length === 0) {
         return;
       }
@@ -233,6 +304,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       sideNodes: Array.from(sideNodes.values()),
       absolutePositions,
       familyGroups: Array.from(familyGroupMap.values()),
+      partnerLinks,
       branchDirections,
     };
   }, [data.rootPersonId, expandedBranches, peopleById]);
@@ -414,6 +486,31 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
                 />
               )),
             )}
+            {layout.partnerLinks.map((link, index) => {
+              const from = layout.absolutePositions.get(link.fromKey);
+              const to = layout.absolutePositions.get(link.toKey);
+
+              if (!from || !to) {
+                return null;
+              }
+
+              const spouseOnRight = to.x > from.x;
+              const x1 = spouseOnRight ? from.x + NODE_WIDTH : from.x;
+              const x2 = spouseOnRight ? to.x : to.x + NODE_WIDTH;
+              const y = from.y + NODE_HEIGHT / 2;
+
+              return (
+                <path
+                  key={`${link.fromKey}-${link.toKey}-${index}`}
+                  d={`M ${x1} ${y} L ${x2} ${y}`}
+                  fill="none"
+                  stroke="#BE8A57"
+                  strokeOpacity={0.68}
+                  strokeWidth={1.6}
+                  strokeLinecap="round"
+                />
+              );
+            })}
           </svg>
 
           {layout.mainNodes.map((node) => {

@@ -13,7 +13,9 @@
       ],
       "spouse": [],
       "children": [],
-      "siblings": [],
+      "siblings": [
+        "augusto-leite-duarte"
+      ],
       "cousins": [],
       "unclesAunts": [
         "fabio-de-almeida-duarte",
@@ -39,7 +41,8 @@
         "cristiane-alano-leite"
       ],
       "children": [
-        "arthur-leite-duarte"
+        "arthur-leite-duarte",
+        "augusto-leite-duarte"
       ],
       "siblings": [
         "fabio-de-almeida-duarte",
@@ -67,7 +70,8 @@
         "francisco-de-almeida-duarte"
       ],
       "children": [
-        "arthur-leite-duarte"
+        "arthur-leite-duarte",
+        "augusto-leite-duarte"
       ],
       "siblings": [],
       "cousins": [],
@@ -357,8 +361,12 @@
         "airan-valdemar-duarte",
         "ione-beatriz-scola-de-almeida"
       ],
-      "spouse": [],
-      "children": [],
+      "spouse": [
+        "marta-fortuna"
+      ],
+      "children": [
+        "henrique-fortuna-duarte"
+      ],
       "siblings": [
         "francisco-de-almeida-duarte",
         "felipe-de-almeida-duarte",
@@ -381,8 +389,12 @@
         "airan-valdemar-duarte",
         "ione-beatriz-scola-de-almeida"
       ],
-      "spouse": [],
-      "children": [],
+      "spouse": [
+        "liane-batista"
+      ],
+      "children": [
+        "matheus-batista-duarte"
+      ],
       "siblings": [
         "francisco-de-almeida-duarte",
         "fabio-de-almeida-duarte",
@@ -405,8 +417,12 @@
         "airan-valdemar-duarte",
         "ione-beatriz-scola-de-almeida"
       ],
-      "spouse": [],
-      "children": [],
+      "spouse": [
+        "angelica-fanfa-freitas"
+      ],
+      "children": [
+        "rafael-freitas-duarte"
+      ],
       "siblings": [
         "francisco-de-almeida-duarte",
         "fabio-de-almeida-duarte",
@@ -416,6 +432,155 @@
       "unclesAunts": [],
       "bio": "Fernando de Almeida Duarte (1972-Present) is included in the Duarte sibling line rooted in Airan and Ione.",
       "portrait": "/family-photos/fernando-de-almeida-duarte.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "marta-fortuna",
+      "slug": "marta-fortuna",
+      "name": "Marta Fortuna",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "fabio-de-almeida-duarte"
+      ],
+      "children": [
+        "henrique-fortuna-duarte"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Marta Fortuna is linked here as Fabio de Almeida Duarte's spouse.",
+      "portrait": "/family-photos/marta-fortuna.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "liane-batista",
+      "slug": "liane-batista",
+      "name": "Liane Batista",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "felipe-de-almeida-duarte"
+      ],
+      "children": [
+        "matheus-batista-duarte"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Liane Batista is linked here as Felipe de Almeida Duarte's spouse.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "angelica-fanfa-freitas",
+      "slug": "angelica-fanfa-freitas",
+      "name": "Angelica Fanfa Freitas",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "fernando-de-almeida-duarte"
+      ],
+      "children": [
+        "rafael-freitas-duarte"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Angelica Fanfa Freitas is linked here as Fernando de Almeida Duarte's spouse.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "henrique-fortuna-duarte",
+      "slug": "henrique-fortuna-duarte",
+      "name": "Henrique Fortuna Duarte",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "fabio-de-almeida-duarte",
+        "marta-fortuna"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Henrique Fortuna Duarte is the child of Fabio de Almeida Duarte and Marta Fortuna.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "matheus-batista-duarte",
+      "slug": "matheus-batista-duarte",
+      "name": "Matheus Batista Duarte",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "felipe-de-almeida-duarte",
+        "liane-batista"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Matheus Batista Duarte is the child of Felipe de Almeida Duarte and Liane Batista.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "rafael-freitas-duarte",
+      "slug": "rafael-freitas-duarte",
+      "name": "Rafael Freitas Duarte",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "fernando-de-almeida-duarte",
+        "angelica-fanfa-freitas"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Rafael Freitas Duarte is the child of Fernando de Almeida Duarte and Angelica Fanfa Freitas.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "augusto-leite-duarte",
+      "slug": "augusto-leite-duarte",
+      "name": "Augusto Leite Duarte",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "francisco-de-almeida-duarte",
+        "cristiane-alano-leite"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "arthur-leite-duarte"
+      ],
+      "cousins": [],
+      "unclesAunts": [
+        "fabio-de-almeida-duarte",
+        "felipe-de-almeida-duarte",
+        "fernando-de-almeida-duarte"
+      ],
+      "bio": "Augusto Leite Duarte is the child of Francisco de Almeida Duarte and Cristiane Alano Leite.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
       "gallery": [],
       "videos": []
     }
