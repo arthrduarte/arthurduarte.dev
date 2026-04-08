@@ -2,7 +2,12 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { ArrowUpRightIcon } from "lucide-react";
+import {
+  ArrowUpRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  UserRoundIcon,
+} from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FamilyPortrait } from "@/components/family-portrait";
 import {
@@ -29,6 +34,7 @@ type CanvasNode = {
   x: number;
   y: number;
   role: "focus" | "ancestor" | "descendant" | "partner" | "sibling";
+  relationshipLabel: string;
 };
 
 type FamilyConnectorGroup = {
@@ -71,9 +77,55 @@ const MAX_SCALE = 1.4;
 const INITIAL_SCALE = 0.74;
 const DRAG_THRESHOLD = 6;
 
+const FEMALE_ROLE_PATTERN = /\b(mother|daughter|sister|wife|her)\b/i;
+const MALE_ROLE_PATTERN = /\b(father|son|brother|husband|his)\b/i;
+const FEMALE_NAME_HINTS = new Set([
+  "amy-lee",
+  "annie",
+  "angelica",
+  "cristiane",
+  "daniele",
+  "fernanda",
+  "gabriele",
+  "ione",
+  "liane",
+  "maria",
+  "mariana",
+  "marlene",
+  "marta",
+  "martha",
+  "nair",
+  "tania",
+  "thomazina",
+  "yara",
+  "yone",
+]);
+const MALE_NAME_HINTS = new Set([
+  "airan",
+  "andre",
+  "antonio",
+  "arthur",
+  "augusto",
+  "diego",
+  "fabio",
+  "felipe",
+  "fernando",
+  "francisco",
+  "henrique",
+  "hermes",
+  "luiz",
+  "manoel",
+  "matheus",
+  "odilon",
+  "rafael",
+  "raphael",
+  "trevor",
+]);
+
 export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
   const searchParams = useSearchParams();
   const [viewport, setViewport] = useState<Viewport>({ x: 0, y: 0, scale: INITIAL_SCALE });
+  const [expandedSiblingBranches, setExpandedSiblingBranches] = useState<Record<string, boolean>>({});
 
   const containerRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef(false);
@@ -85,6 +137,10 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
 
   const focusedPersonId = searchParams.get("person") ?? searchParams.get("focus") ?? data.rootPersonId;
   const focusedPerson = graph.peopleById.get(focusedPersonId) ?? graph.peopleById.get(data.rootPersonId);
+
+  useEffect(() => {
+    setExpandedSiblingBranches({});
+  }, [focusedPerson?.id]);
 
   const layout = useMemo(() => {
     if (!focusedPerson) {
@@ -102,16 +158,23 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
     const familyUnitWidthCache = new Map<string, number>();
     const ancestorWidthCache = new Map<string, number>();
 
-    const addMainNode = (personId: string, x: number, y: number, role: CanvasNode["role"]) => {
+    const addMainNode = (
+      personId: string,
+      x: number,
+      y: number,
+      role: CanvasNode["role"],
+      relationshipLabel: string,
+    ) => {
       if (!graph.peopleById.has(personId) || mainNodes.has(personId)) {
         return;
       }
 
-      mainNodes.set(personId, { key: personId, personId, x, y, role });
+      mainNodes.set(personId, { key: personId, personId, x, y, role, relationshipLabel });
     };
 
     const addPartnerNode = (
       anchorPersonId: string,
+      relationshipLabel: string,
       partnerId: string,
       x: number,
       y: number,
@@ -122,7 +185,14 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
 
       const key = `partner:${anchorPersonId}:${partnerId}`;
       if (!partnerNodes.has(key)) {
-        partnerNodes.set(key, { key, personId: partnerId, x, y, role: "partner" });
+        partnerNodes.set(key, {
+          key,
+          personId: partnerId,
+          x,
+          y,
+          role: "partner",
+          relationshipLabel,
+        });
       }
 
       partnerLinks.push({ fromKey: anchorPersonId, toKey: key });
@@ -131,6 +201,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
 
     const addSiblingNode = (
       anchorKey: string,
+      relationshipLabel: string,
       siblingId: string,
       x: number,
       y: number,
@@ -141,7 +212,14 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
 
       const key = `sibling:${anchorKey}:${siblingId}`;
       if (!siblingNodes.has(key)) {
-        siblingNodes.set(key, { key, personId: siblingId, x, y, role: "sibling" });
+        siblingNodes.set(key, {
+          key,
+          personId: siblingId,
+          x,
+          y,
+          role: "sibling",
+          relationshipLabel,
+        });
       }
 
       siblingLinks.push({ fromKey: anchorKey, toKey: key });
@@ -149,6 +227,10 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
     };
 
     const getSiblingSpan = (personId: string) => {
+      if (!expandedSiblingBranches[personId]) {
+        return 1;
+      }
+
       const visibleSiblingCount = getVisibleSiblingIds(personId, graph).length;
 
       if (visibleSiblingCount === 0) {
@@ -161,17 +243,22 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
     const placeSiblingCluster = (
       anchorKey: string,
       personId: string,
+      relationshipLabel: string,
       centerX: number,
       y: number,
       direction: -1 | 1,
     ) => {
+      if (!expandedSiblingBranches[personId]) {
+        return;
+      }
+
       const siblingIds = getVisibleSiblingIds(personId, graph);
 
       siblingIds.forEach((siblingId, index) => {
         const siblingCenter =
           centerX + direction * (1 + (index + 1) * SIBLING_CARD_STEP);
 
-        addSiblingNode(anchorKey, siblingId, siblingCenter * GRID_X_STEP, y);
+        addSiblingNode(anchorKey, relationshipLabel, siblingId, siblingCenter * GRID_X_STEP, y);
       });
     };
 
@@ -228,14 +315,22 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       parents.forEach((parentId, index) => {
         const parentWidth = widths[index] ?? 1;
         const parentCenter = cursorX + parentWidth / 2;
+        const ancestor = graph.peopleById.get(parentId);
 
-        addMainNode(parentId, parentCenter * GRID_X_STEP, -depth * ANCESTOR_Y_STEP, "ancestor");
+        addMainNode(
+          parentId,
+          parentCenter * GRID_X_STEP,
+          -depth * ANCESTOR_Y_STEP,
+          "ancestor",
+          getAncestorRelationshipLabel(depth, inferPersonGender(ancestor)),
+        );
         placeSiblingCluster(
           parentId,
           parentId,
+          getCollateralAncestorRelationshipLabel(depth, inferPersonGender(ancestor)),
           parentCenter,
           -depth * ANCESTOR_Y_STEP,
-          parentCenter <= 0 ? -1 : 1,
+          getSiblingBranchDirection(ancestor),
         );
         parentKeys.push(parentId);
 
@@ -299,12 +394,18 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       return resolvedWidth;
     };
 
-    const placePartnerNodes = (personId: string, x: number, y: number) => {
+    const placePartnerNodes = (personId: string, generation: number, x: number, y: number) => {
       const partners = getPersonPartners(personId, graph);
 
       partners.forEach((partnerId, index) => {
         const partnerX = x + (index + 1) * PARTNER_X_GAP;
-        addPartnerNode(personId, partnerId, partnerX, y);
+        addPartnerNode(
+          personId,
+          getPartnerRelationshipLabel(generation, inferPersonGender(graph.peopleById.get(partnerId))),
+          partnerId,
+          partnerX,
+          y,
+        );
       });
     };
 
@@ -324,7 +425,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
         return;
       }
 
-      placePartnerNodes(personId, personNode.x, personNode.y);
+      placePartnerNodes(personId, depth, personNode.x, personNode.y);
 
       const widths = familyUnits.map((familyUnit) => measureFamilyUnitWidth(familyUnit, [...lineagePath, personId]));
       const totalWidth = widths.reduce((sum, width, index) => sum + width + (index > 0 ? UNIT_GAP : 0), 0);
@@ -350,8 +451,15 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
         familyUnit.childIds.forEach((childId) => {
           const childWidth = measureDescendantWidth(childId, [...lineagePath, personId]);
           const childCenter = childCursorX + childWidth / 2;
+          const child = graph.peopleById.get(childId);
 
-          addMainNode(childId, childCenter * GRID_X_STEP, (depth + 1) * DESCENDANT_Y_STEP, "descendant");
+          addMainNode(
+            childId,
+            childCenter * GRID_X_STEP,
+            (depth + 1) * DESCENDANT_Y_STEP,
+            "descendant",
+            getDescendantRelationshipLabel(depth + 1, inferPersonGender(child)),
+          );
           childKeys.push(childId);
 
           placeDescendants(childId, childCenter, depth + 1, [...lineagePath, personId]);
@@ -363,9 +471,16 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       });
     };
 
-    addMainNode(focusedPerson.id, 0, 0, "focus");
-    placePartnerNodes(focusedPerson.id, 0, 0);
-    placeSiblingCluster(focusedPerson.id, focusedPerson.id, 0, 0, -1);
+    addMainNode(focusedPerson.id, 0, 0, "focus", "Focused person");
+    placePartnerNodes(focusedPerson.id, 0, 0, 0);
+    placeSiblingCluster(
+      focusedPerson.id,
+      focusedPerson.id,
+      getSiblingRelationshipLabel(inferPersonGender(focusedPerson)),
+      0,
+      0,
+      getSiblingBranchDirection(focusedPerson),
+    );
     placeAncestors(focusedPerson.id, 0, 1, []);
     placeDescendants(focusedPerson.id, 0, 0, []);
 
@@ -404,7 +519,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       siblingLinks,
       absolutePositions,
     };
-  }, [focusedPerson, graph]);
+  }, [expandedSiblingBranches, focusedPerson, graph]);
 
   useEffect(() => {
     if (!layout || !containerRef.current) {
@@ -626,6 +741,16 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
                 person={person}
                 position={position}
                 role={node.role}
+                relationshipLabel={node.relationshipLabel}
+                hasSiblingBranch={node.role !== "sibling" && node.role !== "partner" && getVisibleSiblingIds(person.id, graph).length > 0}
+                siblingBranchOpen={!!expandedSiblingBranches[person.id]}
+                siblingBranchDirection={getSiblingBranchDirection(person)}
+                onToggleSiblingBranch={() =>
+                  setExpandedSiblingBranches((current) => ({
+                    ...current,
+                    [person.id]: !current[person.id],
+                  }))
+                }
                 interactive
               />
             );
@@ -645,6 +770,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
                 person={person}
                 position={position}
                 role="partner"
+                relationshipLabel={node.relationshipLabel}
                 interactive
               />
             );
@@ -664,6 +790,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
                 person={person}
                 position={position}
                 role="sibling"
+                relationshipLabel={node.relationshipLabel}
                 interactive
               />
             );
@@ -678,11 +805,21 @@ function CanvasCard({
   person,
   position,
   role,
+  relationshipLabel,
+  hasSiblingBranch = false,
+  siblingBranchOpen = false,
+  siblingBranchDirection = -1,
+  onToggleSiblingBranch,
   interactive = false,
 }: {
   person: Person;
   position: { x: number; y: number; width: number; height: number };
   role: CanvasNode["role"];
+  relationshipLabel: string;
+  hasSiblingBranch?: boolean;
+  siblingBranchOpen?: boolean;
+  siblingBranchDirection?: -1 | 1;
+  onToggleSiblingBranch?: () => void;
   interactive?: boolean;
 }) {
   const compact = role === "partner";
@@ -697,20 +834,9 @@ function CanvasCard({
         ? "border-[#ce955e]/26 bg-[linear-gradient(180deg,rgba(252,247,239,0.96),rgba(245,234,219,0.96))] text-[#3b2c1d] shadow-[0_20px_48px_rgba(90,63,34,0.12)]"
         : "border-[#ce955e]/30 bg-[linear-gradient(180deg,rgba(250,246,237,0.96),rgba(244,235,220,0.98))] text-[#3b2c1d] shadow-[0_24px_54px_rgba(90,63,34,0.12)]";
 
-  const tag =
-    role === "focus"
-      ? "Focused person"
-      : role === "ancestor"
-        ? "Ascendant"
-        : role === "descendant"
-          ? "Descendant"
-          : role === "sibling"
-            ? "Sibling"
-            : "Partner";
-
   return (
     <article
-      className={`absolute rounded-[30px] border p-4 ${skin}`}
+      className={`absolute rounded-[30px] border px-4 py-3 ${skin}`}
       style={{
         left: position.x,
         top: position.y,
@@ -718,34 +844,69 @@ function CanvasCard({
         height: position.height,
       }}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-[10px] uppercase tracking-[0.28em] opacity-70">{tag}</p>
-          <p className="mt-1 text-xs opacity-70">{formatLifeRange(person)}</p>
-        </div>
+      {hasSiblingBranch ? (
+        <button
+          type="button"
+          onClick={onToggleSiblingBranch}
+          data-interactive={interactive ? "true" : undefined}
+          className={`absolute top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-current/15 bg-white/70 text-[#6f4c2c] shadow-sm transition hover:bg-white ${
+            siblingBranchDirection === 1 ? "right-3" : "left-3"
+          }`}
+          aria-label={siblingBranchOpen ? "Hide siblings" : "Show siblings"}
+        >
+          {siblingBranchDirection === 1 ? (
+            siblingBranchOpen ? <ChevronRightIcon className="h-4 w-4" /> : <ChevronRightIcon className="h-4 w-4" />
+          ) : siblingBranchOpen ? (
+            <ChevronLeftIcon className="h-4 w-4" />
+          ) : (
+            <ChevronLeftIcon className="h-4 w-4" />
+          )}
+        </button>
+      ) : null}
+
+      <div className="flex h-full flex-col items-center text-center">
+        <p className="w-full text-[10px] uppercase tracking-[0.28em] opacity-70">{relationshipLabel}</p>
 
         <Link
-          href={`/family?person=${person.id}`}
-          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-current/15 bg-white/5 transition hover:bg-white/10"
-          aria-label={`Open ${person.name}'s tree`}
+          href={`/family/person/${person.id}`}
           data-interactive={interactive ? "true" : undefined}
+          className="mt-3 block"
         >
-          <ArrowUpRightIcon className="h-4 w-4" />
-        </Link>
-      </div>
-
-      <div className="mt-4 flex flex-col items-center text-center">
-        <Link href={`/family/person/${person.id}`} data-interactive={interactive ? "true" : undefined}>
+          <span
+            className="flex items-center justify-center overflow-hidden rounded-full border-2 border-current/20 bg-white/40"
+            style={{ width: portraitSize, height: portraitSize }}
+          >
           <FamilyPortrait
             person={person}
             alt={person.name}
             width={portraitSize}
             height={portraitSize}
-            className="rounded-full border-2 border-current/20 object-cover"
+            className="h-full w-full rounded-full object-cover"
           />
+          </span>
         </Link>
 
         <h3 className="mt-4 text-lg font-semibold leading-tight">{person.name}</h3>
+        <p className="mt-2 text-sm opacity-75">{formatLifeRange(person)}</p>
+
+        <div className="mt-auto flex items-center gap-3 pt-4">
+          <Link
+            href={`/family/person/${person.id}`}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-current/15 bg-white/45 transition hover:bg-white/70"
+            aria-label={`Open ${person.name}'s profile`}
+            data-interactive={interactive ? "true" : undefined}
+          >
+            <UserRoundIcon className="h-4 w-4" />
+          </Link>
+          <Link
+            href={`/family?person=${person.id}`}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-current/15 bg-white/45 transition hover:bg-white/70"
+            aria-label={`Focus on ${person.name}`}
+            data-interactive={interactive ? "true" : undefined}
+          >
+            <ArrowUpRightIcon className="h-4 w-4" />
+          </Link>
+        </div>
       </div>
     </article>
   );
@@ -833,4 +994,156 @@ function getVisibleSiblingIds(personId: string, graph: FamilyGraph): string[] {
   return getPersonParents(personId, graph).length === 0
     ? []
     : Array.from(new Set(graph.peopleById.has(personId) ? getPersonSiblings(personId, graph) : []));
+}
+
+function getSiblingBranchDirection(person: Person | undefined): -1 | 1 {
+  return inferPersonGender(person) === "female" ? 1 : -1;
+}
+
+function inferPersonGender(person: Person | undefined): "female" | "male" | "unknown" {
+  if (!person) {
+    return "unknown";
+  }
+
+  if (FEMALE_ROLE_PATTERN.test(person.bio)) {
+    return "female";
+  }
+
+  if (MALE_ROLE_PATTERN.test(person.bio)) {
+    return "male";
+  }
+
+  const firstName = person.name.split(" ")[0]?.toLowerCase() ?? "";
+
+  if (FEMALE_NAME_HINTS.has(firstName)) {
+    return "female";
+  }
+
+  if (MALE_NAME_HINTS.has(firstName)) {
+    return "male";
+  }
+
+  return "unknown";
+}
+
+function getSiblingRelationshipLabel(gender: "female" | "male" | "unknown") {
+  if (gender === "female") {
+    return "Sister";
+  }
+
+  if (gender === "male") {
+    return "Brother";
+  }
+
+  return "Sibling";
+}
+
+function getAncestorRelationshipLabel(depth: number, gender: "female" | "male" | "unknown") {
+  if (depth === 1) {
+    if (gender === "female") {
+      return "Mom";
+    }
+
+    if (gender === "male") {
+      return "Dad";
+    }
+
+    return "Parent";
+  }
+
+  const prefix = depth === 2 ? "" : `${"Great-".repeat(depth - 2)}`;
+
+  if (gender === "female") {
+    return `${prefix}Grandma`;
+  }
+
+  if (gender === "male") {
+    return `${prefix}Grandpa`;
+  }
+
+  return `${prefix}Grandparent`;
+}
+
+function getCollateralAncestorRelationshipLabel(depth: number, gender: "female" | "male" | "unknown") {
+  if (depth === 1) {
+    if (gender === "female") {
+      return "Aunt";
+    }
+
+    if (gender === "male") {
+      return "Uncle";
+    }
+
+    return "Parent sibling";
+  }
+
+  const prefix = depth === 2 ? "Grand " : `${"Great-".repeat(depth - 2)}Grand `;
+
+  if (gender === "female") {
+    return `${prefix}Aunt`;
+  }
+
+  if (gender === "male") {
+    return `${prefix}Uncle`;
+  }
+
+  return `${prefix}Relative`;
+}
+
+function getDescendantRelationshipLabel(depth: number, gender: "female" | "male" | "unknown") {
+  if (depth === 1) {
+    if (gender === "female") {
+      return "Daughter";
+    }
+
+    if (gender === "male") {
+      return "Son";
+    }
+
+    return "Child";
+  }
+
+  const prefix = depth === 2 ? "" : `${"Great-".repeat(depth - 2)}`;
+
+  if (gender === "female") {
+    return `${prefix}Granddaughter`;
+  }
+
+  if (gender === "male") {
+    return `${prefix}Grandson`;
+  }
+
+  return `${prefix}Grandchild`;
+}
+
+function getPartnerRelationshipLabel(depth: number, gender: "female" | "male" | "unknown") {
+  if (depth === 0) {
+    if (gender === "female") {
+      return "Wife";
+    }
+
+    if (gender === "male") {
+      return "Husband";
+    }
+
+    return "Spouse";
+  }
+
+  if (depth === 1) {
+    if (gender === "female") {
+      return "Daughter-in-law";
+    }
+
+    if (gender === "male") {
+      return "Son-in-law";
+    }
+
+    return "Child-in-law";
+  }
+
+  if (depth === 2) {
+    return "Grandchild's partner";
+  }
+
+  return "Descendant's partner";
 }

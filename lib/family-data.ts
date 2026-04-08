@@ -58,6 +58,11 @@ export function getPortraitCandidates(person: Pick<Person, "id" | "slug" | "port
   const candidates = new Set<string>();
   const baseNames = Array.from(new Set([person.id, person.slug].filter(Boolean)));
   const extensions = [".jpg", ".JPG", ".jpeg", ".JPEG", ".png", ".PNG", ".webp", ".WEBP"];
+  const folderIndexExtensions = [".webp", ".WEBP", ".jpg", ".JPG", ".jpeg", ".JPEG", ".png", ".PNG"];
+
+  for (const extension of folderIndexExtensions) {
+    candidates.add(`/family-photos/${person.slug}/index${extension}`);
+  }
 
   if (person.portrait && person.portrait !== FAMILY_PORTRAIT_PLACEHOLDER) {
     candidates.add(person.portrait);

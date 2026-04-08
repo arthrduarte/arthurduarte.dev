@@ -25,7 +25,7 @@
         "fernando-de-almeida-duarte"
       ],
       "bio": "Arthur Leite Duarte was born in 2004 and carries forward both the Duarte and Leite family legacies.",
-      "portrait": "/family-photos/arthur-leite-duarte.jpg",
+      "portrait": "/family-photos/arthur-leite-duarte/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -49,7 +49,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Tania Wiebenga is the daughter of Trevor Wiebenga and Annie Wiebenga.",
-      "portrait": "/family-photos/tania-wiebenga.jpg",
+      "portrait": "/family-photos/tania-wiebenga/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -71,7 +71,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Trevor Wiebenga is the father of Tania Wiebenga and Amy-Lee Wiebenga.",
-      "portrait": "/family-photos/trevor-wiebenga.jpg",
+      "portrait": "/family-photos/trevor-wiebenga/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -93,7 +93,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Annie Wiebenga is the mother of Tania Wiebenga and Amy-Lee Wiebenga.",
-      "portrait": "/family-photos/annie-wiebenga.jpg",
+      "portrait": "/family-photos/annie-wiebenga/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -115,7 +115,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Amy-Lee Wiebenga is the sister of Tania Wiebenga.",
-      "portrait": "/family-photos/amy-lee-wiebenga.jpg",
+      "portrait": "/family-photos/amy-lee-wiebenga/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -144,7 +144,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Francisco de Almeida Duarte, born in 1972, is the son of Airan Valdemar Duarte and Ione Beatriz Scola de Almeida.",
-      "portrait": "/family-photos/francisco-de-almeida-duarte.jpg",
+      "portrait": "/family-photos/francisco-de-almeida-duarte/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -172,7 +172,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Cristiane Alano Leite is the daughter of Luiz Fernando Costa Leite and Marlene Alano Leite.",
-      "portrait": "/family-photos/cristiane-alano-leite.jpg",
+      "portrait": "/family-photos/cristiane-alano-leite/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -199,8 +199,13 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Airan Valdemar Duarte (1939–1985) was the son of Manoel dos Santos Duarte and Martha Barbosa Duarte.",
-      "portrait": "/family-photos/airan-valdemar-duarte.jpg",
-      "gallery": [],
+      "portrait": "/family-photos/airan-valdemar-duarte/index.webp",
+      "gallery": [
+        "/family-photos/airan-valdemar-duarte/whatsapp-image-2026-03-03-at-20-50-22.webp",
+        "/family-photos/airan-valdemar-duarte/whatsapp-image-2026-03-03-at-20-51-47.webp",
+        "/family-photos/airan-valdemar-duarte/whatsapp-image-2026-03-03-at-21-00-33.webp",
+        "/family-photos/airan-valdemar-duarte/whatsapp-image-2026-03-03-at-21-02-07.webp"
+      ],
       "videos": []
     },
     {
@@ -226,8 +231,14 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Ione Beatriz Scola de Almeida (1942–2011) was the daughter of Hermes Baptista de Almeida and Thomazina Scola.",
-      "portrait": "/family-photos/ione-beatriz-scola-de-almeida.jpg",
-      "gallery": [],
+      "portrait": "/family-photos/ione-beatriz-scola-de-almeida/index.webp",
+      "gallery": [
+        "/family-photos/ione-beatriz-scola-de-almeida/whatsapp-image-2026-03-03-at-20-46-40.webp",
+        "/family-photos/ione-beatriz-scola-de-almeida/whatsapp-image-2026-03-03-at-20-48-06.webp",
+        "/family-photos/ione-beatriz-scola-de-almeida/whatsapp-image-2026-03-03-at-20-59-25.webp",
+        "/family-photos/ione-beatriz-scola-de-almeida/whatsapp-image-2026-03-03-at-21-04-08.webp",
+        "/family-photos/ione-beatriz-scola-de-almeida/whatsapp-image-2026-03-03-at-21-07-37.webp"
+      ],
       "videos": []
     },
     {
@@ -250,8 +261,12 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Manoel dos Santos Duarte (1908–1988) represents an earlier Duarte generation.",
-      "portrait": "/family-photos/manoel-dos-santos-duarte.jpg",
-      "gallery": [],
+      "portrait": "/family-photos/manoel-dos-santos-duarte/index.webp",
+      "gallery": [
+        "/family-photos/manoel-dos-santos-duarte/whatsapp-image-2026-03-03-at-20-48-06.webp",
+        "/family-photos/manoel-dos-santos-duarte/whatsapp-image-2026-03-03-at-20-50-22.webp",
+        "/family-photos/manoel-dos-santos-duarte/whatsapp-image-2026-03-03-at-20-51-47.webp"
+      ],
       "videos": []
     },
     {
@@ -274,8 +289,11 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Martha Barbosa Duarte (1910–1986) was part of the Barbosa lineage and mother of Airan.",
-      "portrait": "/family-photos/martha-barbosa-duarte.jpg",
-      "gallery": [],
+      "portrait": "/family-photos/martha-barbosa-duarte/index.webp",
+      "gallery": [
+        "/family-photos/martha-barbosa-duarte/whatsapp-image-2026-03-03-at-20-50-22.webp",
+        "/family-photos/martha-barbosa-duarte/whatsapp-image-2026-03-03-at-20-51-47.webp"
+      ],
       "videos": []
     },
     {
@@ -296,8 +314,10 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Hermes Baptista de Almeida (1909–1957) is part of the Almeida ancestry line.",
-      "portrait": "/family-photos/hermes-baptista-de-almeida.jpg",
-      "gallery": [],
+      "portrait": "/family-photos/hermes-baptista-de-almeida/index.webp",
+      "gallery": [
+        "/family-photos/hermes-baptista-de-almeida/whatsapp-image-2026-03-03-at-20-59-25.webp"
+      ],
       "videos": []
     },
     {
@@ -318,8 +338,11 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Thomazina Scola (1910–1980) carried the Scola family name into the Almeida branch.",
-      "portrait": "/family-photos/thomazina-scola.jpg",
-      "gallery": [],
+      "portrait": "/family-photos/thomazina-scola/index.webp",
+      "gallery": [
+        "/family-photos/thomazina-scola/whatsapp-image-2026-03-03-at-20-42-45.webp",
+        "/family-photos/thomazina-scola/whatsapp-image-2026-03-03-at-20-59-25.webp"
+      ],
       "videos": []
     },
     {
@@ -344,7 +367,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Luiz Fernando Costa Leite (1946–2020) was the son of Raphael Paiva Leite and Nair Garcia Costa, continuing the Leite lineage into the next generation.",
-      "portrait": "/family-photos/luiz-fernando-costa-leite.jpg",
+      "portrait": "/family-photos/luiz-fernando-costa-leite/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -370,7 +393,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Marlene Alano Leite is the daughter of Antonio Alano and Maria Guilhermina Alano, representing the Alano family branch.",
-      "portrait": "/family-photos/marlene-alano-leite.jpg",
+      "portrait": "/family-photos/marlene-alano-leite/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -391,7 +414,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Raphael Paiva Leite (1911–1998) was part of the Leite ancestry and father of Luiz Fernando.",
-      "portrait": "/family-photos/raphael-paiva-leite.jpg",
+      "portrait": "/family-photos/raphael-paiva-leite/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -412,7 +435,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Nair Garcia Costa (1912–Deceased) was part of the Costa family and mother of Luiz Fernando.",
-      "portrait": "/family-photos/nair-garcia-costa.jpg",
+      "portrait": "/family-photos/nair-garcia-costa/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -433,7 +456,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Antonio Alano (1908–2004) represents an earlier generation of the Alano family.",
-      "portrait": "/family-photos/antonio-alano.jpg",
+      "portrait": "/family-photos/antonio-alano/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -454,7 +477,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Maria Guilhermina Alano (1913–1986) carried the Alano name into the next generation as the mother of Marlene.",
-      "portrait": "/family-photos/maria-guilhermina-alano.jpg",
+      "portrait": "/family-photos/maria-guilhermina-alano/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -482,7 +505,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Fabio de Almeida Duarte (1966-2021) is part of the Duarte sibling branch descending from Airan and Ione.",
-      "portrait": "/family-photos/fabio-de-almeida-duarte.jpg",
+      "portrait": "/family-photos/fabio-de-almeida-duarte/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -510,7 +533,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Felipe de Almeida Duarte (1971-Present) belongs to the same Duarte generation as Francisco and his brothers.",
-      "portrait": "/family-photos/felipe-de-almeida-duarte.jpg",
+      "portrait": "/family-photos/felipe-de-almeida-duarte/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -538,7 +561,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Fernando de Almeida Duarte (1972-Present) is included in the Duarte sibling line rooted in Airan and Ione.",
-      "portrait": "/family-photos/fernando-de-almeida-duarte.jpg",
+      "portrait": "/family-photos/fernando-de-almeida-duarte/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -559,7 +582,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Marta Fortuna is linked here as Fabio de Almeida Duarte's spouse.",
-      "portrait": "/family-photos/marta-fortuna.jpg",
+      "portrait": "/family-photos/marta-fortuna/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -580,7 +603,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Liane Batista is linked here as Felipe de Almeida Duarte's spouse.",
-      "portrait": "/family-photos/liane-batista.jpg",
+      "portrait": "/family-photos/liane-batista/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -601,7 +624,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Angelica Fanfa Freitas is linked here as Fernando de Almeida Duarte's spouse.",
-      "portrait": "/family-photos/angelica-fanfa-freitas.jpg",
+      "portrait": "/family-photos/angelica-fanfa-freitas/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -625,7 +648,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Odilon Antonio Duarte is one of the children of Manoel dos Santos Duarte and Martha Barbosa Duarte.",
-      "portrait": "/family-photos/odilon-valdemar-duarte/WhatsApp Image 2026-03-03 at 20.51.47.jpeg",
+      "portrait": "/family-photos/odilon-antonio-duarte/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -650,7 +673,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Daniele Alano Leite is one of the children of Luiz Fernando Costa Leite and Marlene Alano Leite.",
-      "portrait": "/family-photos/daniele-alano-leite.jpg",
+      "portrait": "/family-photos/daniele-alano-leite/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -678,7 +701,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Fernanda Alano Leite is one of the children of Luiz Fernando Costa Leite and Marlene Alano Leite.",
-      "portrait": "/family-photos/fernanda-alano-leite.jpg",
+      "portrait": "/family-photos/fernanda-alano-leite/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -700,7 +723,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Andre Romero is linked here as Fernanda Alano Leite's spouse.",
-      "portrait": "/family-photos/andre-romero.jpg",
+      "portrait": "/family-photos/andre-romero/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -719,7 +742,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Diego Fernando de Oliveira is linked here as Daniele Alano Leite's spouse.",
-      "portrait": "/family-photos/diego-fernando-de-oliveira.jpg",
+      "portrait": "/family-photos/diego-fernando-de-oliveira/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -741,7 +764,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Gabriele Leite Romero is the child of Fernanda Alano Leite and Andre Romero.",
-      "portrait": "/family-photos/gabriele-leite-romero.jpg",
+      "portrait": "/family-photos/gabriele-leite-romero/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -763,7 +786,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Mariana Leite Romero is the child of Fernanda Alano Leite and Andre Romero.",
-      "portrait": "/family-photos/mariana-leite-romero.jpg",
+      "portrait": "/family-photos/mariana-leite-romero/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -787,8 +810,10 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Yara Duarte is one of the children of Manoel dos Santos Duarte and Martha Barbosa Duarte.",
-      "portrait": "/family-photos/yara-duarte.jpg",
-      "gallery": [],
+      "portrait": "/family-photos/yara-duarte/index.webp",
+      "gallery": [
+        "/family-photos/yara-duarte/whatsapp-image-2026-03-03-at-20-51-47.webp"
+      ],
       "videos": []
     },
     {
@@ -811,8 +836,10 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Yone Duarte is one of the children of Manoel dos Santos Duarte and Martha Barbosa Duarte.",
-      "portrait": "/family-photos/yone-duarte.jpg",
-      "gallery": [],
+      "portrait": "/family-photos/yone-duarte/index.webp",
+      "gallery": [
+        "/family-photos/yone-duarte/whatsapp-image-2026-03-03-at-20-51-47.webp"
+      ],
       "videos": []
     },
     {
@@ -833,7 +860,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Iara Scola de Almeida is one of the children of Hermes Baptista de Almeida and Thomazina Scola.",
-      "portrait": "/family-photos/iara-beatriz-scola-de-almeida/WhatsApp Image 2026-03-03 at 20.59.25.jpeg",
+      "portrait": "/family-photos/iara-scola-de-almeida/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -853,7 +880,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Henrique Fortuna Duarte is the child of Fabio de Almeida Duarte and Marta Fortuna.",
-      "portrait": "/family-photos/henrique-fortuna-duarte.jpg",
+      "portrait": "/family-photos/henrique-fortuna-duarte/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -873,7 +900,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Matheus Batista Duarte is the child of Felipe de Almeida Duarte and Liane Batista.",
-      "portrait": "/family-photos/matheus-batista-duarte.jpg",
+      "portrait": "/family-photos/matheus-batista-duarte/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -893,7 +920,7 @@
       "cousins": [],
       "unclesAunts": [],
       "bio": "Rafael Freitas Duarte is the child of Fernando de Almeida Duarte and Angelica Fanfa Freitas.",
-      "portrait": "/family-photos/rafael-freitas-duarte.jpg",
+      "portrait": "/family-photos/rafael-freitas-duarte/index.webp",
       "gallery": [],
       "videos": []
     },
@@ -919,7 +946,7 @@
         "fernando-de-almeida-duarte"
       ],
       "bio": "Augusto Leite Duarte is the child of Francisco de Almeida Duarte and Cristiane Alano Leite.",
-      "portrait": "/family-photos/augusto-leite-duarte.jpg",
+      "portrait": "/family-photos/augusto-leite-duarte/index.webp",
       "gallery": [],
       "videos": []
     }
