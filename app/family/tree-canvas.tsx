@@ -59,11 +59,11 @@ type Viewport = {
 };
 
 const MAIN_CARD_WIDTH = 210;
-const MAIN_CARD_HEIGHT = 244;
-const PARTNER_CARD_WIDTH = 178;
-const PARTNER_CARD_HEIGHT = 210;
-const SIBLING_CARD_WIDTH = 184;
-const SIBLING_CARD_HEIGHT = 214;
+const MAIN_CARD_HEIGHT = 292;
+const PARTNER_CARD_WIDTH = 192;
+const PARTNER_CARD_HEIGHT = 272;
+const SIBLING_CARD_WIDTH = 192;
+const SIBLING_CARD_HEIGHT = 272;
 const GRID_X_STEP = 250;
 const ANCESTOR_Y_STEP = 320;
 const DESCENDANT_Y_STEP = 340;
@@ -824,6 +824,7 @@ function CanvasCard({
 }) {
   const compact = role === "partner";
   const portraitSize = compact || role === "sibling" ? 72 : role === "focus" ? 104 : 90;
+  const nameSlotHeight = compact || role === "sibling" ? "h-[4.75rem]" : "h-[4.75rem]";
 
   const skin =
     role === "focus"
@@ -836,7 +837,7 @@ function CanvasCard({
 
   return (
     <article
-      className={`absolute rounded-[30px] border px-4 py-3 ${skin}`}
+      className={`absolute overflow-visible rounded-[30px] border px-4 py-3 ${skin}`}
       style={{
         left: position.x,
         top: position.y,
@@ -849,8 +850,8 @@ function CanvasCard({
           type="button"
           onClick={onToggleSiblingBranch}
           data-interactive={interactive ? "true" : undefined}
-          className={`absolute top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-current/15 bg-white/70 text-[#6f4c2c] shadow-sm transition hover:bg-white ${
-            siblingBranchDirection === 1 ? "right-3" : "left-3"
+          className={`absolute top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center text-[#6f4c2c]/38 transition hover:text-[#6f4c2c]/72 ${
+            siblingBranchDirection === 1 ? "right-[-18px]" : "left-[-18px]"
           }`}
           aria-label={siblingBranchOpen ? "Hide siblings" : "Show siblings"}
         >
@@ -864,7 +865,7 @@ function CanvasCard({
         </button>
       ) : null}
 
-      <div className="flex h-full flex-col items-center text-center">
+      <div className="flex h-full flex-col items-center px-1 text-center">
         <p className="w-full text-[10px] uppercase tracking-[0.28em] opacity-70">{relationshipLabel}</p>
 
         <Link
@@ -886,13 +887,17 @@ function CanvasCard({
           </span>
         </Link>
 
-        <h3 className="mt-4 text-lg font-semibold leading-tight">{person.name}</h3>
-        <p className="mt-2 text-sm opacity-75">{formatLifeRange(person)}</p>
+        <div className={`mt-4 flex ${nameSlotHeight} items-start justify-center`}>
+          <h3 className="line-clamp-3 text-lg font-semibold leading-tight">{person.name}</h3>
+        </div>
+        <div className="mt-1 flex h-5 items-start justify-center">
+          <p className="text-sm opacity-75">{formatLifeRange(person)}</p>
+        </div>
 
         <div className="mt-auto flex items-center gap-3 pt-4">
           <Link
             href={`/family/person/${person.id}`}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-current/15 bg-white/45 transition hover:bg-white/70"
+            className="inline-flex h-10 w-10 items-center justify-center opacity-35 transition hover:opacity-70"
             aria-label={`Open ${person.name}'s profile`}
             data-interactive={interactive ? "true" : undefined}
           >
@@ -900,7 +905,7 @@ function CanvasCard({
           </Link>
           <Link
             href={`/family?person=${person.id}`}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-current/15 bg-white/45 transition hover:bg-white/70"
+            className="inline-flex h-10 w-10 items-center justify-center opacity-35 transition hover:opacity-70"
             aria-label={`Focus on ${person.name}`}
             data-interactive={interactive ? "true" : undefined}
           >
