@@ -24,10 +24,9 @@ type SideNodePosition = {
   y: number;
 };
 
-type Edge = {
-  fromKey: string;
-  toKey: string;
-  dashed?: boolean;
+type FamilyGroup = {
+  parentKeys: string[];
+  childKeys: string[];
 };
 
 type Viewport = {
@@ -70,8 +69,6 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
 
     const mainNodes = new Map<string, MainNodePosition>();
     const sideNodes = new Map<string, SideNodePosition>();
-    const edges: Edge[] = [];
-
     const addMainNode = (id: string, x: number, y: number) => {
       if (!peopleById.has(id) || mainNodes.has(id)) {
         return;
@@ -112,8 +109,6 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
         const parentX = getAncestorX(nextDepth, parentSlotIndex);
         const parentY = -(depth + 1) * MAIN_Y_GAP;
         addMainNode(parentId, parentX, parentY);
-
-        edges.push({ fromKey: parentId, toKey: personId });
         placeAncestors(parentId, nextDepth, parentSlotIndex);
       });
     };
@@ -139,8 +134,6 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
         const childX = x + offset;
         const childY = (depth + 1) * MAIN_Y_GAP;
         addMainNode(childId, childX, childY);
-
-        edges.push({ fromKey: personId, toKey: childId });
         placeDescendants(childId, depth + 1, childX, Math.max(spread * 0.65, 140));
       });
     };
@@ -162,7 +155,6 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
         const sideY = mainNode.y;
 
         addSideNode(sideNodeId, siblingId, mainNode.id, sideX, sideY);
-        edges.push({ fromKey: mainNode.id, toKey: sideNodeId, dashed: true });
       });
     });
 
@@ -186,6 +178,40 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       allPositions.map((node) => [node.key, { x: node.x + offsetX, y: node.y + offsetY }]),
     );
 
+    const visibleNodes = [
+      ...Array.from(mainNodes.values()).map((node) => ({ key: node.id, personId: node.id })),
+      ...Array.from(sideNodes.values()).map((node) => ({ key: node.id, personId: node.personId })),
+    ];
+
+    const familyGroupMap = new Map<string, FamilyGroup>();
+
+    visibleNodes.forEach((node) => {
+      const person = peopleById.get(node.personId);
+      if (!person) {
+        return;
+      }
+
+      const parentKeys = person.parents.filter((parentId) => mainNodes.has(parentId)).sort();
+      if (parentKeys.length === 0) {
+        return;
+      }
+
+      const groupKey = parentKeys.join("|");
+      const existingGroup = familyGroupMap.get(groupKey);
+
+      if (existingGroup) {
+        if (!existingGroup.childKeys.includes(node.key)) {
+          existingGroup.childKeys.push(node.key);
+        }
+        return;
+      }
+
+      familyGroupMap.set(groupKey, {
+        parentKeys,
+        childKeys: [node.key],
+      });
+    });
+
     return {
       rootId,
       width,
@@ -193,7 +219,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       mainNodes: Array.from(mainNodes.values()),
       sideNodes: Array.from(sideNodes.values()),
       absolutePositions,
-      edges,
+      familyGroups: Array.from(familyGroupMap.values()),
     };
   }, [data.rootPersonId, expandedBranches, peopleById]);
 
@@ -360,30 +386,20 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
           }}
         >
           <svg className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
-            {layout.edges.map((edge, index) => {
-              const from = layout.absolutePositions.get(edge.fromKey);
-              const to = layout.absolutePositions.get(edge.toKey);
-              if (!from || !to) {
-                return null;
-              }
-
-              const x1 = from.x + NODE_WIDTH / 2;
-              const y1 = from.y + NODE_HEIGHT;
-              const x2 = to.x + NODE_WIDTH / 2;
-              const y2 = to.y;
-
-              return (
+            {layout.familyGroups.flatMap((group, groupIndex) =>
+              getFamilyConnectorPaths(group, layout.absolutePositions).map((path, pathIndex) => (
                 <path
-                  key={`${edge.fromKey}-${edge.toKey}-${index}`}
-                  d={`M ${x1} ${y1} C ${x1} ${(y1 + y2) / 2}, ${x2} ${(y1 + y2) / 2}, ${x2} ${y2}`}
+                  key={`${group.parentKeys.join("|")}-${groupIndex}-${pathIndex}`}
+                  d={path}
                   fill="none"
                   stroke="#BE8A57"
-                  strokeOpacity={edge.dashed ? 0.55 : 0.74}
-                  strokeWidth={edge.dashed ? 1.3 : 1.7}
-                  strokeDasharray={edge.dashed ? "5 7" : undefined}
+                  strokeOpacity={0.74}
+                  strokeWidth={1.7}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
-              );
-            })}
+              )),
+            )}
           </svg>
 
           {layout.mainNodes.map((node) => {
@@ -448,6 +464,60 @@ function getSiblingIds(person: Person, peopleById: Map<string, Person>): string[
   const preferred = siblingIdsFromParents.length > 0 ? siblingIdsFromParents : person.siblings ?? [];
   const unique = Array.from(new Set(preferred));
   return unique.filter((id) => id !== person.id && peopleById.has(id));
+}
+
+function getFamilyConnectorPaths(
+  group: FamilyGroup,
+  positions: Map<string, { x: number; y: number }>,
+): string[] {
+  const parents = group.parentKeys
+    .map((key) => positions.get(key))
+    .filter((position): position is { x: number; y: number } => !!position)
+    .map((position) => ({
+      x: position.x + NODE_WIDTH / 2,
+      y: position.y + NODE_HEIGHT,
+    }))
+    .sort((left, right) => left.x - right.x);
+
+  const children = group.childKeys
+    .map((key) => positions.get(key))
+    .filter((position): position is { x: number; y: number } => !!position)
+    .map((position) => ({
+      x: position.x + NODE_WIDTH / 2,
+      y: position.y,
+    }))
+    .sort((left, right) => left.x - right.x);
+
+  if (parents.length === 0 || children.length === 0) {
+    return [];
+  }
+
+  const parentY = Math.max(...parents.map((parent) => parent.y));
+  const childY = Math.min(...children.map((child) => child.y));
+  const gap = childY - parentY;
+  const railY = Math.max(parentY + 26, Math.min(childY - 26, parentY + gap * 0.45));
+  const trunkX =
+    parents.length > 1 ? (parents[0].x + parents[parents.length - 1].x) / 2 : parents[0].x;
+  const railStart = Math.min(trunkX, ...children.map((child) => child.x));
+  const railEnd = Math.max(trunkX, ...children.map((child) => child.x));
+
+  const paths: string[] = [];
+
+  if (parents.length > 1) {
+    paths.push(`M ${parents[0].x} ${parentY} L ${parents[parents.length - 1].x} ${parentY}`);
+  }
+
+  paths.push(`M ${trunkX} ${parentY} L ${trunkX} ${railY}`);
+
+  if (railStart !== railEnd) {
+    paths.push(`M ${railStart} ${railY} L ${railEnd} ${railY}`);
+  }
+
+  children.forEach((child) => {
+    paths.push(`M ${child.x} ${railY} L ${child.x} ${child.y}`);
+  });
+
+  return paths;
 }
 
 type PersonCardProps = {

@@ -4,7 +4,7 @@ export type Person = {
   id: string;
   slug: string;
   name: string;
-  birth: string;
+  birth: string | null;
   death: string | null;
   parents: string[];
   spouse: string[];
@@ -34,7 +34,7 @@ export function getPersonById(id: string): Person | undefined {
 }
 
 export function formatLifeRange(person: Person): string {
-  return `${person.birth} - ${person.death ?? "Present"}`;
+  return `${person.birth ?? "Unknown"} - ${person.death ?? "Present"}`;
 }
 
 export function getSideRelativeIds(person: Person): string[] {

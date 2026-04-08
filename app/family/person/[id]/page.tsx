@@ -21,12 +21,20 @@ export default async function PersonPage({ params }: { params: Promise<{ id: str
   return (
     <div className="h-full overflow-y-auto px-6 py-10 md:px-10">
       <div className="mx-auto w-full max-w-4xl">
-        <Link
-          href="/family"
-          className="mb-8 inline-flex rounded-full border border-[#CE955E]/55 bg-[#FAF6ED] px-4 py-2 text-base hover:bg-[#F0EBD6]"
-        >
-          Back to Tree
-        </Link>
+        <div className="mb-8 flex flex-wrap gap-3">
+          <Link
+            href={`/family?focus=${person.id}`}
+            className="inline-flex rounded-full border border-[#CE955E]/55 bg-[#CE955E] px-4 py-2 text-base font-medium text-[#3A2E1F] hover:brightness-95"
+          >
+            View in Tree
+          </Link>
+          <Link
+            href="/family"
+            className="inline-flex rounded-full border border-[#CE955E]/55 bg-[#FAF6ED] px-4 py-2 text-base hover:bg-[#F0EBD6]"
+          >
+            Back to Tree
+          </Link>
+        </div>
 
         <section className="rounded-[36px] border border-[#CE955E]/50 bg-[#FAF6ED] p-8 md:p-12">
           <div className="mx-auto mb-8 w-fit rounded-full border-4 border-[#CE955E]/55 p-1">
