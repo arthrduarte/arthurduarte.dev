@@ -1,14 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import {
-  ArrowUpRightIcon,
-  MoveIcon,
-  SearchIcon,
-  ZoomInIcon,
-  ZoomOutIcon,
-} from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { ArrowUpRightIcon } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FamilyPortrait } from "@/components/family-portrait";
 import {
@@ -78,10 +72,8 @@ const INITIAL_SCALE = 0.74;
 const DRAG_THRESHOLD = 6;
 
 export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [viewport, setViewport] = useState<Viewport>({ x: 0, y: 0, scale: INITIAL_SCALE });
-  const [searchValue, setSearchValue] = useState("");
 
   const containerRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef(false);
@@ -90,21 +82,6 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
 
   const graph = useMemo(() => buildFamilyGraph(data), [data]);
   const validationIssues = useMemo(() => validateFamilyData(data), [data]);
-
-  const people = useMemo(
-    () => [...data.people].sort((left, right) => left.name.localeCompare(right.name)),
-    [data.people],
-  );
-
-  const filteredPeople = useMemo(() => {
-    const normalizedQuery = searchValue.trim().toLowerCase();
-
-    if (!normalizedQuery) {
-      return people;
-    }
-
-    return people.filter((person) => person.name.toLowerCase().includes(normalizedQuery));
-  }, [people, searchValue]);
 
   const focusedPersonId = searchParams.get("person") ?? searchParams.get("focus") ?? data.rootPersonId;
   const focusedPerson = graph.peopleById.get(focusedPersonId) ?? graph.peopleById.get(data.rootPersonId);
@@ -452,29 +429,6 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
     return <div className="grid h-full w-full place-items-center text-lg">No family data found.</div>;
   }
 
-  const setScale = (targetScale: number) => {
-    const container = containerRef.current;
-    if (!container) {
-      return;
-    }
-
-    const rect = container.getBoundingClientRect();
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    setViewport((current) => {
-      const nextScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, targetScale));
-      const worldX = (centerX - current.x) / current.scale;
-      const worldY = (centerY - current.y) / current.scale;
-
-      return {
-        x: centerX - worldX * nextScale,
-        y: centerY - worldY * nextScale,
-        scale: nextScale,
-      };
-    });
-  };
-
   return (
     <div className="relative h-full overflow-hidden bg-[#f6efe4] text-[#3b2c1d]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,250,241,0.96),_rgba(245,235,220,0.94)_46%,_rgba(238,224,204,0.92)_100%)]" />
@@ -490,17 +444,8 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
         </div>
 
         <div>
-          <h1 className="font-serif text-3xl tracking-tight text-[#352619]">Family Canvas</h1>
-          <p className="mt-1 max-w-md text-sm text-[#75573a]">
-            One person in focus. Direct ascendants above. Direct descendants below. Drag the canvas and zoom to
-            inspect the lineage.
-          </p>
-        </div>
-
-        <div className="rounded-[22px] border border-[#ce955e]/20 bg-white/55 p-3">
-          <p className="text-[11px] uppercase tracking-[0.24em] text-[#b07b49]">Focused lineage</p>
-          <p className="mt-2 text-lg font-semibold text-[#352619]">{focusedPerson.name}</p>
-          <p className="mt-1 text-sm text-[#75573a]">{formatLifeRange(focusedPerson)}</p>
+          <h1 className="font-serif text-3xl tracking-tight text-[#352619]">{focusedPerson.name}</h1>
+          <p className="mt-4 text-sm text-[#75573a]">{formatLifeRange(focusedPerson)}</p>
         </div>
 
         {validationIssues.length > 0 ? (
@@ -509,63 +454,6 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
             cleaned up.
           </p>
         ) : null}
-      </div>
-
-      <div className="absolute right-5 top-5 z-20 flex w-[360px] flex-col gap-3 rounded-[28px] border border-[#ce955e]/25 bg-[#faf6ed]/88 p-4 shadow-[0_24px_70px_rgba(90,63,34,0.16)] backdrop-blur-md">
-        <div className="flex items-center gap-2 rounded-[20px] border border-[#ce955e]/20 bg-white/55 px-3 py-2">
-          <SearchIcon className="h-4 w-4 text-[#b07b49]" />
-          <input
-            value={searchValue}
-            onChange={(event) => setSearchValue(event.target.value)}
-            placeholder="Search people"
-            className="w-full bg-transparent text-sm text-[#352619] outline-none placeholder:text-[#9f8161]"
-          />
-        </div>
-
-        <div className="max-h-[220px] overflow-y-auto rounded-[22px] border border-[#ce955e]/20 bg-white/55 p-2">
-          <div className="grid gap-2">
-            {filteredPeople.map((person) => (
-              <button
-                key={person.id}
-                type="button"
-                onClick={() => router.push(`/family?person=${person.id}`)}
-                className={`rounded-[18px] px-3 py-2 text-left text-sm transition ${
-                  person.id === focusedPerson.id
-                    ? "bg-[#ce955e] text-[#2b1d10]"
-                    : "bg-[#fffaf2] text-[#4f3a26] hover:bg-[#f3ebdb]"
-                }`}
-              >
-                <div className="font-medium">{person.name}</div>
-                <div className="text-xs opacity-75">{formatLifeRange(person)}</div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between rounded-[22px] border border-[#ce955e]/20 bg-white/55 px-3 py-3">
-          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-[#b07b49]">
-            <MoveIcon className="h-4 w-4" />
-            Drag canvas
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setScale(viewport.scale / 1.1)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#ce955e]/20 bg-[#fffaf2] text-[#4f3a26] transition hover:bg-[#f3ebdb]"
-              aria-label="Zoom out"
-            >
-              <ZoomOutIcon className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => setScale(viewport.scale * 1.1)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#ce955e]/20 bg-[#fffaf2] text-[#4f3a26] transition hover:bg-[#f3ebdb]"
-              aria-label="Zoom in"
-            >
-              <ZoomInIcon className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
       </div>
 
       <div
