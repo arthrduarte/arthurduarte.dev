@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { FamilyData, Person } from "@/lib/family-data";
 import { formatLifeRange } from "@/lib/family-data";
@@ -28,6 +29,8 @@ type FamilyGroup = {
   parentKeys: string[];
   childKeys: string[];
 };
+
+type BranchDirection = "left" | "right";
 
 type Viewport = {
   x: number;
@@ -184,6 +187,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
     ];
 
     const familyGroupMap = new Map<string, FamilyGroup>();
+    const branchDirections = new Map<string, BranchDirection>();
 
     visibleNodes.forEach((node) => {
       const person = peopleById.get(node.personId);
@@ -212,6 +216,15 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       });
     });
 
+    mainNodes.forEach((node) => {
+      const person = peopleById.get(node.id);
+      if (!person || getSiblingIds(person, peopleById).length === 0) {
+        return;
+      }
+
+      branchDirections.set(node.id, node.x >= 0 ? "right" : "left");
+    });
+
     return {
       rootId,
       width,
@@ -220,6 +233,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
       sideNodes: Array.from(sideNodes.values()),
       absolutePositions,
       familyGroups: Array.from(familyGroupMap.values()),
+      branchDirections,
     };
   }, [data.rootPersonId, expandedBranches, peopleById]);
 
@@ -419,6 +433,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
                 x={absolute.x}
                 y={absolute.y}
                 showBranchToggle={sideCount > 0}
+                branchDirection={layout.branchDirections.get(node.id) ?? "left"}
                 isBranchOpen={!!expandedBranches[node.id]}
                 onToggleBranch={() =>
                   setExpandedBranches((current) => ({
@@ -445,6 +460,7 @@ export function FamilyTreeCanvas({ data }: FamilyTreeCanvasProps) {
                 x={absolute.x}
                 y={absolute.y}
                 showBranchToggle={false}
+                branchDirection="left"
                 isSideBranch
               />
             );
@@ -525,6 +541,7 @@ type PersonCardProps = {
   x: number;
   y: number;
   showBranchToggle: boolean;
+  branchDirection: BranchDirection;
   isBranchOpen?: boolean;
   isSideBranch?: boolean;
   onToggleBranch?: () => void;
@@ -535,6 +552,7 @@ function PersonCard({
   x,
   y,
   showBranchToggle,
+  branchDirection,
   isBranchOpen = false,
   isSideBranch = false,
   onToggleBranch,
@@ -554,11 +572,17 @@ function PersonCard({
         <button
           type="button"
           data-interactive="true"
-          className="absolute -right-3 top-1/2 h-8 w-8 -translate-y-1/2 rounded-full border border-[#CE955E]/70 bg-[#FAF6ED] text-lg leading-none shadow-sm hover:bg-[#F0EBD6]"
+          className={`absolute top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center text-[#8F653D] transition-colors hover:text-[#6F4C2C] ${
+            branchDirection === "right" ? "-right-7" : "-left-7"
+          }`}
           onClick={onToggleBranch}
           aria-label={isBranchOpen ? "Hide relatives" : "Show relatives"}
         >
-          {isBranchOpen ? "-" : "+"}
+          {branchDirection === "right" ? (
+            <ChevronRightIcon className="h-4 w-4" />
+          ) : (
+            <ChevronLeftIcon className="h-4 w-4" />
+          )}
         </button>
       ) : null}
 
