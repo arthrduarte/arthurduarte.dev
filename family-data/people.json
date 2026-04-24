@@ -607,6 +607,215 @@
       "videos": []
     },
     {
+      "id": "yvon-st-jean",
+      "slug": "yvon-st-jean",
+      "name": "Yvon St-Jean",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "suzanne-bercier"
+      ],
+      "children": [
+        "eric-st-jean",
+        "annie-wiebenga"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Yvon St-Jean married Suzanne Bercier in 1972 in Treadwell, Ontario, and they had Eric St-Jean and Annie St-Jean Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "suzanne-bercier",
+      "slug": "suzanne-bercier",
+      "name": "Suzanne Bercier",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "yvon-st-jean"
+      ],
+      "children": [
+        "eric-st-jean",
+        "annie-wiebenga"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Suzanne Bercier married Yvon St-Jean in 1972 in Treadwell, Ontario, and they had Eric St-Jean and Annie St-Jean Wiebenga.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "eric-st-jean",
+      "slug": "eric-st-jean",
+      "name": "Eric St-Jean",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "yvon-st-jean",
+        "suzanne-bercier"
+      ],
+      "spouse": [
+        "claudine-couture"
+      ],
+      "children": [
+        "isabelle-st-jean",
+        "maxim-st-jean",
+        "anthony-st-jean",
+        "julia-st-jean"
+      ],
+      "siblings": [
+        "annie-wiebenga"
+      ],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Eric St-Jean is the son of Yvon St-Jean and Suzanne Bercier, the brother of Annie St-Jean Wiebenga, and the father of Isabelle St-Jean, Maxim St-Jean, Anthony St-Jean, and Julia St-Jean. His children Isabelle and Maxim are from a previous marriage whose spouse is not yet recorded here.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "claudine-couture",
+      "slug": "claudine-couture",
+      "name": "Claudine Couture",
+      "birth": null,
+      "death": null,
+      "parents": [],
+      "spouse": [
+        "eric-st-jean"
+      ],
+      "children": [
+        "anthony-st-jean",
+        "julia-st-jean"
+      ],
+      "siblings": [],
+      "cousins": [],
+      "unclesAunts": [],
+      "bio": "Claudine Couture is Eric St-Jean's spouse and the mother of Anthony St-Jean and Julia St-Jean.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "isabelle-st-jean",
+      "slug": "isabelle-st-jean",
+      "name": "Isabelle St-Jean",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "eric-st-jean"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "maxim-st-jean",
+        "anthony-st-jean",
+        "julia-st-jean"
+      ],
+      "cousins": [
+        "tania-wiebenga",
+        "amy-lee-wiebenga"
+      ],
+      "unclesAunts": [
+        "annie-wiebenga"
+      ],
+      "bio": "Isabelle St-Jean is the daughter of Eric St-Jean from a previous marriage.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "maxim-st-jean",
+      "slug": "maxim-st-jean",
+      "name": "Maxim St-Jean",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "eric-st-jean"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "isabelle-st-jean",
+        "anthony-st-jean",
+        "julia-st-jean"
+      ],
+      "cousins": [
+        "tania-wiebenga",
+        "amy-lee-wiebenga"
+      ],
+      "unclesAunts": [
+        "annie-wiebenga"
+      ],
+      "bio": "Maxim St-Jean is the child of Eric St-Jean from a previous marriage.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "anthony-st-jean",
+      "slug": "anthony-st-jean",
+      "name": "Anthony St-Jean",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "eric-st-jean",
+        "claudine-couture"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "isabelle-st-jean",
+        "maxim-st-jean",
+        "julia-st-jean"
+      ],
+      "cousins": [
+        "tania-wiebenga",
+        "amy-lee-wiebenga"
+      ],
+      "unclesAunts": [
+        "annie-wiebenga"
+      ],
+      "bio": "Anthony St-Jean is the son of Eric St-Jean and Claudine Couture.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
+      "id": "julia-st-jean",
+      "slug": "julia-st-jean",
+      "name": "Julia St-Jean",
+      "birth": null,
+      "death": null,
+      "parents": [
+        "eric-st-jean",
+        "claudine-couture"
+      ],
+      "spouse": [],
+      "children": [],
+      "siblings": [
+        "isabelle-st-jean",
+        "maxim-st-jean",
+        "anthony-st-jean"
+      ],
+      "cousins": [
+        "tania-wiebenga",
+        "amy-lee-wiebenga"
+      ],
+      "unclesAunts": [
+        "annie-wiebenga"
+      ],
+      "bio": "Julia St-Jean is the daughter of Eric St-Jean and Claudine Couture.",
+      "portrait": "/family-photos/portrait-placeholder.jpg",
+      "gallery": [],
+      "videos": []
+    },
+    {
       "id": "tania-wiebenga",
       "slug": "tania-wiebenga",
       "name": "Tania Wiebenga",
@@ -623,12 +832,18 @@
       "siblings": [
         "amy-lee-wiebenga"
       ],
-      "cousins": [],
+      "cousins": [
+        "isabelle-st-jean",
+        "maxim-st-jean",
+        "anthony-st-jean",
+        "julia-st-jean"
+      ],
       "unclesAunts": [
         "sherry-wiebenga-berkelmans",
-        "willy-wiebenga"
+        "willy-wiebenga",
+        "eric-st-jean"
       ],
-      "bio": "Tania Wiebenga is the daughter of Trevor Wiebenga and Annie Wiebenga.",
+      "bio": "Tania Wiebenga is the daughter of Trevor Wiebenga and Annie St-Jean Wiebenga.",
       "portrait": "/family-photos/tania-wiebenga/index.webp",
       "gallery": [],
       "videos": []
@@ -656,7 +871,7 @@
       ],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Trevor Wiebenga is the son of Sam Wiebenga and Eva Catharina DeKraker Wiebenga, and the father of Tania Wiebenga and Amy-Lee Wiebenga.",
+      "bio": "Trevor Wiebenga is the son of Sam Wiebenga and Eva Catharina DeKraker Wiebenga. He married Annie St-Jean, and they are the parents of Tania Wiebenga and Amy-Lee Wiebenga.",
       "portrait": "/family-photos/trevor-wiebenga/index.webp",
       "gallery": [],
       "videos": []
@@ -664,10 +879,13 @@
     {
       "id": "annie-wiebenga",
       "slug": "annie-wiebenga",
-      "name": "Annie Wiebenga",
+      "name": "Annie St-Jean Wiebenga",
       "birth": null,
       "death": null,
-      "parents": [],
+      "parents": [
+        "yvon-st-jean",
+        "suzanne-bercier"
+      ],
       "spouse": [
         "trevor-wiebenga"
       ],
@@ -675,10 +893,12 @@
         "tania-wiebenga",
         "amy-lee-wiebenga"
       ],
-      "siblings": [],
+      "siblings": [
+        "eric-st-jean"
+      ],
       "cousins": [],
       "unclesAunts": [],
-      "bio": "Annie Wiebenga is the mother of Tania Wiebenga and Amy-Lee Wiebenga.",
+      "bio": "Annie St-Jean Wiebenga, born Annie St-Jean, is the daughter of Yvon St-Jean and Suzanne Bercier, the sister of Eric St-Jean, and the mother of Tania Wiebenga and Amy-Lee Wiebenga.",
       "portrait": "/family-photos/annie-wiebenga/index.webp",
       "gallery": [],
       "videos": []
@@ -698,12 +918,18 @@
       "siblings": [
         "tania-wiebenga"
       ],
-      "cousins": [],
+      "cousins": [
+        "isabelle-st-jean",
+        "maxim-st-jean",
+        "anthony-st-jean",
+        "julia-st-jean"
+      ],
       "unclesAunts": [
         "sherry-wiebenga-berkelmans",
-        "willy-wiebenga"
+        "willy-wiebenga",
+        "eric-st-jean"
       ],
-      "bio": "Amy-Lee Wiebenga is the sister of Tania Wiebenga.",
+      "bio": "Amy-Lee Wiebenga is the daughter of Trevor Wiebenga and Annie St-Jean Wiebenga, and the sister of Tania Wiebenga.",
       "portrait": "/family-photos/amy-lee-wiebenga/index.webp",
       "gallery": [],
       "videos": []
