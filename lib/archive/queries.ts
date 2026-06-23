@@ -1,7 +1,11 @@
-import { and, asc, eq, isNull } from "drizzle-orm";
+import { and, asc, desc, eq, isNotNull, isNull } from "drizzle-orm";
 
 import { archiveItems, archiveTags } from "@/db/schema";
-import type { ArchiveItemRecord, ArchiveTagOption } from "@/lib/archive/types";
+import type {
+  ArchiveItemRecord,
+  ArchiveTagOption,
+  DeletedArchiveItemRecord,
+} from "@/lib/archive/types";
 import { getDb } from "@/lib/db";
 
 function mapItemRecord(item: {
@@ -95,4 +99,51 @@ export async function getActiveArchiveItemById(
   });
 
   return item ? mapItemRecord(item) : null;
+}
+
+function mapDeletedItemRecord(item: {
+  id: string;
+  title: string;
+  url: string;
+  imageUrl: string | null;
+  note: string | null;
+  isFavorite: boolean;
+  source: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date | null;
+  deletedReason: string | null;
+  itemTags: Array<{ tag: { name: string; slug: string } }>;
+}): DeletedArchiveItemRecord {
+  const base = mapItemRecord(item);
+
+  if (!item.deletedAt || !item.deletedReason) {
+    throw new Error("Deleted archive item is missing deletion metadata.");
+  }
+
+  return {
+    ...base,
+    deletedAt: item.deletedAt,
+    deletedReason: item.deletedReason,
+  };
+}
+
+export async function getDeletedArchiveItemsWithTags(): Promise<
+  DeletedArchiveItemRecord[]
+> {
+  const db = getDb();
+
+  const items = await db.query.archiveItems.findMany({
+    where: isNotNull(archiveItems.deletedAt),
+    with: {
+      itemTags: {
+        with: {
+          tag: true,
+        },
+      },
+    },
+    orderBy: desc(archiveItems.deletedAt),
+  });
+
+  return items.map(mapDeletedItemRecord);
 }

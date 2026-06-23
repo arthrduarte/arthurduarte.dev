@@ -3,6 +3,8 @@ import { parseImageUrl } from "@/lib/archive/images";
 import type {
   ArchiveItemFormInput,
   CreateArchiveItemInput,
+  RestoreArchiveItemInput,
+  SoftDeleteArchiveItemInput,
   UpdateArchiveItemInput,
 } from "@/lib/archive/types";
 
@@ -93,4 +95,36 @@ export function parseUpdateArchiveItemInput(
     id,
     ...parseArchiveItemFormInput(formData),
   };
+}
+
+export function parseSoftDeleteArchiveItemInput(
+  formData: FormData,
+): SoftDeleteArchiveItemInput {
+  const id = String(formData.get("id") ?? "").trim();
+  const deletedReason = String(formData.get("deletedReason") ?? "").trim();
+
+  if (!id) {
+    throw new Error("Archive item id is required.");
+  }
+
+  if (!deletedReason) {
+    throw new Error("Deletion reason is required.");
+  }
+
+  return {
+    id,
+    deletedReason,
+  };
+}
+
+export function parseRestoreArchiveItemInput(
+  formData: FormData,
+): RestoreArchiveItemInput {
+  const id = String(formData.get("id") ?? "").trim();
+
+  if (!id) {
+    throw new Error("Archive item id is required.");
+  }
+
+  return { id };
 }

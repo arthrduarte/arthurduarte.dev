@@ -1,4 +1,4 @@
-import { and, asc, eq, isNull } from "drizzle-orm";
+import { and, eq, isNotNull, isNull } from "drizzle-orm";
 
 import {
   archiveItemTags,
@@ -9,9 +9,6 @@ import type { Database } from "@/lib/db";
 import { getDb } from "@/lib/db";
 import { normalizeTagName, normalizeTagSlug } from "@/lib/archive/tags";
 import type {
-  ArchiveItemFormInput,
-  ArchiveItemRecord,
-  ArchiveTagOption,
   CreateArchiveItemInput,
   UpdateArchiveItemInput,
 } from "@/lib/archive/types";
@@ -142,4 +139,55 @@ export async function updateArchiveItem(input: UpdateArchiveItemInput) {
   await syncItemTags(db, input.id, input.tagNames);
 
   return { id: input.id };
+}
+
+export async function softDeleteArchiveItem(
+  id: string,
+  deletedReason: string,
+) {
+  const db = getDb();
+
+  const existing = await db.query.archiveItems.findFirst({
+    where: and(eq(archiveItems.id, id), isNull(archiveItems.deletedAt)),
+    columns: { id: true },
+  });
+
+  if (!existing) {
+    throw new Error("Archive item not found.");
+  }
+
+  await db
+    .update(archiveItems)
+    .set({
+      deletedAt: new Date(),
+      deletedReason,
+      updatedAt: new Date(),
+    })
+    .where(eq(archiveItems.id, id));
+
+  return { id };
+}
+
+export async function restoreArchiveItem(id: string) {
+  const db = getDb();
+
+  const existing = await db.query.archiveItems.findFirst({
+    where: and(eq(archiveItems.id, id), isNotNull(archiveItems.deletedAt)),
+    columns: { id: true },
+  });
+
+  if (!existing) {
+    throw new Error("Deleted archive item not found.");
+  }
+
+  await db
+    .update(archiveItems)
+    .set({
+      deletedAt: null,
+      deletedReason: null,
+      updatedAt: new Date(),
+    })
+    .where(eq(archiveItems.id, id));
+
+  return { id };
 }

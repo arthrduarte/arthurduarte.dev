@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { PencilIcon, StarIcon } from "lucide-react";
+import { PencilIcon, StarIcon, Trash2Icon } from "lucide-react";
 
+import { DeleteArchiveItemDialog } from "@/components/admin/delete-archive-item-dialog";
 import { EditArchiveItemSheet } from "@/components/admin/edit-archive-item-sheet";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,10 @@ export function ArchiveItemList({ items, existingTags }: ArchiveItemListProps) {
     null,
   );
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [deletingItem, setDeletingItem] = useState<ArchiveItemRecord | null>(
+    null,
+  );
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   if (items.length === 0) {
     return (
@@ -79,6 +84,18 @@ export function ArchiveItemList({ items, existingTags }: ArchiveItemListProps) {
                     <PencilIcon className="size-4" />
                     Edit
                   </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      setDeletingItem(item);
+                      setIsDeleteOpen(true);
+                    }}
+                  >
+                    <Trash2Icon className="size-4" />
+                    Delete
+                  </Button>
                 </div>
               </div>
 
@@ -116,6 +133,18 @@ export function ArchiveItemList({ items, existingTags }: ArchiveItemListProps) {
 
           if (!open) {
             setEditingItem(null);
+          }
+        }}
+      />
+
+      <DeleteArchiveItemDialog
+        item={deletingItem}
+        open={isDeleteOpen}
+        onOpenChange={(open) => {
+          setIsDeleteOpen(open);
+
+          if (!open) {
+            setDeletingItem(null);
           }
         }}
       />

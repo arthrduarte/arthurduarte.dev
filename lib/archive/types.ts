@@ -39,3 +39,17 @@ export type ArchiveTagOption = {
   name: string;
   slug: string;
 };
+
+export type DeletedArchiveItemRecord = ArchiveItemRecord & {
+  deletedAt: Date;
+  deletedReason: string;
+};
+
+export type SoftDeleteArchiveItemInput = {
+  id: string;
+  deletedReason: string;
+};
+
+export type RestoreArchiveItemInput = {
+  id: string;
+};

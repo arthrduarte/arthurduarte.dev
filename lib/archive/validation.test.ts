@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { parseCreateArchiveItemInput } from "@/lib/archive/validation";
+import { parseCreateArchiveItemInput, parseSoftDeleteArchiveItemInput } from "@/lib/archive/validation";
 
 function buildFormData(values: Record<string, string>): FormData {
   const formData = new FormData();
@@ -55,5 +55,32 @@ describe("parseCreateArchiveItemInput", () => {
         }),
       ),
     ).toThrow("URL must be a valid http or https link.");
+  });
+});
+
+describe("parseSoftDeleteArchiveItemInput", () => {
+  it("requires a deletion reason", () => {
+    expect(() =>
+      parseSoftDeleteArchiveItemInput(
+        buildFormData({
+          id: "item-id",
+          deletedReason: "  ",
+        }),
+      ),
+    ).toThrow("Deletion reason is required.");
+  });
+
+  it("parses a valid soft delete payload", () => {
+    expect(
+      parseSoftDeleteArchiveItemInput(
+        buildFormData({
+          id: "item-id",
+          deletedReason: "Outdated link",
+        }),
+      ),
+    ).toEqual({
+      id: "item-id",
+      deletedReason: "Outdated link",
+    });
   });
 });
