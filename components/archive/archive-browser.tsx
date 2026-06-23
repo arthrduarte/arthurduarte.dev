@@ -1,14 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import {
-  ArrowLeftIcon,
-  MessageSquareTextIcon,
-  SearchIcon,
-  StarIcon,
-} from "lucide-react";
+import { ArrowLeftIcon, SearchIcon, StarIcon } from "lucide-react";
 import Link from "next/link";
 
+import { ArchiveConstellation } from "@/components/archive/archive-constellation";
 import { ArchiveEmptyState } from "@/components/archive/archive-empty-state";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,7 +19,6 @@ import {
 } from "@/components/ui/drawer";
 import { filterArchiveItems } from "@/lib/archive/filters";
 import type { ArchiveItemRecord, ArchiveTagOption } from "@/lib/archive/types";
-import { cn } from "@/lib/utils";
 
 type ArchiveBrowserProps = {
   items: ArchiveItemRecord[];
@@ -38,102 +33,23 @@ function getHostname(url: string): string {
   }
 }
 
-function getCardRotation(index: number): string {
-  const rotations = ["-1.2deg", "0.6deg", "-0.4deg", "1deg", "-0.8deg"];
-  return rotations[index % rotations.length];
-}
-
-function ArchiveCard({
-  item,
-  index,
-  onOpenDetails,
-}: {
-  item: ArchiveItemRecord;
-  index: number;
-  onOpenDetails: (item: ArchiveItemRecord) => void;
-}) {
+function ArchiveHeader() {
   return (
-    <article
-      className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-xl border border-border/70 bg-card/40 shadow-xs transition hover:-translate-y-0.5 hover:border-border hover:bg-card/70 hover:shadow-sm",
-        item.isFavorite && "ring-1 ring-primary/30",
-      )}
-      style={{ transform: `rotate(${getCardRotation(index)})` }}
-    >
-      <a
-        href={item.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex flex-1 flex-col"
+    <div className="space-y-4">
+      <Link
+        href="/"
+        className="-mx-2 flex w-fit items-center gap-2 rounded-sm px-2 py-1 text-sm font-medium text-stone-400 transition-colors hover:bg-stone-800/80 hover:text-stone-100"
       >
-        {item.imageUrl ? (
-          <div className="relative aspect-[4/3] overflow-hidden bg-muted/30">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={item.imageUrl}
-              alt=""
-              className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
-            />
-          </div>
-        ) : (
-          <div className="flex aspect-[4/3] flex-col justify-between bg-gradient-to-br from-stone-800/80 to-stone-950 p-4">
-            <div className="text-xs uppercase tracking-[0.2em] text-stone-400">
-              {item.source ?? getHostname(item.url)}
-            </div>
-            <div>
-              <p className="text-3xl font-semibold text-stone-100">
-                {item.title.slice(0, 1).toUpperCase()}
-              </p>
-              <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-stone-300">
-                {item.title}
-              </p>
-              {item.note ? (
-                <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-stone-400">
-                  {item.note}
-                </p>
-              ) : null}
-            </div>
-          </div>
-        )}
-
-        {item.imageUrl ? (
-          <div className="space-y-2 p-4">
-            <div className="flex items-start justify-between gap-2">
-              <h2 className="line-clamp-2 text-sm font-semibold leading-snug">
-                {item.title}
-              </h2>
-              {item.isFavorite ? (
-                <StarIcon className="size-4 shrink-0 fill-primary text-primary" />
-              ) : null}
-            </div>
-            <p className="truncate text-xs text-muted-foreground">
-              {item.source ?? getHostname(item.url)}
-            </p>
-          </div>
-        ) : null}
-      </a>
-
-      <div className="flex items-center justify-between gap-2 border-t border-border/60 px-4 py-3">
-        <div className="flex flex-wrap gap-1">
-          {item.tags.slice(0, 3).map((tag) => (
-            <Badge key={tag} variant="secondary" className="text-[11px]">
-              {tag}
-            </Badge>
-          ))}
-        </div>
-
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          className="shrink-0"
-          onClick={() => onOpenDetails(item)}
-        >
-          <MessageSquareTextIcon className="size-4" />
-          Note
-        </Button>
+        <ArrowLeftIcon className="h-4 w-4" /> Back to home
+      </Link>
+      <div className="space-y-2">
+        <h1 className="text-2xl font-semibold">Arthur&apos;s Archive</h1>
+        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          A messy but browsable dump of internet gold nuggets collected over
+          time.
+        </p>
       </div>
-    </article>
+    </div>
   );
 }
 
@@ -145,63 +61,87 @@ export function ArchiveBrowser({ items, tags }: ArchiveBrowserProps) {
     null,
   );
 
-  const filteredItems = useMemo(
-    () =>
-      filterArchiveItems(items, {
-        search,
-        tagSlug: selectedTagSlug,
-        favoritesOnly,
-      }),
-    [items, search, selectedTagSlug, favoritesOnly],
-  );
+  const filterActive =
+    search.trim().length > 0 || selectedTagSlug !== null || favoritesOnly;
+
+  // The canvas keeps every node mounted and dims non-matches, so we pass the
+  // set of matching ids (or null when nothing is filtered) rather than a
+  // pruned list.
+  const matchedIds = useMemo(() => {
+    if (!filterActive) {
+      return null;
+    }
+    const matched = filterArchiveItems(items, {
+      search,
+      tagSlug: selectedTagSlug,
+      favoritesOnly,
+    });
+    return new Set(matched.map((item) => item.id));
+  }, [items, search, selectedTagSlug, favoritesOnly, filterActive]);
+
+  const matchCount = matchedIds ? matchedIds.size : items.length;
 
   return (
     <>
-      <div className="mx-auto max-w-6xl space-y-8 p-8">
-        <div className="space-y-4">
-          <Link
-            href="/"
-            className="flex items-center gap-2 rounded-sm px-2 py-1 -mx-2 text-sm font-medium text-stone-400 transition-colors hover:bg-stone-800/80 hover:text-stone-100"
-          >
-            <ArrowLeftIcon className="h-4 w-4" /> Back to home
-          </Link>
-          <div className="space-y-2">
-            <h1 className="text-2xl font-semibold">Arthur&apos;s Archive</h1>
-            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              A messy but browsable dump of internet gold nuggets collected over
-              time.
-            </p>
-          </div>
+      {items.length === 0 ? (
+        <div className="mx-auto max-w-6xl space-y-8 p-8">
+          <ArchiveHeader />
+          <ArchiveEmptyState />
         </div>
+      ) : (
+        <div className="relative h-full w-full">
+          <ArchiveConstellation
+            items={items}
+            matchedIds={matchedIds}
+            onOpenDetails={setSelectedItem}
+          />
 
-        {items.length > 0 ? (
-          <div className="space-y-4">
-            <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
-              <div className="relative flex-1">
+          {/* Floating control rail — overlaid on the canvas. */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex flex-col gap-3 p-4 sm:p-6">
+            <div className="pointer-events-auto flex flex-wrap items-center gap-3">
+              <Link
+                href="/"
+                className="flex items-center gap-2 rounded-md border border-border/70 bg-card/80 px-3 py-2 text-sm font-medium text-muted-foreground shadow-sm backdrop-blur-sm transition hover:border-border hover:text-foreground"
+              >
+                <ArrowLeftIcon className="size-4" /> Home
+              </Link>
+
+              <div className="relative min-w-0 flex-1 sm:max-w-sm">
                 <SearchIcon className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   value={search}
                   onChange={(event) => setSearch(event.target.value)}
-                  placeholder="Search title, URL, note, or tag"
-                  className="pl-9"
+                  placeholder="Search the constellation"
+                  className="border-border/70 bg-card/80 pl-9 shadow-sm backdrop-blur-sm"
                 />
               </div>
+
               <Button
                 type="button"
                 variant={favoritesOnly ? "default" : "outline"}
+                className={favoritesOnly ? "" : "bg-card/80 backdrop-blur-sm"}
                 onClick={() => setFavoritesOnly((current) => !current)}
               >
                 <StarIcon className="size-4" />
                 Favorites
               </Button>
+
+              <span className="ml-auto rounded-md border border-border/60 bg-card/70 px-2.5 py-1 text-xs text-muted-foreground backdrop-blur-sm">
+                {filterActive
+                  ? `${matchCount} of ${items.length}`
+                  : `${items.length} finds`}
+              </span>
             </div>
 
             {tags.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
+              <div className="pointer-events-auto flex max-w-full flex-wrap gap-2">
                 <Button
                   type="button"
                   size="sm"
                   variant={selectedTagSlug === null ? "default" : "outline"}
+                  className={
+                    selectedTagSlug === null ? "" : "bg-card/80 backdrop-blur-sm"
+                  }
                   onClick={() => setSelectedTagSlug(null)}
                 >
                   All tags
@@ -214,6 +154,11 @@ export function ArchiveBrowser({ items, tags }: ArchiveBrowserProps) {
                     variant={
                       selectedTagSlug === tag.slug ? "default" : "outline"
                     }
+                    className={
+                      selectedTagSlug === tag.slug
+                        ? ""
+                        : "bg-card/80 backdrop-blur-sm"
+                    }
                     onClick={() =>
                       setSelectedTagSlug((current) =>
                         current === tag.slug ? null : tag.slug,
@@ -225,33 +170,9 @@ export function ArchiveBrowser({ items, tags }: ArchiveBrowserProps) {
                 ))}
               </div>
             ) : null}
-
-            <p className="text-xs text-muted-foreground">
-              Showing {filteredItems.length} of {items.length} finds
-            </p>
           </div>
-        ) : null}
-
-        {items.length === 0 ? (
-          <ArchiveEmptyState />
-        ) : filteredItems.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-border/80 px-6 py-10 text-center">
-            <p className="text-sm font-medium">No items match these filters.</p>
-          </div>
-        ) : (
-          <div className="columns-1 gap-4 sm:columns-2 xl:columns-3">
-            {filteredItems.map((item, index) => (
-              <div key={item.id} className="mb-4 break-inside-avoid">
-                <ArchiveCard
-                  item={item}
-                  index={index}
-                  onOpenDetails={setSelectedItem}
-                />
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <Drawer
         direction="right"
