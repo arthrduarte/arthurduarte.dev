@@ -18,10 +18,10 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-full">
-      <aside className="flex w-56 shrink-0 flex-col border-r border-zinc-200 bg-white">
-        <div className="border-b border-zinc-200 px-4 py-5">
-          <p className="text-sm font-semibold text-zinc-900">Admin</p>
-          <p className="text-xs text-zinc-500">Arthur&apos;s Archive</p>
+      <aside className="flex w-56 shrink-0 flex-col border-r border-border bg-card/30 backdrop-blur-xl">
+        <div className="border-b border-border px-4 py-5">
+          <p className="text-sm font-semibold text-foreground">Admin</p>
+          <p className="text-xs text-muted-foreground">Arthur&apos;s Archive</p>
         </div>
 
         <nav className="flex-1 space-y-1 p-3">
@@ -34,10 +34,10 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors active:scale-[0.98]",
                   isActive
-                    ? "bg-zinc-100 text-zinc-900"
-                    : "text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900",
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground",
                 )}
               >
                 <Icon className="h-4 w-4" />
@@ -47,12 +47,12 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
           })}
         </nav>
 
-        <div className="space-y-2 border-t border-zinc-200 p-3">
+        <div className="space-y-2 border-t border-border p-3">
           <Link
             href="/archive"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-50 hover:text-zinc-900"
+            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:scale-[0.98]"
           >
             <ExternalLinkIcon className="h-4 w-4" />
             View public archive

@@ -139,7 +139,7 @@ export function ArchiveItemForm({
           </Button>
         </div>
         {prefillError ? (
-          <p className="text-sm text-amber-700">{prefillError}</p>
+          <p className="text-sm text-destructive">{prefillError}</p>
         ) : null}
       </div>
 
@@ -197,12 +197,12 @@ export function ArchiveItemForm({
         />
       </div>
 
-      <label className="flex items-center gap-2 text-sm text-zinc-700">
+      <label className="flex items-center gap-2 text-sm text-muted-foreground">
         <input
           type="checkbox"
           checked={isFavorite}
           onChange={(event) => setIsFavorite(event.target.checked)}
-          className="size-4 rounded border-zinc-300"
+          className="size-4 rounded border-input accent-primary"
         />
         Mark as favorite
       </label>
@@ -212,7 +212,7 @@ export function ArchiveItemForm({
       ) : null}
 
       {state.success && !isEditing ? (
-        <p className="text-sm text-emerald-700">Archive item created.</p>
+        <p className="text-sm text-primary">Archive item created.</p>
       ) : null}
 
       <Button type="submit" disabled={isPending}>

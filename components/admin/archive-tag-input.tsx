@@ -111,13 +111,13 @@ export function ArchiveTagInput({
         />
 
         {isOpen && suggestions.length > 0 ? (
-          <ul className="absolute z-10 mt-1 max-h-48 w-full overflow-y-auto rounded-md border border-zinc-200 bg-white py-1 shadow-sm">
+          <ul className="absolute z-10 mt-1 max-h-48 w-full overflow-y-auto rounded-md border border-border bg-popover py-1 shadow-sm">
             {suggestions.map((tag) => (
               <li key={tag}>
                 <button
                   type="button"
                   className={cn(
-                    "flex w-full px-3 py-2 text-left text-sm text-zinc-700 hover:bg-zinc-50",
+                    "flex w-full px-3 py-2 text-left text-sm text-popover-foreground hover:bg-muted",
                   )}
                   onMouseDown={(event) => event.preventDefault()}
                   onClick={() => addTag(tag)}

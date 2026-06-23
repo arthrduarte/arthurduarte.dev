@@ -10,10 +10,12 @@ export function CreateArchiveItemForm({
   blobConfigured,
 }: CreateArchiveItemFormProps) {
   return (
-    <div className="rounded-lg border border-zinc-200 bg-white p-4">
+    <div className="rounded-lg border border-border bg-card/40 p-4">
       <div className="mb-4 space-y-1">
-        <h2 className="text-sm font-semibold text-zinc-900">Add archive item</h2>
-        <p className="text-sm text-zinc-500">
+        <h2 className="text-sm font-semibold text-foreground">
+          Add archive item
+        </h2>
+        <p className="text-sm text-muted-foreground">
           New items are public immediately.
         </p>
       </div>

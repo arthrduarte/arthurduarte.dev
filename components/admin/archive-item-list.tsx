@@ -31,9 +31,11 @@ export function ArchiveItemList({
 
   if (items.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-zinc-200 px-4 py-8 text-center">
-        <p className="text-sm font-medium text-zinc-900">No archive items yet.</p>
-        <p className="mt-1 text-sm text-zinc-500">
+      <div className="rounded-lg border border-dashed border-border px-4 py-8 text-center">
+        <p className="text-sm font-medium text-foreground">
+          No archive items yet.
+        </p>
+        <p className="mt-1 text-sm text-muted-foreground">
           Add your first item with the form above.
         </p>
       </div>
@@ -42,17 +44,20 @@ export function ArchiveItemList({
 
   return (
     <>
-      <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white">
-        <ul className="divide-y divide-zinc-200">
+      <div className="overflow-hidden rounded-lg border border-border bg-card/40">
+        <ul className="divide-y divide-border">
           {items.map((item) => (
-            <li key={item.id} className="px-4 py-4">
+            <li
+              key={item.id}
+              className="px-4 py-4 transition-colors hover:bg-muted/40"
+            >
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0 flex-1 space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <p className="font-medium text-zinc-900">{item.title}</p>
+                    <p className="font-medium text-foreground">{item.title}</p>
                     {item.isFavorite ? (
                       <Badge variant="outline" className="gap-1">
-                        <StarIcon className="size-3 fill-current" />
+                        <StarIcon className="size-3 fill-primary text-primary" />
                         Favorite
                       </Badge>
                     ) : null}
@@ -61,20 +66,22 @@ export function ArchiveItemList({
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block truncate text-sm text-zinc-500 hover:text-zinc-900"
+                    className="block truncate text-sm text-muted-foreground hover:text-foreground"
                   >
                     {item.url}
                   </a>
                   {item.source ? (
-                    <p className="text-xs text-zinc-400">{item.source}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {item.source}
+                    </p>
                   ) : null}
                   {item.note ? (
-                    <p className="text-sm text-zinc-600">{item.note}</p>
+                    <p className="text-sm text-muted-foreground">{item.note}</p>
                   ) : null}
                 </div>
 
                 <div className="flex shrink-0 items-center gap-2">
-                  <p className="text-xs text-zinc-400">
+                  <p className="font-mono text-xs text-muted-foreground">
                     {item.createdAt.toLocaleDateString()}
                   </p>
                   <Button
@@ -105,7 +112,7 @@ export function ArchiveItemList({
               </div>
 
               {item.imageUrl ? (
-                <div className="mt-3 overflow-hidden rounded-md border border-zinc-200">
+                <div className="mt-3 overflow-hidden rounded-md border border-border">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.imageUrl}

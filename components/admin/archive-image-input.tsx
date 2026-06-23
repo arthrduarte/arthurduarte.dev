@@ -121,13 +121,13 @@ export function ArchiveImageInput({
         />
       </div>
 
-      <p className="text-xs text-zinc-500">
+      <p className="text-xs text-muted-foreground">
         Paste an image anywhere on the page, upload a file, or paste an external
         URL. Uploaded images are stored in Vercel Blob.
       </p>
 
       {!blobConfigured ? (
-        <p className="text-xs text-amber-700">
+        <p className="text-xs text-destructive">
           BLOB_READ_WRITE_TOKEN is not configured. External image URLs still
           work, but upload and clipboard paste require Blob storage. See
           docs/arthurs-archive-setup.md.
@@ -137,7 +137,7 @@ export function ArchiveImageInput({
       {activePreview ? (
         <div
           className={cn(
-            "overflow-hidden rounded-md border border-zinc-200 bg-zinc-50",
+            "overflow-hidden rounded-md border border-border bg-muted",
           )}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -148,7 +148,7 @@ export function ArchiveImageInput({
           />
         </div>
       ) : (
-        <div className="rounded-md border border-dashed border-zinc-200 px-4 py-8 text-center text-sm text-zinc-500">
+        <div className="rounded-md border border-dashed border-border px-4 py-8 text-center text-sm text-muted-foreground">
           No image selected
         </div>
       )}
