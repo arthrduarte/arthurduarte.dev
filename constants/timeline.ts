@@ -26,8 +26,8 @@ const timelineEntries: TimelineEntry[] = [
         text: "Started my ",
       },
       {
-        text: "list of lists.",
-        link: "/list-of-lists",
+        text: "Arthur's Archive.",
+        link: "/archive",
       },
       {
         text: "I have been saving so many different links, resources, articles, videos, and internet stuff for years now. Unfortunately I've lost 2 Twitter accounts and a Facebook account, which I'm sure contained a lot of this stuff. So from now on I'll be collecting the best piece of content I consume and sharing it here. ",
