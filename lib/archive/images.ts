@@ -28,6 +28,10 @@ export function getBlobReadWriteToken(): string {
   return token;
 }
 
+export function isBlobStorageConfigured(): boolean {
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+}
+
 export async function uploadArchiveImage(file: File): Promise<string> {
   const { put } = await import("@vercel/blob");
 

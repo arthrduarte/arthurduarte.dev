@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Archive, Trash2 } from "lucide-react";
+import { Archive, ExternalLinkIcon, Trash2 } from "lucide-react";
 
 import { logoutAction } from "@/app/admin/actions";
 import { Button } from "@/components/ui/button";
@@ -47,7 +47,16 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
           })}
         </nav>
 
-        <div className="border-t border-zinc-200 p-3">
+        <div className="space-y-2 border-t border-zinc-200 p-3">
+          <Link
+            href="/archive"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-50 hover:text-zinc-900"
+          >
+            <ExternalLinkIcon className="h-4 w-4" />
+            View public archive
+          </Link>
           <form action={logoutAction}>
             <Button type="submit" variant="outline" className="w-full">
               Log out

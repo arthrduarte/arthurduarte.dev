@@ -12,9 +12,14 @@ import type { ArchiveItemRecord } from "@/lib/archive/types";
 type ArchiveItemListProps = {
   items: ArchiveItemRecord[];
   existingTags: string[];
+  blobConfigured: boolean;
 };
 
-export function ArchiveItemList({ items, existingTags }: ArchiveItemListProps) {
+export function ArchiveItemList({
+  items,
+  existingTags,
+  blobConfigured,
+}: ArchiveItemListProps) {
   const [editingItem, setEditingItem] = useState<ArchiveItemRecord | null>(
     null,
   );
@@ -127,6 +132,7 @@ export function ArchiveItemList({ items, existingTags }: ArchiveItemListProps) {
       <EditArchiveItemSheet
         item={editingItem}
         existingTags={existingTags}
+        blobConfigured={blobConfigured}
         open={isEditOpen}
         onOpenChange={(open) => {
           setIsEditOpen(open);

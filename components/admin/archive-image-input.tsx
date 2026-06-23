@@ -13,6 +13,7 @@ type ArchiveImageInputProps = {
   onImageUrlChange: (value: string) => void;
   pastedFile: File | null;
   onPastedFileChange: (file: File | null) => void;
+  blobConfigured?: boolean;
 };
 
 export function ArchiveImageInput({
@@ -20,6 +21,7 @@ export function ArchiveImageInput({
   onImageUrlChange,
   pastedFile,
   onPastedFileChange,
+  blobConfigured = true,
 }: ArchiveImageInputProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -123,6 +125,14 @@ export function ArchiveImageInput({
         Paste an image anywhere on the page, upload a file, or paste an external
         URL. Uploaded images are stored in Vercel Blob.
       </p>
+
+      {!blobConfigured ? (
+        <p className="text-xs text-amber-700">
+          BLOB_READ_WRITE_TOKEN is not configured. External image URLs still
+          work, but upload and clipboard paste require Blob storage. See
+          docs/arthurs-archive-setup.md.
+        </p>
+      ) : null}
 
       {activePreview ? (
         <div

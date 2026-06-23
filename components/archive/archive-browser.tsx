@@ -38,19 +38,27 @@ function getHostname(url: string): string {
   }
 }
 
+function getCardRotation(index: number): string {
+  const rotations = ["-1.2deg", "0.6deg", "-0.4deg", "1deg", "-0.8deg"];
+  return rotations[index % rotations.length];
+}
+
 function ArchiveCard({
   item,
+  index,
   onOpenDetails,
 }: {
   item: ArchiveItemRecord;
+  index: number;
   onOpenDetails: (item: ArchiveItemRecord) => void;
 }) {
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-xl border border-border/70 bg-card/40 shadow-xs transition hover:border-border hover:bg-card/70",
+        "group relative flex h-full flex-col overflow-hidden rounded-xl border border-border/70 bg-card/40 shadow-xs transition hover:-translate-y-0.5 hover:border-border hover:bg-card/70 hover:shadow-sm",
         item.isFavorite && "ring-1 ring-primary/30",
       )}
+      style={{ transform: `rotate(${getCardRotation(index)})` }}
     >
       <a
         href={item.url}
@@ -79,6 +87,11 @@ function ArchiveCard({
               <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-stone-300">
                 {item.title}
               </p>
+              {item.note ? (
+                <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-stone-400">
+                  {item.note}
+                </p>
+              ) : null}
             </div>
           </div>
         )}
@@ -212,6 +225,10 @@ export function ArchiveBrowser({ items, tags }: ArchiveBrowserProps) {
                 ))}
               </div>
             ) : null}
+
+            <p className="text-xs text-muted-foreground">
+              Showing {filteredItems.length} of {items.length} finds
+            </p>
           </div>
         ) : null}
 
@@ -223,10 +240,11 @@ export function ArchiveBrowser({ items, tags }: ArchiveBrowserProps) {
           </div>
         ) : (
           <div className="columns-1 gap-4 sm:columns-2 xl:columns-3">
-            {filteredItems.map((item) => (
+            {filteredItems.map((item, index) => (
               <div key={item.id} className="mb-4 break-inside-avoid">
                 <ArchiveCard
                   item={item}
+                  index={index}
                   onOpenDetails={setSelectedItem}
                 />
               </div>

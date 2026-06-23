@@ -22,17 +22,20 @@ const initialState: ArchiveActionState = {};
 type ArchiveItemFormProps = {
   existingTags: string[];
   item?: ArchiveItemRecord;
+  blobConfigured?: boolean;
   onSuccess?: () => void;
 };
 
 export function ArchiveItemForm({
   existingTags,
   item,
+  blobConfigured = true,
   onSuccess,
 }: ArchiveItemFormProps) {
   const isEditing = Boolean(item);
   const action = isEditing ? updateArchiveItemAction : createArchiveItemAction;
   const [state, formAction, isPending] = useActionState(action, initialState);
+  const [formKey, setFormKey] = useState(0);
   const [tagInputKey, setTagInputKey] = useState(0);
   const [title, setTitle] = useState(item?.title ?? "");
   const [url, setUrl] = useState(item?.url ?? "");
@@ -61,6 +64,7 @@ export function ArchiveItemForm({
     setImageUrl("");
     setIsFavorite(false);
     setPastedFile(null);
+    setFormKey((current) => current + 1);
     setTagInputKey((current) => current + 1);
   }, [state.success, isEditing, onSuccess]);
 
@@ -99,6 +103,7 @@ export function ArchiveItemForm({
 
   return (
     <form
+      key={formKey}
       action={async (formData) => {
         if (pastedFile) {
           formData.set("imageFile", pastedFile);
@@ -179,6 +184,7 @@ export function ArchiveItemForm({
           onImageUrlChange={setImageUrl}
           pastedFile={pastedFile}
           onPastedFileChange={setPastedFile}
+          blobConfigured={blobConfigured}
         />
       </div>
 

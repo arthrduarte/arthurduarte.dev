@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { ArchiveBrowser } from "@/components/archive/archive-browser";
 import {
   getActiveArchiveItemsWithTags,
@@ -5,6 +7,12 @@ import {
 } from "@/lib/archive/queries";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Arthur's Archive | Arthur Duarte",
+  description:
+    "A messy but browsable dump of internet gold nuggets collected over time.",
+};
 
 export default async function ArchivePage() {
   const [items, tags] = await Promise.all([

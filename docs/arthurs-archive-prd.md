@@ -99,20 +99,6 @@ The admin experience should be a simple dashboard under `/admin`, starting with 
 - The public visual archive should avoid a professional directory feel. Prefer a browsable grid or masonry-like layout, visual variation, tag chips, favorite emphasis, and graceful text-first fallbacks.
 - The admin dashboard should be utilitarian, dense, and quiet. It should prioritize fast entry and editing over decorative presentation.
 
-## Testing Decisions
-
-- Tests should verify external behavior and user-visible outcomes rather than Drizzle query internals or component implementation details.
-- Public archive behavior should be tested at the route/page seam: non-deleted items render, deleted items do not render, image and no-image entries both display cleanly, card clicks target original URLs, and the note side sheet opens with the expected content.
-- Public filtering should be tested through user-facing controls: tag filtering, favorite filtering, and search should update the visible item set correctly.
-- Admin auth should be tested at the route protection seam: unauthenticated users cannot access `/admin/archive` or `/admin/archive/trash`, authenticated sessions can, and logout clears access.
-- Archive management should be tested at the action/API seam: create, edit, favorite toggle, tag assignment, soft delete with required reason, and restore should produce the expected database-visible behavior.
-- Delete behavior should test that a missing deletion reason is rejected and a valid reason moves the item to trash without removing Blob image URLs.
-- Trash behavior should test that deleted items appear in `/admin/archive/trash`, do not appear in `/admin/archive`, and can be restored.
-- Metadata prefill should be tested with mocked fetch responses for success, missing metadata, invalid URLs, and fetch failures.
-- Image handling should be tested at the upload/action seam: pasted/uploaded files produce a stored Blob URL, external image URLs can be saved without upload, and items can be saved without any image.
-- Redirect behavior should be tested so `/list-of-lists` sends users to `/archive`.
-- If the repo does not already have a test framework, add the lightest practical setup that can validate route/action behavior for this Next.js app. Avoid broad snapshot testing.
-
 ## Out of Scope
 
 - Migrating the existing `constants/list-of-lists.ts` entries into Neon.

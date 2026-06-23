@@ -14,7 +14,6 @@ Create the database-backed foundation for Arthur's Archive. The public `/archive
 - [ ] `/list-of-lists` redirects to `/archive`.
 - [ ] Navigation/home/timeline references use archive naming instead of "list of lists" where applicable.
 - [ ] The existing static list data is not migrated or seeded into the new database.
-- [ ] Route/schema behavior has basic verification or tests at the highest practical seam.
 
 ## Blocked by
 
@@ -34,7 +33,6 @@ Add the private admin entry point for future archive management. Arthur should b
 - [ ] Authenticated users can access the admin dashboard shell.
 - [ ] The admin shell includes simple dashboard navigation for Archive and Trash.
 - [ ] Logout clears the session and returns the user to an unauthenticated state.
-- [ ] Tests or route-level checks verify protected and unprotected admin access.
 
 ## Blocked by
 
@@ -56,7 +54,6 @@ Build the first complete admin publishing path for active archive items. From `/
 - [ ] New tags are automatically created with normalized slugs.
 - [ ] Duplicate tag names are prevented through slug normalization.
 - [ ] Created items are immediately public because v1 has no draft/published status.
-- [ ] Creation and tag assignment are covered by action/API-level tests or equivalent verification.
 
 ## Blocked by
 
@@ -78,7 +75,6 @@ Turn `/archive` into the public browsing experience for real archive items. Visi
 - [ ] Visitors can filter by tag.
 - [ ] Visitors can filter or identify favorite items.
 - [ ] Visitors can search by relevant item content such as title, URL, note, or tag.
-- [ ] Public archive behavior is tested through user-visible route/page behavior.
 
 ## Blocked by
 
@@ -98,7 +94,6 @@ Add the admin editing path for existing active archive items. Arthur should be a
 - [ ] New tags can be created during editing using the same normalization rules as creation.
 - [ ] Updates are reflected on the public `/archive` page.
 - [ ] Editing preserves created/deleted state correctly.
-- [ ] Edit behavior is covered by action/API-level tests or equivalent verification.
 
 ## Blocked by
 
@@ -117,7 +112,6 @@ Make new item creation faster by adding URL-first metadata prefill. When Arthur 
 - [ ] Prefilled metadata remains editable before save.
 - [ ] Missing metadata does not block item creation.
 - [ ] Fetch errors, invalid URLs, and blocked sites produce a recoverable admin state.
-- [ ] Metadata prefill is tested with mocked success, missing metadata, invalid URL, and fetch failure cases.
 
 ## Blocked by
 
@@ -139,7 +133,6 @@ Add optional image support across admin and public archive surfaces. Arthur shou
 - [ ] Public archive cards and side sheets render item images when present.
 - [ ] Items can still be saved and rendered without images.
 - [ ] Image URLs remain untouched when item data changes.
-- [ ] Image handling is tested at the upload/action seam or equivalent.
 
 ## Blocked by
 
@@ -163,26 +156,25 @@ Implement reversible deletion for archive items. Deleting an item from the admin
 - [ ] Deleted items can be restored.
 - [ ] Restore clears deletion date and deletion reason.
 - [ ] Blob image URLs are not removed or modified by soft delete or restore.
-- [ ] Soft delete and restore behavior is covered by route/action tests or equivalent verification.
 
 ## Blocked by
 
 - 5. Edit Existing Archive Items
 
-## 9. End-To-End Hardening
+## 9. End-To-End Polish And Setup
 
 ## What to build
 
-Harden the complete Arthur's Archive flow after the main vertical slices are in place. Fill test gaps, verify route behavior, refine edge cases, and make sure the public archive and admin dashboard work as a coherent product.
+Polish the complete Arthur's Archive flow after the main vertical slices are in place. Refine edge cases, check the full experience manually, document setup requirements, and make sure the public archive and admin dashboard work as a coherent product.
 
 ## Acceptance criteria
 
-- [ ] Public archive tests verify non-deleted rendering, deleted exclusion, card click-through, side sheet behavior, filtering, search, favorite behavior, and image/no-image states.
-- [ ] Admin auth tests verify login, protected route access, session persistence, and logout.
-- [ ] Archive management tests verify create, edit, tag assignment, favorite toggle, soft delete with required reason, and restore.
-- [ ] Metadata tests cover success, missing metadata, invalid URL, and fetch failure.
-- [ ] Image tests cover uploaded/pasted Blob images, external image URLs, and no-image items.
-- [ ] Redirect behavior from `/list-of-lists` to `/archive` is verified.
+- [ ] Public archive behavior is manually checked for non-deleted rendering, deleted exclusion, card click-through, side sheet behavior, filtering, search, favorite behavior, and image/no-image states.
+- [ ] Admin auth behavior is manually checked for login, protected route access, session persistence, and logout.
+- [ ] Archive management behavior is manually checked for create, edit, tag assignment, favorite toggle, soft delete with required reason, and restore.
+- [ ] Metadata prefill behavior is manually checked for success, missing metadata, invalid URL, and fetch failure.
+- [ ] Image behavior is manually checked for uploaded/pasted Blob images, external image URLs, and no-image items.
+- [ ] Redirect behavior from `/list-of-lists` to `/archive` works.
 - [ ] The admin dashboard remains usable and readable with a simple dashboard layout.
 - [ ] The public archive feels like a personal internet scrapbook rather than a formal resource directory.
 - [ ] Any setup requirements for Vercel Blob and environment variables are documented for local and deployed usage.

@@ -1,8 +1,5 @@
-import { RotateCcwIcon } from "lucide-react";
-
-import { restoreArchiveItemFormAction } from "@/app/admin/archive/actions";
+import { RestoreArchiveItemButton } from "@/components/admin/restore-archive-item-button";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import type { DeletedArchiveItemRecord } from "@/lib/archive/types";
 
 type ArchiveTrashListProps = {
@@ -54,13 +51,7 @@ export function ArchiveTrashList({ items }: ArchiveTrashListProps) {
                 </p>
               </div>
 
-              <form action={restoreArchiveItemFormAction}>
-                <input type="hidden" name="id" value={item.id} />
-                <Button type="submit" variant="outline" size="sm">
-                  <RotateCcwIcon className="size-4" />
-                  Restore
-                </Button>
-              </form>
+              <RestoreArchiveItemButton itemId={item.id} />
             </div>
 
             {item.tags.length > 0 ? (

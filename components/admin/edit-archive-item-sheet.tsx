@@ -15,6 +15,7 @@ import type { ArchiveItemRecord } from "@/lib/archive/types";
 type EditArchiveItemSheetProps = {
   item: ArchiveItemRecord | null;
   existingTags: string[];
+  blobConfigured: boolean;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 };
@@ -22,6 +23,7 @@ type EditArchiveItemSheetProps = {
 export function EditArchiveItemSheet({
   item,
   existingTags,
+  blobConfigured,
   open,
   onOpenChange,
 }: EditArchiveItemSheetProps) {
@@ -45,6 +47,7 @@ export function EditArchiveItemSheet({
               key={item.id}
               item={item}
               existingTags={existingTags}
+              blobConfigured={blobConfigured}
               onSuccess={() => onOpenChange(false)}
             />
           </div>

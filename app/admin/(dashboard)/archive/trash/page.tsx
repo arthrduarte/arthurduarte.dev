@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
+
 import { getDeletedArchiveItemsWithTags } from "@/lib/archive/queries";
 import { ArchiveTrashList } from "@/components/admin/archive-trash-list";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Archive Trash | Arthur Duarte",
+  description: "Review and restore deleted Arthur's Archive items.",
+};
 
 export default async function AdminArchiveTrashPage() {
   const items = await getDeletedArchiveItemsWithTags();

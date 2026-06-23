@@ -2,10 +2,12 @@ import { ArchiveItemForm } from "@/components/admin/archive-item-form";
 
 type CreateArchiveItemFormProps = {
   existingTags: string[];
+  blobConfigured: boolean;
 };
 
 export function CreateArchiveItemForm({
   existingTags,
+  blobConfigured,
 }: CreateArchiveItemFormProps) {
   return (
     <div className="rounded-lg border border-zinc-200 bg-white p-4">
@@ -16,7 +18,10 @@ export function CreateArchiveItemForm({
         </p>
       </div>
 
-      <ArchiveItemForm existingTags={existingTags} />
+      <ArchiveItemForm
+        existingTags={existingTags}
+        blobConfigured={blobConfigured}
+      />
     </div>
   );
 }
