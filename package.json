@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:baseline": "bun scripts/baseline-migrations.ts",
@@ -43,7 +42,6 @@
     "eslint-config-next": "16.0.10",
     "pg": "^8.22.0",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "vitest": "^4.1.9"
+    "typescript": "^5"
   }
 }
