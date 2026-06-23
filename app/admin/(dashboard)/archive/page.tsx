@@ -12,6 +12,7 @@ export default async function AdminArchivePage() {
     getActiveArchiveItemsWithTags(),
     getAllArchiveTags(),
   ]);
+  const existingTags = tags.map((tag) => tag.name);
 
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
@@ -22,13 +23,13 @@ export default async function AdminArchivePage() {
         </p>
       </div>
 
-      <CreateArchiveItemForm existingTags={tags.map((tag) => tag.name)} />
+      <CreateArchiveItemForm existingTags={existingTags} />
 
       <section className="space-y-3">
         <h2 className="text-sm font-semibold text-zinc-900">
           Active items ({items.length})
         </h2>
-        <ArchiveItemList items={items} />
+        <ArchiveItemList items={items} existingTags={existingTags} />
       </section>
     </div>
   );

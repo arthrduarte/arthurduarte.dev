@@ -14,10 +14,14 @@ import {
 
 type ArchiveTagInputProps = {
   existingTags: string[];
+  initialTags?: string[];
 };
 
-export function ArchiveTagInput({ existingTags }: ArchiveTagInputProps) {
-  const [tags, setTags] = useState<string[]>([]);
+export function ArchiveTagInput({
+  existingTags,
+  initialTags = [],
+}: ArchiveTagInputProps) {
+  const [tags, setTags] = useState<string[]>(initialTags);
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 

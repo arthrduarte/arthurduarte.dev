@@ -19,6 +19,8 @@ describe("parseCreateArchiveItemInput", () => {
         title: "Interesting essay",
         url: "https://example.com/essay",
         note: "Worth revisiting",
+        source: "Example Site",
+        imageUrl: "https://example.com/cover.jpg",
         isFavorite: "true",
         tags: JSON.stringify(["Design", "design", "Essays"]),
       }),
@@ -28,6 +30,8 @@ describe("parseCreateArchiveItemInput", () => {
       title: "Interesting essay",
       url: "https://example.com/essay",
       note: "Worth revisiting",
+      source: "Example Site",
+      imageUrl: "https://example.com/cover.jpg",
       isFavorite: true,
       tagNames: ["Design", "Essays"],
     });

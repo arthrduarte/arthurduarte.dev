@@ -1,0 +1,217 @@
+"use client";
+
+import { useActionState, useEffect, useState } from "react";
+import { SparklesIcon } from "lucide-react";
+
+import {
+  createArchiveItemAction,
+  prefillArchiveMetadataAction,
+  updateArchiveItemAction,
+  type ArchiveActionState,
+} from "@/app/admin/archive/actions";
+import { ArchiveImageInput } from "@/components/admin/archive-image-input";
+import { ArchiveTagInput } from "@/components/admin/archive-tag-input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import type { ArchiveItemRecord } from "@/lib/archive/types";
+
+const initialState: ArchiveActionState = {};
+
+type ArchiveItemFormProps = {
+  existingTags: string[];
+  item?: ArchiveItemRecord;
+  onSuccess?: () => void;
+};
+
+export function ArchiveItemForm({
+  existingTags,
+  item,
+  onSuccess,
+}: ArchiveItemFormProps) {
+  const isEditing = Boolean(item);
+  const action = isEditing ? updateArchiveItemAction : createArchiveItemAction;
+  const [state, formAction, isPending] = useActionState(action, initialState);
+  const [tagInputKey, setTagInputKey] = useState(0);
+  const [title, setTitle] = useState(item?.title ?? "");
+  const [url, setUrl] = useState(item?.url ?? "");
+  const [source, setSource] = useState(item?.source ?? "");
+  const [note, setNote] = useState(item?.note ?? "");
+  const [imageUrl, setImageUrl] = useState(item?.imageUrl ?? "");
+  const [isFavorite, setIsFavorite] = useState(item?.isFavorite ?? false);
+  const [pastedFile, setPastedFile] = useState<File | null>(null);
+  const [prefillError, setPrefillError] = useState<string | null>(null);
+  const [isPrefilling, setIsPrefilling] = useState(false);
+
+  useEffect(() => {
+    if (!state.success) {
+      return;
+    }
+
+    if (isEditing) {
+      onSuccess?.();
+      return;
+    }
+
+    setTitle("");
+    setUrl("");
+    setSource("");
+    setNote("");
+    setImageUrl("");
+    setIsFavorite(false);
+    setPastedFile(null);
+    setTagInputKey((current) => current + 1);
+  }, [state.success, isEditing, onSuccess]);
+
+  async function handlePrefill() {
+    setPrefillError(null);
+    setIsPrefilling(true);
+
+    try {
+      const result = await prefillArchiveMetadataAction(url);
+
+      if (result.error) {
+        setPrefillError(result.error);
+        return;
+      }
+
+      if (result.metadata?.title) {
+        setTitle(result.metadata.title);
+      }
+
+      if (result.metadata?.description) {
+        setNote(result.metadata.description);
+      }
+
+      if (result.metadata?.source) {
+        setSource(result.metadata.source);
+      }
+
+      if (result.metadata?.imageUrl) {
+        setImageUrl(result.metadata.imageUrl);
+        setPastedFile(null);
+      }
+    } finally {
+      setIsPrefilling(false);
+    }
+  }
+
+  return (
+    <form
+      action={async (formData) => {
+        if (pastedFile) {
+          formData.set("imageFile", pastedFile);
+        }
+
+        formData.set("isFavorite", isFavorite ? "true" : "false");
+        await formAction(formData);
+      }}
+      className="space-y-4"
+    >
+      {item ? <input type="hidden" name="id" value={item.id} /> : null}
+
+      <div className="space-y-2">
+        <Label htmlFor={item ? `url-${item.id}` : "url"}>URL</Label>
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <Input
+            id={item ? `url-${item.id}` : "url"}
+            name="url"
+            type="url"
+            required
+            value={url}
+            onChange={(event) => setUrl(event.target.value)}
+          />
+          <Button
+            type="button"
+            variant="outline"
+            className="shrink-0"
+            disabled={isPrefilling || !url.trim()}
+            onClick={handlePrefill}
+          >
+            <SparklesIcon className="size-4" />
+            {isPrefilling ? "Prefilling..." : "Prefill metadata"}
+          </Button>
+        </div>
+        {prefillError ? (
+          <p className="text-sm text-amber-700">{prefillError}</p>
+        ) : null}
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="space-y-2">
+          <Label htmlFor={item ? `title-${item.id}` : "title"}>Title</Label>
+          <Input
+            id={item ? `title-${item.id}` : "title"}
+            name="title"
+            required
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor={item ? `source-${item.id}` : "source"}>Source</Label>
+          <Input
+            id={item ? `source-${item.id}` : "source"}
+            name="source"
+            value={source}
+            onChange={(event) => setSource(event.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor={item ? `note-${item.id}` : "note"}>Note</Label>
+        <Textarea
+          id={item ? `note-${item.id}` : "note"}
+          name="note"
+          rows={3}
+          value={note}
+          onChange={(event) => setNote(event.target.value)}
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label>Image</Label>
+        <ArchiveImageInput
+          imageUrl={imageUrl}
+          onImageUrlChange={setImageUrl}
+          pastedFile={pastedFile}
+          onPastedFileChange={setPastedFile}
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="tags">Tags</Label>
+        <ArchiveTagInput
+          key={tagInputKey}
+          existingTags={existingTags}
+          initialTags={item?.tags ?? []}
+        />
+      </div>
+
+      <label className="flex items-center gap-2 text-sm text-zinc-700">
+        <input
+          type="checkbox"
+          checked={isFavorite}
+          onChange={(event) => setIsFavorite(event.target.checked)}
+          className="size-4 rounded border-zinc-300"
+        />
+        Mark as favorite
+      </label>
+
+      {state.error ? (
+        <p className="text-sm text-destructive">{state.error}</p>
+      ) : null}
+
+      {state.success && !isEditing ? (
+        <p className="text-sm text-emerald-700">Archive item created.</p>
+      ) : null}
+
+      <Button type="submit" disabled={isPending}>
+        {isPending ? "Saving..." : isEditing ? "Save changes" : "Save item"}
+      </Button>
+    </form>
+  );
+}

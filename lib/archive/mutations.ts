@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { and, asc, eq, isNull } from "drizzle-orm";
 
 import {
   archiveItemTags,
@@ -8,7 +8,13 @@ import {
 import type { Database } from "@/lib/db";
 import { getDb } from "@/lib/db";
 import { normalizeTagName, normalizeTagSlug } from "@/lib/archive/tags";
-import type { CreateArchiveItemInput } from "@/lib/archive/types";
+import type {
+  ArchiveItemFormInput,
+  ArchiveItemRecord,
+  ArchiveTagOption,
+  CreateArchiveItemInput,
+  UpdateArchiveItemInput,
+} from "@/lib/archive/types";
 
 async function findOrCreateTagId(
   db: Database,
@@ -65,9 +71,31 @@ export async function resolveTagIds(
   return [...new Set(tagIds)];
 }
 
+async function syncItemTags(
+  db: Database,
+  itemId: string,
+  tagNames: string[],
+): Promise<void> {
+  const tagIds = await resolveTagIds(db, tagNames);
+
+  await db
+    .delete(archiveItemTags)
+    .where(eq(archiveItemTags.itemId, itemId));
+
+  if (tagIds.length === 0) {
+    return;
+  }
+
+  await db.insert(archiveItemTags).values(
+    tagIds.map((tagId) => ({
+      itemId,
+      tagId,
+    })),
+  );
+}
+
 export async function createArchiveItem(input: CreateArchiveItemInput) {
   const db = getDb();
-  const tagIds = await resolveTagIds(db, input.tagNames);
 
   const [item] = await db
     .insert(archiveItems)
@@ -75,18 +103,43 @@ export async function createArchiveItem(input: CreateArchiveItemInput) {
       title: input.title,
       url: input.url,
       note: input.note,
+      source: input.source,
+      imageUrl: input.imageUrl,
       isFavorite: input.isFavorite,
     })
     .returning({ id: archiveItems.id });
 
-  if (tagIds.length > 0) {
-    await db.insert(archiveItemTags).values(
-      tagIds.map((tagId) => ({
-        itemId: item.id,
-        tagId,
-      })),
-    );
-  }
+  await syncItemTags(db, item.id, input.tagNames);
 
   return item;
+}
+
+export async function updateArchiveItem(input: UpdateArchiveItemInput) {
+  const db = getDb();
+
+  const existing = await db.query.archiveItems.findFirst({
+    where: and(eq(archiveItems.id, input.id), isNull(archiveItems.deletedAt)),
+    columns: { id: true },
+  });
+
+  if (!existing) {
+    throw new Error("Archive item not found.");
+  }
+
+  await db
+    .update(archiveItems)
+    .set({
+      title: input.title,
+      url: input.url,
+      note: input.note,
+      source: input.source,
+      imageUrl: input.imageUrl,
+      isFavorite: input.isFavorite,
+      updatedAt: new Date(),
+    })
+    .where(eq(archiveItems.id, input.id));
+
+  await syncItemTags(db, input.id, input.tagNames);
+
+  return { id: input.id };
 }

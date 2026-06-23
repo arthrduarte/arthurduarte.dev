@@ -1,11 +1,24 @@
+"use client";
+
+import { useState } from "react";
+import { PencilIcon, StarIcon } from "lucide-react";
+
+import { EditArchiveItemSheet } from "@/components/admin/edit-archive-item-sheet";
 import { Badge } from "@/components/ui/badge";
-import type { ArchiveItemWithTags } from "@/lib/archive/types";
+import { Button } from "@/components/ui/button";
+import type { ArchiveItemRecord } from "@/lib/archive/types";
 
 type ArchiveItemListProps = {
-  items: ArchiveItemWithTags[];
+  items: ArchiveItemRecord[];
+  existingTags: string[];
 };
 
-export function ArchiveItemList({ items }: ArchiveItemListProps) {
+export function ArchiveItemList({ items, existingTags }: ArchiveItemListProps) {
+  const [editingItem, setEditingItem] = useState<ArchiveItemRecord | null>(
+    null,
+  );
+  const [isEditOpen, setIsEditOpen] = useState(false);
+
   if (items.length === 0) {
     return (
       <div className="rounded-lg border border-dashed border-zinc-200 px-4 py-8 text-center">
@@ -18,48 +31,94 @@ export function ArchiveItemList({ items }: ArchiveItemListProps) {
   }
 
   return (
-    <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white">
-      <ul className="divide-y divide-zinc-200">
-        {items.map((item) => (
-          <li key={item.id} className="px-4 py-4">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div className="min-w-0 space-y-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="font-medium text-zinc-900">{item.title}</p>
-                  {item.isFavorite ? (
-                    <Badge variant="outline">Favorite</Badge>
+    <>
+      <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white">
+        <ul className="divide-y divide-zinc-200">
+          {items.map((item) => (
+            <li key={item.id} className="px-4 py-4">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="min-w-0 flex-1 space-y-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="font-medium text-zinc-900">{item.title}</p>
+                    {item.isFavorite ? (
+                      <Badge variant="outline" className="gap-1">
+                        <StarIcon className="size-3 fill-current" />
+                        Favorite
+                      </Badge>
+                    ) : null}
+                  </div>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block truncate text-sm text-zinc-500 hover:text-zinc-900"
+                  >
+                    {item.url}
+                  </a>
+                  {item.source ? (
+                    <p className="text-xs text-zinc-400">{item.source}</p>
+                  ) : null}
+                  {item.note ? (
+                    <p className="text-sm text-zinc-600">{item.note}</p>
                   ) : null}
                 </div>
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block truncate text-sm text-zinc-500 hover:text-zinc-900"
-                >
-                  {item.url}
-                </a>
-                {item.note ? (
-                  <p className="text-sm text-zinc-600">{item.note}</p>
-                ) : null}
+
+                <div className="flex shrink-0 items-center gap-2">
+                  <p className="text-xs text-zinc-400">
+                    {item.createdAt.toLocaleDateString()}
+                  </p>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      setEditingItem(item);
+                      setIsEditOpen(true);
+                    }}
+                  >
+                    <PencilIcon className="size-4" />
+                    Edit
+                  </Button>
+                </div>
               </div>
 
-              <p className="shrink-0 text-xs text-zinc-400">
-                {item.createdAt.toLocaleDateString()}
-              </p>
-            </div>
+              {item.imageUrl ? (
+                <div className="mt-3 overflow-hidden rounded-md border border-zinc-200">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={item.imageUrl}
+                    alt=""
+                    className="max-h-32 w-full object-cover"
+                  />
+                </div>
+              ) : null}
 
-            {item.tags.length > 0 ? (
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {item.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            ) : null}
-          </li>
-        ))}
-      </ul>
-    </div>
+              {item.tags.length > 0 ? (
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {item.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <EditArchiveItemSheet
+        item={editingItem}
+        existingTags={existingTags}
+        open={isEditOpen}
+        onOpenChange={(open) => {
+          setIsEditOpen(open);
+
+          if (!open) {
+            setEditingItem(null);
+          }
+        }}
+      />
+    </>
   );
 }
