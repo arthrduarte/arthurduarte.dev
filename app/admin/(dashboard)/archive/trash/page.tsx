@@ -16,15 +16,18 @@ export default async function AdminArchiveTrashPage() {
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
       <div className="space-y-1">
-        <h1 className="text-xl font-semibold text-zinc-900">Trash</h1>
-        <p className="text-sm text-zinc-600">
+        <h1 className="text-xl font-semibold text-foreground">Trash</h1>
+        <p className="text-sm text-muted-foreground">
           Review deleted archive items and restore them when needed.
         </p>
       </div>
 
       <section className="space-y-3">
-        <h2 className="text-sm font-semibold text-zinc-900">
-          Deleted items ({items.length})
+        <h2 className="text-sm font-semibold text-foreground">
+          Deleted items{" "}
+          <span className="font-mono text-muted-foreground">
+            ({items.length})
+          </span>
         </h2>
         <ArchiveTrashList items={items} />
       </section>

@@ -15,7 +15,6 @@ function mapItemRecord(item: {
   imageUrl: string | null;
   note: string | null;
   isFavorite: boolean;
-  source: string | null;
   createdAt: Date;
   updatedAt: Date;
   itemTags: Array<{ tag: { name: string; slug: string } }>;
@@ -31,7 +30,6 @@ function mapItemRecord(item: {
     imageUrl: item.imageUrl,
     note: item.note,
     isFavorite: item.isFavorite,
-    source: item.source,
     createdAt: item.createdAt,
     updatedAt: item.updatedAt,
     tags,
@@ -108,7 +106,6 @@ function mapDeletedItemRecord(item: {
   imageUrl: string | null;
   note: string | null;
   isFavorite: boolean;
-  source: string | null;
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;

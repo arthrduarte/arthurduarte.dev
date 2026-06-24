@@ -13,10 +13,10 @@ export default async function AdminLoginPage() {
 
   return (
     <div className="flex min-h-full items-center justify-center px-6 py-12">
-      <div className="w-full max-w-sm space-y-6 rounded-lg border border-zinc-200 bg-white p-6 shadow-xs">
+      <div className="w-full max-w-sm space-y-6 rounded-lg border border-border bg-card/60 p-6 shadow-xs backdrop-blur-sm">
         <div className="space-y-1">
-          <h1 className="text-lg font-semibold text-zinc-900">Admin login</h1>
-          <p className="text-sm text-zinc-500">
+          <h1 className="text-lg font-semibold text-foreground">Admin login</h1>
+          <p className="text-sm text-muted-foreground">
             Sign in to manage Arthur&apos;s Archive.
           </p>
         </div>

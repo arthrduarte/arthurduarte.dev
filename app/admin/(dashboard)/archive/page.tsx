@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
-import { CreateArchiveItemForm } from "@/components/admin/create-archive-item-form";
-import { ArchiveItemList } from "@/components/admin/archive-item-list";
+import { AdminArchiveManager } from "@/components/admin/admin-archive-manager";
 import { isBlobStorageConfigured } from "@/lib/archive/images";
 import {
   getActiveArchiveItemsWithTags,
@@ -26,27 +25,18 @@ export default async function AdminArchivePage() {
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
       <div className="space-y-1">
-        <h1 className="text-xl font-semibold text-zinc-900">Archive</h1>
-        <p className="text-sm text-zinc-600">
+        <h1 className="text-xl font-semibold text-foreground">Archive</h1>
+        <p className="text-sm text-muted-foreground">
           Manage active public archive items.
         </p>
       </div>
 
-      <CreateArchiveItemForm
+      <AdminArchiveManager
+        items={items}
+        tags={tags}
         existingTags={existingTags}
         blobConfigured={blobConfigured}
       />
-
-      <section className="space-y-3">
-        <h2 className="text-sm font-semibold text-zinc-900">
-          Active items ({items.length})
-        </h2>
-        <ArchiveItemList
-          items={items}
-          existingTags={existingTags}
-          blobConfigured={blobConfigured}
-        />
-      </section>
     </div>
   );
 }

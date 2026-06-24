@@ -15,6 +15,13 @@
       "when": 1782220800000,
       "tag": "0001_align_archive_item_columns",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1782269230024,
+      "tag": "0002_even_moira_mactaggert",
+      "breakpoints": true
     }
   ]
 }

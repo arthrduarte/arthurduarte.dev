@@ -71,9 +71,6 @@ export function parseArchiveMetadataFromHtml(
     readMetaContent(html, "og:image") ??
     readMetaContent(html, "twitter:image");
 
-  const source =
-    readMetaContent(html, "og:site_name") ?? url.hostname.replace(/^www\./, "");
-
   const metadata: ArchiveUrlMetadata = {};
 
   if (title) {
@@ -89,10 +86,6 @@ export function parseArchiveMetadataFromHtml(
 
   if (parsedImage) {
     metadata.imageUrl = parsedImage;
-  }
-
-  if (source) {
-    metadata.source = source;
   }
 
   return metadata;
@@ -129,9 +122,7 @@ export async function fetchArchiveUrlMetadata(
   const contentType = response.headers.get("content-type") ?? "";
 
   if (!contentType.includes("text/html")) {
-    return {
-      source: url.hostname.replace(/^www\./, ""),
-    };
+    return {};
   }
 
   const html = await response.text();

@@ -4,7 +4,7 @@ export default function AdminRootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="fixed inset-0 z-50 overflow-auto bg-zinc-50 text-zinc-900">
+    <div className="fixed inset-0 z-50 overflow-auto bg-background text-foreground">
       {children}
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { ArrowLeftIcon, SearchIcon, StarIcon } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowLeftIcon, SearchIcon, SlidersHorizontalIcon, StarIcon } from "lucide-react";
 import Link from "next/link";
 
 import { ArchiveConstellation } from "@/components/archive/archive-constellation";
@@ -18,6 +18,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { filterArchiveItems } from "@/lib/archive/filters";
+import { cn } from "@/lib/utils";
 import type { ArchiveItemRecord, ArchiveTagOption } from "@/lib/archive/types";
 
 type ArchiveBrowserProps = {
@@ -57,20 +58,31 @@ export function ArchiveBrowser({ items, tags }: ArchiveBrowserProps) {
   const [search, setSearch] = useState("");
   const [selectedTagSlug, setSelectedTagSlug] = useState<string | null>(null);
   const [favoritesOnly, setFavoritesOnly] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ArchiveItemRecord | null>(
-    null,
-  );
+  const [selectedItem, setSelectedItem] = useState<ArchiveItemRecord | null>(null);
+  const [filterOpen, setFilterOpen] = useState(false);
 
-  const filterActive =
-    search.trim().length > 0 || selectedTagSlug !== null || favoritesOnly;
+  const filterPanelRef = useRef<HTMLDivElement>(null);
+  const filterButtonRef = useRef<HTMLButtonElement>(null);
 
-  // The canvas keeps every node mounted and dims non-matches, so we pass the
-  // set of matching ids (or null when nothing is filtered) rather than a
-  // pruned list.
-  const matchedIds = useMemo(() => {
-    if (!filterActive) {
-      return null;
+  const filtersActive = selectedTagSlug !== null || favoritesOnly;
+  const filterActive = search.trim().length > 0 || filtersActive;
+
+  // Close filter panel on outside click
+  useEffect(() => {
+    if (!filterOpen) return;
+    function handlePointerDown(event: PointerEvent) {
+      if (
+        filterPanelRef.current?.contains(event.target as Node) ||
+        filterButtonRef.current?.contains(event.target as Node)
+      ) return;
+      setFilterOpen(false);
     }
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [filterOpen]);
+
+  const matchedIds = useMemo(() => {
+    if (!filterActive) return null;
     const matched = filterArchiveItems(items, {
       search,
       tagSlug: selectedTagSlug,
@@ -93,15 +105,21 @@ export function ArchiveBrowser({ items, tags }: ArchiveBrowserProps) {
           <ArchiveConstellation
             items={items}
             matchedIds={matchedIds}
-            onOpenDetails={setSelectedItem}
+            onOpenDetails={(item) => {
+              if (item.note) {
+                setSelectedItem(item);
+              } else {
+                window.open(item.url, "_blank", "noopener,noreferrer");
+              }
+            }}
           />
 
-          {/* Floating control rail — overlaid on the canvas. */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex flex-col gap-3 p-4 sm:p-6">
-            <div className="pointer-events-auto flex flex-wrap items-center gap-3">
+          {/* Floating control rail */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex flex-col gap-2 p-4 sm:p-6">
+            <div className="pointer-events-auto flex items-center gap-2">
               <Link
                 href="/"
-                className="flex items-center gap-2 rounded-md border border-border/70 bg-card/80 px-3 py-2 text-sm font-medium text-muted-foreground shadow-sm backdrop-blur-sm transition hover:border-border hover:text-foreground"
+                className="flex shrink-0 items-center gap-2 rounded-md border border-border/70 bg-card/80 px-3 py-2 text-sm font-medium text-muted-foreground shadow-sm backdrop-blur-sm transition hover:border-border hover:text-foreground"
               >
                 <ArrowLeftIcon className="size-4" /> Home
               </Link>
@@ -116,60 +134,103 @@ export function ArchiveBrowser({ items, tags }: ArchiveBrowserProps) {
                 />
               </div>
 
-              <Button
+              {/* Filter button */}
+              <button
+                ref={filterButtonRef}
                 type="button"
-                variant={favoritesOnly ? "default" : "outline"}
-                className={favoritesOnly ? "" : "bg-card/80 backdrop-blur-sm"}
-                onClick={() => setFavoritesOnly((current) => !current)}
+                onClick={() => setFilterOpen((v) => !v)}
+                className={cn(
+                  "relative flex shrink-0 items-center gap-2 rounded-md border px-3 py-2 text-sm font-medium shadow-sm backdrop-blur-sm transition",
+                  filterOpen || filtersActive
+                    ? "border-primary/60 bg-primary/10 text-primary hover:bg-primary/15"
+                    : "border-border/70 bg-card/80 text-muted-foreground hover:border-border hover:text-foreground",
+                )}
               >
-                <StarIcon className="size-4" />
-                Favorites
-              </Button>
+                <SlidersHorizontalIcon className="size-4" />
+                Filters
+                {filtersActive && (
+                  <span className="absolute -top-1.5 -right-1.5 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">
+                    {(favoritesOnly ? 1 : 0) + (selectedTagSlug !== null ? 1 : 0)}
+                  </span>
+                )}
+              </button>
 
-              <span className="ml-auto rounded-md border border-border/60 bg-card/70 px-2.5 py-1 text-xs text-muted-foreground backdrop-blur-sm">
+              <span className="ml-auto shrink-0 rounded-md border border-border/60 bg-card/70 px-2.5 py-1 text-xs text-muted-foreground backdrop-blur-sm">
                 {filterActive
                   ? `${matchCount} of ${items.length}`
                   : `${items.length} finds`}
               </span>
             </div>
 
-            {tags.length > 0 ? (
-              <div className="pointer-events-auto flex max-w-full flex-wrap gap-2">
-                <Button
-                  type="button"
-                  size="sm"
-                  variant={selectedTagSlug === null ? "default" : "outline"}
-                  className={
-                    selectedTagSlug === null ? "" : "bg-card/80 backdrop-blur-sm"
-                  }
-                  onClick={() => setSelectedTagSlug(null)}
-                >
-                  All tags
-                </Button>
-                {tags.map((tag) => (
-                  <Button
-                    key={tag.slug}
+            {/* Filter panel */}
+            {filterOpen && (
+              <div
+                ref={filterPanelRef}
+                className="pointer-events-auto w-full max-w-lg rounded-xl border border-border/70 bg-card/90 p-4 shadow-lg backdrop-blur-md"
+              >
+                {/* Favorites row */}
+                <div className="mb-3 flex items-center justify-between">
+                  <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Favorites</span>
+                  <button
                     type="button"
-                    size="sm"
-                    variant={
-                      selectedTagSlug === tag.slug ? "default" : "outline"
-                    }
-                    className={
-                      selectedTagSlug === tag.slug
-                        ? ""
-                        : "bg-card/80 backdrop-blur-sm"
-                    }
-                    onClick={() =>
-                      setSelectedTagSlug((current) =>
-                        current === tag.slug ? null : tag.slug,
-                      )
-                    }
+                    onClick={() => setFavoritesOnly((v) => !v)}
+                    className={cn(
+                      "flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium transition",
+                      favoritesOnly
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted/60 text-muted-foreground hover:text-foreground",
+                    )}
                   >
-                    {tag.name}
-                  </Button>
-                ))}
+                    <StarIcon className={cn("size-3", favoritesOnly && "fill-current")} />
+                    Favorites only
+                  </button>
+                </div>
+
+                {/* Divider */}
+                {tags.length > 0 && (
+                  <div className="mb-3 h-px bg-border/50" />
+                )}
+
+                {/* Tags */}
+                {tags.length > 0 && (
+                  <div>
+                    <div className="mb-2 flex items-center justify-between">
+                      <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Tags</span>
+                      {selectedTagSlug !== null && (
+                        <button
+                          type="button"
+                          onClick={() => setSelectedTagSlug(null)}
+                          className="text-xs text-muted-foreground transition hover:text-foreground"
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {tags.map((tag) => (
+                        <button
+                          key={tag.slug}
+                          type="button"
+                          onClick={() =>
+                            setSelectedTagSlug((current) =>
+                              current === tag.slug ? null : tag.slug,
+                            )
+                          }
+                          className={cn(
+                            "rounded-md px-2.5 py-1 text-xs font-medium transition cursor-pointer",
+                            selectedTagSlug === tag.slug
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground",
+                          )}
+                        >
+                          {tag.name}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       )}
@@ -178,9 +239,7 @@ export function ArchiveBrowser({ items, tags }: ArchiveBrowserProps) {
         direction="right"
         open={Boolean(selectedItem)}
         onOpenChange={(open) => {
-          if (!open) {
-            setSelectedItem(null);
-          }
+          if (!open) setSelectedItem(null);
         }}
       >
         <DrawerContent className="data-[vaul-drawer-direction=right]:sm:max-w-md">
@@ -189,20 +248,18 @@ export function ArchiveBrowser({ items, tags }: ArchiveBrowserProps) {
               <DrawerHeader className="px-0">
                 <DrawerTitle>{selectedItem.title}</DrawerTitle>
                 <DrawerDescription>
-                  {selectedItem.source ?? getHostname(selectedItem.url)}
+                  {getHostname(selectedItem.url)}
                 </DrawerDescription>
               </DrawerHeader>
 
               <div className="mt-6 space-y-6">
                 {selectedItem.imageUrl ? (
-                  <div className="overflow-hidden rounded-lg border border-border/70">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={selectedItem.imageUrl}
-                      alt=""
-                      className="w-full object-cover"
-                    />
-                  </div>
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={selectedItem.imageUrl}
+                    alt=""
+                    className="h-auto max-w-full"
+                  />
                 ) : null}
 
                 <div className="flex flex-wrap gap-2">

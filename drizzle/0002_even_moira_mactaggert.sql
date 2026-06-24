@@ -1,0 +1,1 @@
+ALTER TABLE "archive_items" DROP COLUMN "source";

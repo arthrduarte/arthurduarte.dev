@@ -48,7 +48,6 @@ export function parseArchiveItemFormInput(
   const title = String(formData.get("title") ?? "").trim();
   const url = String(formData.get("url") ?? "").trim();
   const note = parseOptionalText(formData.get("note"));
-  const source = parseOptionalText(formData.get("source"));
   const isFavorite = formData.get("isFavorite") === "true";
   const tagNames = parseTagNames(formData.get("tags"));
   const imageUrl = parseImageUrl(formData.get("imageUrl"));
@@ -69,7 +68,6 @@ export function parseArchiveItemFormInput(
     title,
     url,
     note,
-    source,
     isFavorite,
     tagNames,
     imageUrl,
