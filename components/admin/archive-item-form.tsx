@@ -66,6 +66,7 @@ export function ArchiveItemForm({
     setPastedFile(null);
     setFormKey((current) => current + 1);
     setTagInputKey((current) => current + 1);
+    onSuccess?.();
   }, [state.success, isEditing, onSuccess]);
 
   async function handlePrefill() {
