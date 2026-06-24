@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { UploadIcon, XIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
 type ArchiveImageInputProps = {
@@ -64,37 +62,16 @@ export function ArchiveImageInput({
 
   const activePreview = previewUrl ?? (imageUrl || null);
 
-  return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap gap-2">
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          onClick={() => fileInputRef.current?.click()}
-        >
-          <UploadIcon className="size-4" />
-          Upload image
-        </Button>
-        {pastedFile || imageUrl ? (
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            onClick={() => {
-              onPastedFileChange(null);
-              onImageUrlChange("");
-              if (fileInputRef.current) {
-                fileInputRef.current.value = "";
-              }
-            }}
-          >
-            <XIcon className="size-4" />
-            Clear image
-          </Button>
-        ) : null}
-      </div>
+  function clearImage() {
+    onPastedFileChange(null);
+    onImageUrlChange("");
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  }
 
+  return (
+    <div className="space-y-2">
       <input
         ref={fileInputRef}
         type="file"
@@ -107,24 +84,47 @@ export function ArchiveImageInput({
         }}
       />
 
-      <div className="space-y-2">
-        <Label htmlFor="imageUrl">External image URL</Label>
-        <Input
-          id="imageUrl"
-          name="imageUrl"
-          value={imageUrl}
-          placeholder="https://..."
-          onChange={(event) => {
-            onPastedFileChange(null);
-            onImageUrlChange(event.target.value);
-          }}
-        />
-      </div>
+      {activePreview ? (
+        <div className="group relative overflow-hidden rounded-lg border border-border bg-muted">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={activePreview}
+            alt="Archive item preview"
+            className="aspect-video w-full object-cover"
+          />
+          <button
+            type="button"
+            onClick={clearImage}
+            className="absolute top-2 right-2 flex items-center gap-1 rounded-md bg-background/80 px-2 py-1 text-xs text-foreground opacity-0 backdrop-blur-sm transition group-hover:opacity-100 focus-visible:opacity-100"
+          >
+            <XIcon className="size-3.5" />
+            Remove
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => fileInputRef.current?.click()}
+          className={cn(
+            "flex aspect-video w-full flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-muted/30 text-sm text-muted-foreground transition hover:border-primary/50 hover:bg-muted/50 hover:text-foreground",
+          )}
+        >
+          <UploadIcon className="size-6" />
+          <span className="font-medium">Click to upload</span>
+          <span className="text-xs">or drop / paste an image anywhere</span>
+        </button>
+      )}
 
-      <p className="text-xs text-muted-foreground">
-        Paste an image anywhere on the page, upload a file, or paste an external
-        URL. Uploaded images are stored in Vercel Blob.
-      </p>
+      <Input
+        id="imageUrl"
+        name="imageUrl"
+        value={imageUrl}
+        placeholder="…or paste an external image URL"
+        onChange={(event) => {
+          onPastedFileChange(null);
+          onImageUrlChange(event.target.value);
+        }}
+      />
 
       {!blobConfigured ? (
         <p className="text-xs text-destructive">
@@ -133,25 +133,6 @@ export function ArchiveImageInput({
           docs/arthurs-archive-setup.md.
         </p>
       ) : null}
-
-      {activePreview ? (
-        <div
-          className={cn(
-            "overflow-hidden rounded-md border border-border bg-muted",
-          )}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={activePreview}
-            alt="Archive item preview"
-            className="max-h-48 w-full object-cover"
-          />
-        </div>
-      ) : (
-        <div className="rounded-md border border-dashed border-border px-4 py-8 text-center text-sm text-muted-foreground">
-          No image selected
-        </div>
-      )}
     </div>
   );
 }

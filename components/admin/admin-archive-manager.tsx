@@ -42,7 +42,7 @@ export function AdminArchiveManager({
         search,
         tagSlug: selectedTagSlug,
         favoritesOnly,
-      }),
+      }).sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()),
     [items, search, selectedTagSlug, favoritesOnly],
   );
 
