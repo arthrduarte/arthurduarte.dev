@@ -28,9 +28,9 @@ type ArchiveConstellationProps = {
 // Force-simulation constants. Tuned for a few dozen warm, loosely-clustered
 // nodes; all distances are in world units (1 unit = 1px at zoom 1).
 const FORCE = {
-  repulsion: 26000,
-  minRepelDist: 40,
-  springLength: 150,
+  repulsion: 100000,
+  minRepelDist: 140,
+  springLength: 320,
   springStrength: 0.012,
   gravity: 0.015,
   matchedGravity: 0.06,
@@ -42,7 +42,7 @@ const FORCE = {
 };
 
 const ZOOM = { min: 0.35, max: 2.4, step: 1.2 };
-const NODE_SIZE = 72;
+const NODE_SIZE = 120;
 
 type SimState = {
   ids: string[];
@@ -121,27 +121,10 @@ function tick(state: SimState, matchedIds: Set<string> | null): void {
     fy[edge.b] -= uy * force;
   }
 
-  // Centering gravity, plus filter-driven reorganization: matches are pulled
-  // hard to the middle, non-matches pushed out past the ring.
+  // Uniform centering gravity — no filter-driven reorganization.
   for (let i = 0; i < n; i += 1) {
-    const matched = !filtering || matchedIds.has(ids[i]);
-    const gravity = matched
-      ? filtering
-        ? FORCE.matchedGravity
-        : FORCE.gravity
-      : FORCE.gravity * 0.4;
-
-    fx[i] -= px[i] * gravity;
-    fy[i] -= py[i] * gravity;
-
-    if (filtering && !matched) {
-      const dist = Math.hypot(px[i], py[i]) || 0.001;
-      if (dist < state.ringRadius) {
-        const push = FORCE.ringPush * (state.ringRadius - dist);
-        fx[i] += (px[i] / dist) * push;
-        fy[i] += (py[i] / dist) * push;
-      }
-    }
+    fx[i] -= px[i] * FORCE.gravity;
+    fy[i] -= py[i] * FORCE.gravity;
   }
 
   for (let i = 0; i < n; i += 1) {
@@ -475,7 +458,7 @@ export function ArchiveConstellation({
 
       <div
         ref={groupRef}
-        className="absolute left-1/2 top-1/2 h-0 w-0 will-change-transform"
+        className="absolute left-1/2 top-1/2 h-0 w-0"
       >
         <svg
           className="pointer-events-none absolute overflow-visible"
@@ -485,7 +468,7 @@ export function ArchiveConstellation({
           {edges.map((edge, i) => {
             const lit =
               hoveredId === edge.source || hoveredId === edge.target;
-            const dimmed =
+            const hidden =
               matchedIds !== null &&
               (!matchedIds.has(edge.source) || !matchedIds.has(edge.target));
             return (
@@ -497,7 +480,7 @@ export function ArchiveConstellation({
                 stroke="var(--primary)"
                 strokeWidth={lit ? 1.4 : 0.8}
                 className="transition-[stroke-opacity,stroke-width] duration-200 ease-out"
-                strokeOpacity={lit ? 0.55 : dimmed ? 0.04 : 0.14}
+                strokeOpacity={hidden ? 0 : lit ? 0.55 : 0.14}
               />
             );
           })}
@@ -507,9 +490,8 @@ export function ArchiveConstellation({
           const item = node.item;
           const matched = matchedIds === null || matchedIds.has(node.id);
           const isHovered = hoveredId === node.id;
-          const isNeighbor =
-            hoveredId !== null && neighbors.get(hoveredId)?.has(node.id);
-          const dim = (!matched && !isHovered) || (hoveredId !== null && !isHovered && !isNeighbor);
+          const hidden = !matched;
+          const dim = !hidden && hoveredId !== null && !isHovered;
 
           return (
             <button
@@ -526,24 +508,20 @@ export function ArchiveConstellation({
               }
               onClick={() => onOpenDetails(item)}
               className={cn(
-                "group absolute left-0 top-0 flex cursor-pointer flex-col items-center outline-none will-change-transform",
-                "transition-[opacity,filter] duration-200 ease-out",
-                dim ? "opacity-25 blur-[0.5px]" : "opacity-100",
+                "group absolute left-0 top-0 flex cursor-pointer flex-col items-center outline-none",
+                "transition-[opacity,filter,visibility] duration-200 ease-out",
+                hidden ? "invisible opacity-0 pointer-events-none" : dim ? "opacity-25 blur-[0.5px]" : "opacity-100",
               )}
-              style={{ zIndex: isHovered ? 30 : matched ? 10 : 1 }}
+              style={{ zIndex: isHovered ? 30 : 10 }}
             >
               <span
                 className={cn(
-                  "relative grid place-items-center rounded-full border bg-card shadow-sm transition-transform duration-200 ease-out",
+                  "relative grid place-items-center overflow-hidden transition-transform duration-200 ease-out",
                   "group-hover:scale-110 group-active:scale-[0.97] group-focus-visible:scale-110",
                 )}
                 style={{
                   width: NODE_SIZE,
-                  height: NODE_SIZE,
-                  borderColor: `var(--chart-${node.colorIndex})`,
-                  boxShadow: isHovered
-                    ? `0 0 0 4px color-mix(in oklch, var(--chart-${node.colorIndex}) 22%, transparent)`
-                    : undefined,
+                  minHeight: NODE_SIZE,
                 }}
               >
                 {item.imageUrl ? (
@@ -552,7 +530,7 @@ export function ArchiveConstellation({
                     src={item.imageUrl}
                     alt=""
                     draggable={false}
-                    className="h-full w-full rounded-full object-cover"
+                    className="w-full"
                   />
                 ) : (
                   <span
@@ -573,8 +551,8 @@ export function ArchiveConstellation({
 
               <span
                 className={cn(
-                  "pointer-events-none mt-2 max-w-[140px] truncate rounded-md bg-background/80 px-2 py-0.5 text-center text-xs font-medium text-foreground backdrop-blur-sm transition-opacity duration-200 ease-out",
-                  isHovered || isNeighbor ? "opacity-100" : "opacity-0",
+                  "pointer-events-none mt-2 max-w-[160px] rounded-md bg-background/80 px-2 py-0.5 text-center text-xs font-medium text-foreground backdrop-blur-sm transition-opacity duration-200 ease-out break-words",
+                  "opacity-100",
                 )}
               >
                 {item.title}
