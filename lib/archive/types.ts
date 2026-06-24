@@ -5,7 +5,6 @@ export type ArchiveItemFormInput = {
   isFavorite: boolean;
   tagNames: string[];
   imageUrl: string | null;
-  source: string | null;
 };
 
 export type CreateArchiveItemInput = ArchiveItemFormInput;
@@ -21,7 +20,6 @@ export type ArchiveItemRecord = {
   imageUrl: string | null;
   note: string | null;
   isFavorite: boolean;
-  source: string | null;
   createdAt: Date;
   updatedAt: Date;
   tags: string[];
@@ -32,7 +30,6 @@ export type ArchiveUrlMetadata = {
   title?: string;
   description?: string;
   imageUrl?: string;
-  source?: string;
 };
 
 export type ArchiveTagOption = {

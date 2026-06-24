@@ -15,7 +15,6 @@ export const archiveItems = pgTable("archive_items", {
   imageUrl: text("image_url"),
   note: text("note"),
   isFavorite: boolean("is_favorite").notNull().default(false),
-  source: text("source"),
   foundAt: timestamp("found_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()

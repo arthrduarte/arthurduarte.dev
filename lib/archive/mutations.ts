@@ -100,7 +100,6 @@ export async function createArchiveItem(input: CreateArchiveItemInput) {
       title: input.title,
       url: input.url,
       note: input.note,
-      source: input.source,
       imageUrl: input.imageUrl,
       isFavorite: input.isFavorite,
     })
@@ -129,7 +128,6 @@ export async function updateArchiveItem(input: UpdateArchiveItemInput) {
       title: input.title,
       url: input.url,
       note: input.note,
-      source: input.source,
       imageUrl: input.imageUrl,
       isFavorite: input.isFavorite,
       updatedAt: new Date(),

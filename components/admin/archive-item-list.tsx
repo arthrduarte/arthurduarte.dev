@@ -57,7 +57,7 @@ export function ArchiveItemList({
                   <img
                     src={item.imageUrl}
                     alt=""
-                    className="size-full object-cover"
+                    className="size-full object-contain"
                   />
                 ) : (
                   <div className="flex size-full items-center justify-center text-muted-foreground">
@@ -88,11 +88,6 @@ export function ArchiveItemList({
                     >
                       {item.url}
                     </a>
-                    {item.source ? (
-                      <p className="text-xs text-muted-foreground">
-                        {item.source}
-                      </p>
-                    ) : null}
                     {item.note ? (
                       <p className="text-sm text-muted-foreground">
                         {item.note}

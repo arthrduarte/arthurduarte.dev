@@ -40,7 +40,6 @@ export function ArchiveItemForm({
   const [tagInputKey, setTagInputKey] = useState(0);
   const [title, setTitle] = useState(item?.title ?? "");
   const [url, setUrl] = useState(item?.url ?? "");
-  const [source, setSource] = useState(item?.source ?? "");
   const [note, setNote] = useState(item?.note ?? "");
   const [imageUrl, setImageUrl] = useState(item?.imageUrl ?? "");
   const [isFavorite, setIsFavorite] = useState(item?.isFavorite ?? false);
@@ -60,7 +59,6 @@ export function ArchiveItemForm({
 
     setTitle("");
     setUrl("");
-    setSource("");
     setNote("");
     setImageUrl("");
     setIsFavorite(false);
@@ -88,10 +86,6 @@ export function ArchiveItemForm({
 
       if (result.metadata?.description) {
         setNote(result.metadata.description);
-      }
-
-      if (result.metadata?.source) {
-        setSource(result.metadata.source);
       }
 
       if (result.metadata?.imageUrl) {
@@ -147,7 +141,7 @@ export function ArchiveItemForm({
           <p className="text-sm text-destructive">{prefillError}</p>
         ) : (
           <p className="text-xs text-muted-foreground">
-            Pulls the title, image, source, and note from the page.
+            Pulls the title, image, and note from the page.
           </p>
         )}
       </div>
@@ -164,29 +158,15 @@ export function ArchiveItemForm({
       </div>
 
       <div className="space-y-4">
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="space-y-2">
-            <Label htmlFor={item ? `title-${item.id}` : "title"}>Title</Label>
-            <Input
-              id={item ? `title-${item.id}` : "title"}
-              name="title"
-              required
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor={item ? `source-${item.id}` : "source"}>
-              Source
-            </Label>
-            <Input
-              id={item ? `source-${item.id}` : "source"}
-              name="source"
-              value={source}
-              onChange={(event) => setSource(event.target.value)}
-            />
-          </div>
+        <div className="space-y-2">
+          <Label htmlFor={item ? `title-${item.id}` : "title"}>Title</Label>
+          <Input
+            id={item ? `title-${item.id}` : "title"}
+            name="title"
+            required
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
         </div>
 
         <div className="space-y-2">

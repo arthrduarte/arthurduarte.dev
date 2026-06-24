@@ -85,12 +85,12 @@ export function ArchiveImageInput({
       />
 
       {activePreview ? (
-        <div className="group relative overflow-hidden rounded-lg border border-border bg-muted">
+        <div className="group relative flex justify-center overflow-hidden rounded-lg border border-border bg-muted">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={activePreview}
             alt="Archive item preview"
-            className="aspect-video w-full object-cover"
+            className="max-h-80 w-auto max-w-full object-contain"
           />
           <button
             type="button"

@@ -26,13 +26,7 @@ export function filterArchiveItems(
       return true;
     }
 
-    const haystack = [
-      item.title,
-      item.url,
-      item.note ?? "",
-      item.source ?? "",
-      ...item.tags,
-    ]
+    const haystack = [item.title, item.url, item.note ?? "", ...item.tags]
       .join(" ")
       .toLowerCase();
 
